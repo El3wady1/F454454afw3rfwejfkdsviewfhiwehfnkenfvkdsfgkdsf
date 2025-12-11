@@ -2,8 +2,6 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salad Factory System - نظام مصنع السلطة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -546,7 +544,7 @@
             margin-bottom: 20px;
         }
 
-        /* Print Styles */
+        /* Print Styles - تم التعديل للعرض بالطول */
         @media print {
             body * {
                 visibility: hidden;
@@ -561,7 +559,48 @@
                 left: 0;
                 top: 0;
                 width: 100%;
-                page-break-after: always;
+                height: 100% !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                overflow: hidden !important;
+                margin: 0 !important;
+                padding: 2mm !important;
+                box-sizing: border-box;
+            }
+            
+            .print-section:last-child {
+                page-break-after: auto !important;
+            }
+            
+            .print-table-container {
+                page-break-inside: avoid !important;
+                max-height: 100% !important;
+                overflow: hidden !important;
+            }
+            
+            /* أنماط للجداول المدمجة */
+            .compact-table {
+                transform-origin: top right;
+                transform: scale(0.95);
+                width: 100% !important;
+            }
+            
+            .very-compact-table {
+                transform-origin: top right;
+                transform: scale(0.85);
+                width: 100% !important;
+            }
+            
+            .extremely-compact-table {
+                transform-origin: top right;
+                transform: scale(0.75);
+                width: 100% !important;
+            }
+            
+            .super-compact-table {
+                transform-origin: top right;
+                transform: scale(0.65);
+                width: 100% !important;
             }
             
             .no-print {
@@ -571,23 +610,110 @@
             .card {
                 box-shadow: none;
                 border: 1px solid #ddd;
-                margin: 10px 0;
+                margin: 0;
+                page-break-inside: avoid;
+                height: 100%;
+                width: 100%;
             }
             
             .production-table {
-                font-size: 12px;
+                font-size: 12px !important;
                 min-width: 100%;
+                page-break-inside: avoid;
+                border-collapse: collapse;
+                table-layout: fixed !important;
+                width: 100% !important;
             }
             
             .production-table th,
             .production-table td {
                 border: 1px solid #ddd;
-                padding: 6px 4px;
+                padding: 1px 0.5px !important;
+                page-break-inside: avoid;
+                line-height: 1 !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: inherit !important;
+            }
+            
+            .compact-view th,
+            .compact-view td {
+                font-size: 11px !important;
+                padding: 0.8px 0.4px !important;
+            }
+            
+            .very-compact-view th,
+            .very-compact-view td {
+                font-size: 10px !important;
+                padding: 0.6px 0.3px !important;
+            }
+            
+            .extremely-compact-view th,
+            .extremely-compact-view td {
+                font-size: 9px !important;
+                padding: 0.4px 0.2px !important;
+            }
+            
+            .super-compact-view th,
+            .super-compact-view td {
+                font-size: 8px !important;
+                padding: 0.2px 0.1px !important;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+                margin: 2px 0 !important;
+                font-size: 17px !important;
+                line-height: 1.1 !important;
+            }
+            
+            table {
+                page-break-inside: avoid;
+                width: 100% !important;
+            }
+            
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            
+            thead {
+                display: table-header-group;
+            }
+            
+            tfoot {
+                display: table-footer-group;
             }
             
             @page {
-                size: A4 landscape;
-                margin: 1cm;
+                size: A4 portrait; /* تغيير إلى portrait للعرض بالطول */
+                margin: 0.1cm !important;
+            }
+            
+            @page :first {
+                margin-top: 0.1cm !important;
+            }
+            
+            /* تقليل الهوامش */
+            .print-header {
+                margin-bottom: 3px !important;
+                padding-bottom: 2px !important;
+            }
+            
+            .print-title {
+                font-size: 14px !important;
+                margin-bottom: 1px !important;
+            }
+            
+            .print-date {
+                font-size: 8px !important;
+            }
+            
+            .print-footer {
+                margin-top: 3px !important;
+                padding-top: 2px !important;
+                font-size: 6px !important;
+                line-height: 1 !important;
             }
         }
 
@@ -841,10 +967,7 @@
             <div class="main-content">
                 <!-- Print Controls for Production -->
                 <div class="auto-scroll-controls">
-                    <div class="d-flex gap-10" style="flex-wrap: wrap;">
-                
-            
-                    </div>
+                   
                     <div class="print-controls no-print">
                         <button id="print-all-production" class="print-btn">
                             <i class="fas fa-print"></i> <span data-ar="طباعة جميع الجداول" data-en="Print All Tables">طباعة جميع الجداول</span>
@@ -856,15 +979,16 @@
                             <i class="fas fa-print"></i> <span data-ar="طباعة جدول واحد" data-en="Print Single Table">طباعة جدول واحد</span>
                         </button>
                     </div>
-                
+              
                 </div>
 
-          
+                <!-- Stats Section -->
+             
 
                 <!-- Filter Section -->
                 <div class="filter-section">
                     <div class="filter-row">
-             
+                
                         <div class="filter-group">
                             <label class="filter-label" data-ar="الفرع:" data-en="Branch:">الفرع:</label>
                             <select id="branch-filter-production" class="form-control">
@@ -908,24 +1032,7 @@
             <div class="main-content">
                 <!-- Print Controls for Supply -->
                 <div class="auto-scroll-controls">
-                    <div class="d-flex gap-10" style="flex-wrap: wrap;">
-                        <div class="auto-scroll-buttons">
-                            <button id="start-scroll-supply" class="scroll-btn">
-                                <i class="fas fa-play"></i> <span data-ar="بدء التمرير التلقائي" data-en="Start Auto Scroll">بدء التمرير التلقائي</span>
-                            </button>
-                            <button id="stop-scroll-supply" class="scroll-btn">
-                                <i class="fas fa-stop"></i> <span data-ar="إيقاف التمرير" data-en="Stop Scroll">إيقاف التمرير</span>
-                            </button>
-                            <button id="reset-scroll-supply" class="scroll-btn">
-                                <i class="fas fa-undo"></i> <span data-ar="الرجوع للأعلى" data-en="Scroll to Top">الرجوع للأعلى</span>
-                            </button>
-                        </div>
-                        <div class="scroll-speed-control">
-                            <span class="speed-label" data-ar="سرعة التمرير:" data-en="Scroll Speed:">سرعة التمرير:</span>
-                            <input type="range" id="scroll-speed-supply" class="speed-slider" min="1" max="10" value="5">
-                            <span id="speed-value-supply" data-ar="متوسطة" data-en="Medium">متوسطة</span>
-                        </div>
-                    </div>
+                  
                     <div class="print-controls no-print">
                         <button id="print-all-supply" class="print-btn">
                             <i class="fas fa-print"></i> <span data-ar="طباعة جميع الجداول" data-en="Print All Tables">طباعة جميع الجداول</span>
@@ -937,50 +1044,14 @@
                             <i class="fas fa-print"></i> <span data-ar="طباعة جدول واحد" data-en="Print Single Table">طباعة جدول واحد</span>
                         </button>
                     </div>
-                    <div id="scroll-status-supply" class="auto-scroll-status hidden">
-                        <i class="fas fa-sync-alt fa-spin"></i>
-                        <span data-ar="جاري التمرير التلقائي..." data-en="Auto scrolling...">جاري التمرير التلقائي...</span>
-                    </div>
+              
                 </div>
 
-                <!-- Stats Section -->
-                <div id="stats-section-supply">
-                    <div class="stats-header">
-                        <div class="stats-title" data-ar="إحصائيات التوريد" data-en="Supply Statistics">إحصائيات التوريد</div>
-                        <button class="toggle-stats-btn" data-stats="supply">
-                            <i class="fas fa-eye-slash"></i>
-                            <span data-ar="إخفاء الإحصائيات" data-en="Hide Statistics">إخفاء الإحصائيات</span>
-                        </button>
-                    </div>
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-number" id="total-items-supply">0</div>
-                            <div class="stat-label" data-ar="إجمالي العناصر" data-en="Total Items">إجمالي العناصر</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="total-categories-supply">0</div>
-                            <div class="stat-label" data-ar="عدد الفئات" data-en="Categories Count">عدد الفئات</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="total-branches-supply">0</div>
-                            <div class="stat-label" data-ar="عدد الفروع" data-en="Branches Count">عدد الفروع</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="total-quantity-supply">0</div>
-                            <div class="stat-label" data-ar="إجمالي الكمية" data-en="Total Quantity">إجمالي الكمية</div>
-                        </div>
-                    </div>
-                </div>
-
+            
                 <!-- Filter Section -->
                 <div class="filter-section">
                     <div class="filter-row">
-                        <div class="filter-group">
-                            <label class="filter-label" data-ar="الفئة:" data-en="Category:">الفئة:</label>
-                            <select id="category-filter-supply" class="form-control" multiple="multiple">
-                                <!-- سيتم ملؤها ديناميكياً -->
-                            </select>
-                        </div>
+             
                         <div class="filter-group">
                             <label class="filter-label" data-ar="الفرع:" data-en="Branch:">الفرع:</label>
                             <select id="branch-filter-supply" class="form-control">
@@ -1071,7 +1142,7 @@
 
         // تهيئة التطبيق
         $(document).ready(function() {
-            initializeSelect2(); // تعريف الدالة أولاً قبل استدعائها
+            initializeSelect2();
             loadProductionData();
             setupEventListeners();
             setupAutoScrollControls();
@@ -1080,7 +1151,7 @@
             setupPrintControls();
         });
 
-        // تهيئة Select2 - يجب تعريفها أولاً
+        // تهيئة Select2
         function initializeSelect2() {
             const placeholder = appState.currentLang === 'ar' ? 'اختر الفئات' : 'Select Categories';
             const branchPlaceholder = appState.currentLang === 'ar' ? 'اختر الفرع' : 'Select Branch';
@@ -1140,58 +1211,113 @@
             const printContent = generatePrintContent(type, 'single', tableId);
             openPrintWindow(printContent, type);
         }
+function calculateOptimalTableSize(uniqueProducts, branches) {
+    const rows = uniqueProducts.length;
+    const cols = branches.length + 2; // +2 لأعمدة المنتج والإجمالي
 
-        // تصدير إلى PDF
-        function exportToPDF(type) {
-            const printContent = generatePrintContent(type, 'all');
+    const fontSize = 14; // حجم خط ثابت (يمكن تغييره لأي رقم تريده)
+    const tableClass = '';
+    const viewClass = '';
+
+    return {
+        fontSize,
+        tableClass,
+        viewClass,
+        fitsInOnePage: rows <= 200
+    };
+}
+   // إنشاء محتوى الجدول للطباعة - كل جدول في صفحة واحدة بالطول
+        function generateTablePrintContent(category, products, branches) {
+            const organizedData = organizeItemsByBranchAndProductForCategory(products);
+            const uniqueProducts = getUniqueProductsFromOrganizedData(organizedData);
             
-            const options = {
-                margin: [10, 10, 10, 10],
-                filename: `${type === 'production' ? 'production' : 'supply'}_report.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 2,
-                    useCORS: true,
-                    letterRendering: true
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'landscape' 
-                }
-            };
-
-            // إنشاء عنصر مؤقت للطباعة
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = printContent;
-            document.body.appendChild(tempElement);
-
-            // إنشاء PDF
-            html2pdf()
-                .from(tempElement)
-                .set(options)
-                .save()
-                .then(() => {
-                    // إزالة العنصر المؤقت
-                    document.body.removeChild(tempElement);
-                    
-                    const message = appState.currentLang === 'ar' 
-                        ? '✅ تم تصدير PDF بنجاح'
-                        : '✅ PDF exported successfully';
-                    showMessage(type, message, 'success');
-                })
-                .catch((error) => {
-                    console.error('PDF export error:', error);
-                    document.body.removeChild(tempElement);
-                    
-                    const message = appState.currentLang === 'ar' 
-                        ? '❌ فشل في تصدير PDF'
-                        : '❌ Failed to export PDF';
-                    showMessage(type, message, 'error');
-                });
+            if (uniqueProducts.length === 0) return '';
+            
+            const notSpecifiedText = appState.currentLang === 'ar' ? 'لم يحدد' : 'Not specified';
+            const productsText = appState.currentLang === 'ar' ? 'المنتجات' : 'Products';
+            const sizeUnitText = appState.currentLang === 'ar' ? '(الحجم/وحدة)' : '(Size/Unit)';
+            const totalText = appState.currentLang === 'ar' ? 'الإجمالي' : 'Total';
+            
+            // حساب الحجم الأمثل للجدول
+            const optimalSize = calculateOptimalTableSize(uniqueProducts, branches);
+            
+            return `
+                <div class="print-table-container ${optimalSize.tableClass}">
+                    <h2 style="color: #2E5E3A; text-align: center; margin-bottom: 3px; padding-bottom: 2px; border-bottom: 1px solid #2E5E3A; font-size: ${optimalSize.fontSize + 2}px; line-height: 1;">
+                        ${category}
+                    </h2>
+                    <table class="${optimalSize.viewClass}" style="width: 100%; border-collapse: collapse; font-size: ${optimalSize.fontSize}px; line-height: 0.9; table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th style="background-color: #f0f0f0; padding: 1px; text-align: center; border: 1px solid #ddd; width: 25%; min-width: 80px;">
+                                    <div>${productsText}</div>
+                                    <div style="font-size: ${optimalSize.fontSize - 0.5}px; color: #666;">${sizeUnitText}</div>
+                                </th>
+                                ${branches.map(branch => `
+                                    <th style="background-color: #f0f0f0; padding: 1px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize - 0.5}px; max-width: 30px;">
+                                        ${getVeryShortBranchName(branch)}
+                                    </th>
+                                `).join('')}
+                                <th style="background-color: #f0f0f0; padding: 1px; text-align: center; border: 1px solid #ddd; min-width: 30px; color: #2E5E3A; font-size: ${optimalSize.fontSize}px;">
+                                    ${totalText}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${uniqueProducts.map(product => `
+                                <tr>
+                                    <td style="padding: 1px; text-align: right; border: 1px solid #ddd; max-width: 100px; overflow: hidden; text-overflow: ellipsis;">
+                                        <div style="font-weight: bold; font-size: ${optimalSize.fontSize}px; line-height: 0.9;">
+                                            ${truncateText(product.name, 20)}
+                                        </div>
+                                        <div style="font-size: ${optimalSize.fontSize - 0.5}px; color: #666; line-height: 0.8;">
+                                            ${product.package && product.package !== '0' && product.package !== 'null' ? truncateText(product.package, 8) : ''} 
+                                            ${product.packageUnitname ? truncateText(product.packageUnitname, 3) : ''}
+                                            ${!product.package || product.package === '0' || product.package === 'null' ? notSpecifiedText : ''}
+                                        </div>
+                                    </td>
+                                    ${branches.map(branch => `
+                                        <td style="padding: 1px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize}px; line-height: 0.9;">
+                                            ${organizedData[branch] && organizedData[branch][product.name] 
+                                                ? formatNumber(organizedData[branch][product.name].requestedQty) 
+                                                : '-'}
+                                        </td>
+                                    `).join('')}
+                                    <td style="padding: 1px; text-align: center; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold; color: #2E5E3A; font-size: ${optimalSize.fontSize}px; line-height: 0.9;">
+                                        ${formatNumber(calculateTotalForProduct(product.name, organizedData))}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <div style="text-align: center; font-size: ${optimalSize.fontSize - 0.5}px; color: #666; margin-top: 2px; line-height: 0.9;">
+                        ${appState.currentLang === 'ar' ? 'عدد العناصر: ' : 'Items: '}${uniqueProducts.length}
+                    </div>
+                </div>
+            `;
         }
 
-        // إنشاء محتوى الطباعة
+        // دالة لاختصار النص
+        function truncateText(text, maxLength) {
+            if (!text) return '';
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        // دالة للحصول على اسم فرع مختصر جداً
+        function getVeryShortBranchName(branch) {
+            if (branch.length <= 2) return branch;
+            
+            const words = branch.split(' ');
+            if (words.length > 1) {
+                const initials = words.map(word => word.charAt(0)).join('');
+                return initials.substring(0, 2);
+            }
+            
+            return branch.substring(0, 2);
+        }
+
+        // إنشاء محتوى الطباعة - كل جدول في صفحة واحدة بالطول
         function generatePrintContent(type, mode = 'all', tableId = null) {
             const state = appState[type];
             const items = mode === 'single' && tableId 
@@ -1208,124 +1334,89 @@
                 day: 'numeric'
             });
             
-            let content = `
-                <div class="print-section">
-                    <div class="print-header">
-                        <h1 class="print-title">${title}</h1>
-                        <div class="print-date">${date}</div>
-                    </div>
-            `;
+            let content = '';
             
             if (mode === 'single' && tableId) {
-                content += generateSingleTablePrintContent(items, state.allBranches);
+                // جدول واحد فقط في صفحة منفصلة
+                content = generateSingleTablePerPageContent(items, state.allBranches, title, date);
             } else {
-                content += generateAllTablesPrintContent(items, state.allBranches);
+                // جميع الجداول - كل جدول في صفحة منفصلة
+                content = generateAllTablesPerPageContent(items, state.allBranches, title, date);
             }
-            
-            content += `
-                    <div class="print-footer">
-                        <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
-                        <p>${date}</p>
-                    </div>
-                </div>
-            `;
             
             return content;
         }
 
-        // إنشاء محتوى طباعة جميع الجداول
-        function generateAllTablesPrintContent(items, branches) {
+        // إنشاء محتوى لجميع الجداول - كل جدول في صفحة منفصلة بالطول
+        function generateAllTablesPerPageContent(items, branches, title, date) {
             const organizedData = organizeItemsByMainCategory(items);
             let content = '';
             
+            let counter = 0;
+            const totalTables = Object.keys(organizedData).length;
+            
             Object.keys(organizedData).forEach(category => {
                 const categoryProducts = organizedData[category];
-                content += generateTablePrintContent(category, categoryProducts, branches);
+                
+                // إضافة صفحة لكل جدول
+                content += `
+                    <div class="print-section">
+                        <div class="print-header" style="margin-bottom: 3px; padding-bottom: 2px;">
+                            <h1 class="print-title" style="font-size: 12px; margin-bottom: 1px; line-height: 1;">${title}</h1>
+                            <div class="print-date" style="font-size: 7px; line-height: 0.9;">${date}</div>
+                        </div>
+                        ${generateTablePrintContent(category, categoryProducts, branches)}
+                        <div class="print-footer" style="margin-top: 3px; padding-top: 2px; font-size: 6px; line-height: 0.9;">
+                            <p>${appState.currentLang === 'ar' ? 'صفحة ' : 'Page '}${counter + 1} من ${totalTables}</p>
+                            <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
+                        </div>
+                    </div>
+                `;
+                counter++;
             });
             
             return content;
         }
 
-        // إنشاء محتوى طباعة جدول واحد
-        function generateSingleTablePrintContent(items, branches) {
+        // إنشاء محتوى لجدول واحد في صفحة منفصلة بالطول
+        function generateSingleTablePerPageContent(items, branches, title, date) {
             if (!items || items.length === 0) return '';
             const category = items[0].category;
-            return generateTablePrintContent(category, items, branches);
-        }
-
-        // إنشاء محتوى الجدول للطباعة
-        function generateTablePrintContent(category, products, branches) {
-            const organizedData = organizeItemsByBranchAndProductForCategory(products);
-            const uniqueProducts = getUniqueProductsFromOrganizedData(organizedData);
             
-            if (uniqueProducts.length === 0) return '';
-            
-            const notSpecifiedText = appState.currentLang === 'ar' ? 'لم يحدد' : 'Not specified';
-            const productsText = appState.currentLang === 'ar' ? 'المنتجات' : 'Products';
-            const sizeUnitText = appState.currentLang === 'ar' ? '(الحجم / الوحدة)' : '(Size / Unit)';
-            const totalText = appState.currentLang === 'ar' ? 'الإجمالي' : 'Total';
+            const organizedData = organizeItemsByMainCategory(items);
+            const categoryProducts = organizedData[category] || items;
             
             return `
-                <div style="page-break-inside: avoid; margin-bottom: 20px;">
-                    <h2 style="color: #2E5E3A; text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #2E5E3A;">
-                        ${category}
-                    </h2>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
-                        <thead>
-                            <tr>
-                                <th style="background-color: #f0f0f0; padding: 8px; text-align: center; border: 1px solid #ddd; min-width: 200px;">
-                                    <div>${productsText}</div>
-                                    <div style="font-size: 10px; color: #666; margin-top: 4px;">${sizeUnitText}</div>
-                                </th>
-                                ${branches.map(branch => `
-                                    <th style="background-color: #f0f0f0; padding: 8px; text-align: center; border: 1px solid #ddd; font-size: 11px;">
-                                        ${getAbbreviatedBranchName(branch)}
-                                    </th>
-                                `).join('')}
-                                <th style="background-color: #f0f0f0; padding: 8px; text-align: center; border: 1px solid #ddd; min-width: 80px; color: #2E5E3A;">
-                                    ${totalText}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${uniqueProducts.map(product => `
-                                <tr>
-                                    <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">
-                                        <div style="font-weight: bold;">${product.name}</div>
-                                        <div style="font-size: 10px; color: #666;">
-                                            ${product.package && product.package !== '0' && product.package !== 'null' ? product.package : ''} 
-                                            ${product.packageUnitname ? product.packageUnitname : ''}
-                                            ${!product.package || product.package === '0' || product.package === 'null' ? notSpecifiedText : ''}
-                                        </div>
-                                    </td>
-                                    ${branches.map(branch => `
-                                        <td style="padding: 8px; text-align: center; border: 1px solid #ddd;">
-                                            ${organizedData[branch] && organizedData[branch][product.name] 
-                                                ? formatNumber(organizedData[branch][product.name].requestedQty) 
-                                                : '-'}
-                                        </td>
-                                    `).join('')}
-                                    <td style="padding: 8px; text-align: center; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold; color: #2E5E3A;">
-                                        ${formatNumber(calculateTotalForProduct(product.name, organizedData))}
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
+                <div class="print-section">
+                    <div class="print-header" style="margin-bottom: 3px; padding-bottom: 2px;">
+                        <h1 class="print-title" style="font-size: 12px; margin-bottom: 1px; line-height: 1;">${title}</h1>
+                        <div class="print-subtitle" style="font-size: 9px; color: #3a7a4a; margin: 2px 0; line-height: 0.9;">
+                            ${appState.currentLang === 'ar' ? 'جدول: ' : 'Table: '}${category}
+                        </div>
+                        <div class="print-date" style="font-size: 7px; line-height: 0.9;">${date}</div>
+                    </div>
+                    ${generateTablePrintContent(category, categoryProducts, branches)}
+                    <div class="print-footer" style="margin-top: 3px; padding-top: 2px; font-size: 6px; line-height: 0.9;">
+                        <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
+                        <p>${date}</p>
+                    </div>
                 </div>
             `;
         }
 
-        // فتح نافذة الطباعة
+        // فتح نافذة الطباعة مع كل جدول في صفحة منفصلة بالطول
         function openPrintWindow(printContent, type) {
             const printWindow = window.open('', '_blank');
             const title = type === 'production' 
                 ? (appState.currentLang === 'ar' ? 'طباعة تقرير الإنتاج' : 'Print Production Report')
                 : (appState.currentLang === 'ar' ? 'طباعة تقرير التوريد' : 'Print Supply Report');
             
+            const isArabic = appState.currentLang === 'ar';
+            const direction = isArabic ? 'rtl' : 'ltr';
+            
             printWindow.document.write(`
                 <!DOCTYPE html>
-                <html lang="${appState.currentLang === 'ar' ? 'ar' : 'en'}" dir="${appState.currentLang === 'ar' ? 'rtl' : 'ltr'}">
+                <html lang="${isArabic ? 'ar' : 'en'}" dir="${direction}">
                 <head>
                     <title>${title}</title>
                     <meta charset="UTF-8">
@@ -1333,83 +1424,192 @@
                     <style>
                         @media print {
                             @page {
-                                size: A4 landscape;
-                                margin: 1cm;
+                                size: A4 portrait; /* تغيير إلى portrait للعرض بالطول */
+                                margin: 0.1cm !important;
+                            }
+                            
+                            @page :first {
+                                margin-top: 0.1cm !important;
                             }
                             
                             body {
                                 font-family: 'Cairo', 'Arial', sans-serif;
-                                direction: ${appState.currentLang === 'ar' ? 'rtl' : 'ltr'};
+                                direction: ${direction};
+                                margin: 0;
+                                padding: 0;
+                            }
+                            
+                            .print-section {
+                                page-break-after: always !important;
+                                page-break-inside: avoid !important;
+                                width: 100% !important;
+                                height: 100% !important;
+                                margin: 0 !important;
+                                padding: 2mm !important;
+                                box-sizing: border-box;
+                                overflow: hidden !important;
+                            }
+                            
+                            .print-section:last-child {
+                                page-break-after: auto !important;
+                            }
+                            
+                            .print-table-container {
+                                page-break-inside: avoid !important;
+                                max-height: 95% !important;
+                                overflow: hidden !important;
+                            }
+                            
+                            .compact-table {
+                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
+                                transform: scale(0.95);
+                                width: 100% !important;
+                            }
+                            
+                            .very-compact-table {
+                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
+                                transform: scale(0.85);
+                                width: 100% !important;
+                            }
+                            
+                            .extremely-compact-table {
+                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
+                                transform: scale(0.75);
+                                width: 100% !important;
+                            }
+                            
+                            .super-compact-table {
+                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
+                                transform: scale(0.65);
+                                width: 100% !important;
                             }
                             
                             table {
                                 page-break-inside: avoid;
-                                width: 100%;
+                                width: 100% !important;
+                                table-layout: fixed !important;
                             }
                             
                             h2 {
                                 page-break-after: avoid;
+                                margin: 2px 0 !important;
+                                font-size: 10px !important;
+                                line-height: 1 !important;
+                            }
+                            
+                            tr {
+                                page-break-inside: avoid;
+                            }
+                            
+                            thead {
+                                display: table-header-group;
+                            }
+                            
+                            tfoot {
+                                display: table-footer-group;
+                            }
+                            
+                            /* أنماط الخطوط المدمجة للعرض بالطول */
+                            .compact-view th,
+                            .compact-view td {
+                                font-size: 5px !important;
+                                padding: 0.8px 0.4px !important;
+                                line-height: 0.9 !important;
+                            }
+                            
+                            .very-compact-view th,
+                            .very-compact-view td {
+                                font-size: 4px !important;
+                                padding: 0.6px 0.3px !important;
+                                line-height: 0.8 !important;
+                            }
+                            
+                            .extremely-compact-view th,
+                            .extremely-compact-view td {
+                                font-size: 3px !important;
+                                padding: 0.4px 0.2px !important;
+                                line-height: 0.7 !important;
+                            }
+                            
+                            .super-compact-view th,
+                            .super-compact-view td {
+                                font-size: 2.5px !important;
+                                padding: 0.2px 0.1px !important;
+                                line-height: 0.6 !important;
                             }
                         }
                         
                         body {
                             font-family: 'Cairo', 'Arial', sans-serif;
                             margin: 0;
-                            padding: 20px;
-                            direction: ${appState.currentLang === 'ar' ? 'rtl' : 'ltr'};
+                            padding: 0;
+                            direction: ${direction};
+                            background: white;
+                        }
+                        
+                        .print-section {
+                            width: 100%;
+                            min-height: 100vh;
+                            padding: 3mm;
+                            box-sizing: border-box;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
                         }
                         
                         .print-header {
                             text-align: center;
-                            margin-bottom: 30px;
-                            padding-bottom: 15px;
-                            border-bottom: 3px solid #2E5E3A;
+                            margin-bottom: 5px;
+                            padding-bottom: 3px;
+                            border-bottom: 1px solid #2E5E3A;
                         }
                         
                         .print-title {
                             color: #2E5E3A;
-                            font-size: 24px;
-                            margin: 0;
+                            font-size: 12px;
+                            margin: 0 0 2px 0;
+                        }
+                        
+                        .print-subtitle {
+                            color: #3a7a4a;
+                            font-size: 8px;
+                            margin: 3px 0;
+                            font-weight: bold;
                         }
                         
                         .print-date {
                             color: #666;
-                            font-size: 14px;
-                            margin-top: 5px;
+                            font-size: 7px;
                         }
                         
                         .print-footer {
                             text-align: center;
-                            margin-top: 30px;
-                            padding-top: 15px;
+                            margin-top: 5px;
+                            padding-top: 3px;
                             border-top: 1px solid #ddd;
                             color: #666;
-                            font-size: 12px;
+                            font-size: 6px;
+                        }
+                        
+                        .print-table-container {
+                            flex-grow: 1;
+                            margin-bottom: 5px;
                         }
                         
                         table {
                             width: 100%;
                             border-collapse: collapse;
-                            margin-bottom: 30px;
-                            font-size: 12px;
                         }
                         
                         th {
                             background-color: #f5f5f5;
-                            padding: 10px;
                             text-align: center;
                             border: 1px solid #ddd;
                             font-weight: bold;
                         }
                         
                         td {
-                            padding: 8px;
                             border: 1px solid #ddd;
-                        }
-                        
-                        .total-cell {
-                            background-color: #f0f0f0;
-                            font-weight: bold;
                         }
                     </style>
                 </head>
@@ -1420,7 +1620,7 @@
                             window.print();
                             setTimeout(function() {
                                 window.close();
-                            }, 500);
+                            }, 1000);
                         };
                     <\/script>
                 </body>
@@ -1428,6 +1628,112 @@
             `);
             
             printWindow.document.close();
+        }
+
+        // تصدير إلى PDF بالطول
+        function exportToPDF(type) {
+            const printContent = generatePrintContent(type, 'all');
+            
+            const options = {
+                margin: [1, 1, 1, 1], // هوامش صغيرة جداً للعرض بالطول
+                filename: `${type === 'production' ? 'production' : 'supply'}_report.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 4, // زيادة الدقة للعرض بالطول
+                    useCORS: true,
+                    letterRendering: true,
+                    width: 794, // عرض A4 portrait بالبكسل
+                    height: 1123, // ارتفاع A4 portrait بالبكسل
+                    windowWidth: 794,
+                    windowHeight: 1123
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' // تغيير إلى portrait
+                },
+                pagebreak: { 
+                    mode: ['css', 'legacy'],
+                    before: '.print-section',
+                    after: '.print-section',
+                    avoid: ['tr', 'td', 'th']
+                }
+            };
+
+            // إنشاء عنصر مؤقت للطباعة
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = printContent;
+            document.body.appendChild(tempElement);
+
+            // إضافة أنماط CSS للضغط للعرض بالطول
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @media print {
+                    .print-section {
+                        page-break-after: always !important;
+                        page-break-inside: avoid !important;
+                        width: 100% !important;
+                        height: 100% !important;
+                        margin: 0 !important;
+                        padding: 1mm !important;
+                        box-sizing: border-box;
+                        overflow: hidden !important;
+                    }
+                    
+                    .print-table-container {
+                        max-height: 98% !important;
+                        overflow: hidden !important;
+                    }
+                    
+                    table {
+                        table-layout: fixed !important;
+                        width: 100% !important;
+                    }
+                    
+                    th, td {
+                        padding: 0.5px 0.3px !important;
+                        font-size: 5px !important;
+                        line-height: 0.8 !important;
+                    }
+                }
+                
+                body {
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                .print-section {
+                    width: 100%;
+                    min-height: 100vh;
+                    padding: 1.5mm;
+                    box-sizing: border-box;
+                }
+            `;
+            tempElement.appendChild(style);
+
+            // إنشاء PDF
+            html2pdf()
+                .from(tempElement)
+                .set(options)
+                .save()
+                .then(() => {
+                    // إزالة العنصر المؤقت
+                    document.body.removeChild(tempElement);
+                    
+                    const message = appState.currentLang === 'ar' 
+                        ? '✅ تم تصدير PDF بنجاح - كل جدول في صفحة واحدة بالطول'
+                        : '✅ PDF exported successfully - each table in one portrait page';
+                    showMessage(type, message, 'success');
+                })
+                .catch((error) => {
+                    console.error('PDF export error:', error);
+                    document.body.removeChild(tempElement);
+                    
+                    const message = appState.currentLang === 'ar' 
+                        ? '❌ فشل في تصدير PDF'
+                        : '❌ Failed to export PDF';
+                    showMessage(type, message, 'error');
+                });
         }
 
         // عرض حوار طباعة جدول واحد
@@ -1533,16 +1839,50 @@
                 const printContent = generatePrintContent(type, 'single', category);
                 
                 const options = {
-                    margin: [10, 10, 10, 10],
+                    margin: [1, 1, 1, 1],
                     filename: `${category.replace(/\s+/g, '_')}.pdf`,
                     image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                    html2canvas: { scale: 4 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    pagebreak: { 
+                        mode: ['css', 'legacy'],
+                        before: '.print-section',
+                        after: '.print-section'
+                    }
                 };
                 
                 const tempElement = document.createElement('div');
                 tempElement.innerHTML = printContent;
                 document.body.appendChild(tempElement);
+                
+                // إضافة أنماط CSS للضغط للعرض بالطول
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @media print {
+                        .print-section {
+                            page-break-after: always !important;
+                            page-break-inside: avoid !important;
+                            width: 100% !important;
+                            height: 100% !important;
+                            margin: 0 !important;
+                            padding: 1mm !important;
+                            box-sizing: border-box;
+                            overflow: hidden !important;
+                        }
+                        
+                        table {
+                            table-layout: fixed !important;
+                            width: 100% !important;
+                        }
+                        
+                        th, td {
+                            padding: 0.5px 0.3px !important;
+                            font-size: 5px !important;
+                            line-height: 0.8 !important;
+                        }
+                    }
+                `;
+                tempElement.appendChild(style);
                 
                 html2pdf()
                     .from(tempElement)
@@ -1619,13 +1959,11 @@
             if (appState.showStats[type]) {
                 statsContainer.slideDown();
                 toggleBtn.html('<i class="fas fa-eye-slash"></i> <span data-ar="إخفاء الإحصائيات" data-en="Hide Statistics">إخفاء الإحصائيات</span>');
-                // تحديث النص بناءً على اللغة الحالية
                 const span = toggleBtn.find('span');
                 span.text(appState.currentLang === 'ar' ? 'إخفاء الإحصائيات' : 'Hide Statistics');
             } else {
                 statsContainer.slideUp();
                 toggleBtn.html('<i class="fas fa-eye"></i> <span data-ar="إظهار الإحصائيات" data-en="Show Statistics">إظهار الإحصائيات</span>');
-                // تحديث النص بناءً على اللغة الحالية
                 const span = toggleBtn.find('span');
                 span.text(appState.currentLang === 'ar' ? 'إظهار الإحصائيات' : 'Show Statistics');
             }
