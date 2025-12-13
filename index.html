@@ -1830,12 +1830,7 @@
                 
                 if (!card.find('.card-print-controls').length) {
                     const printControls = `
-                        <div class="card-print-controls no-print">
-                            <button class="card-print-btn print-card" data-category="${category}" title="${appState.currentLang === 'ar' ? 'طباعة هذا الجدول' : 'Print this table'}">
-                                <i class="fas fa-print"></i>
-                            </button>
-                      
-                        </div>
+                
                     `;
                     card.prepend(printControls);
                 }
