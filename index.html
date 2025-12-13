@@ -441,7 +441,7 @@
             background: #d32f2f;
         }
 
-        /* Table Styles */
+        /* Table Styles - تم التعديل هنا */
         .table-container {
             overflow-x: auto;
             margin-bottom: 15px;
@@ -451,12 +451,12 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
-            min-width: 800px;
+            min-width: 900px; /* تم زيادة العرض */
         }
 
         .production-table th {
             background-color: rgba(46, 94, 58, 0.05);
-            padding: 12px 8px;
+            padding: 12px 10px; /* زيادة padding */
             text-align: center;
             font-weight: 700;
             color: var(--primary-color);
@@ -464,44 +464,53 @@
             position: sticky;
             top: 0;
             z-index: 5;
+            min-width: 100px; /* زيادة العرض */
         }
 
         .production-table td {
-            padding: 10px 8px;
+            padding: 10px 10px; /* زيادة padding */
             text-align: center;
             border-bottom: 1px solid rgba(139, 158, 126, 0.1);
+            min-width: 100px; /* زيادة العرض */
         }
 
         .product-info {
             text-align: right;
-            min-width: 200px;
+            min-width: 300px; /* زيادة عرض عمود المنتجات */
+            max-width: 400px;
         }
 
         .product-name {
             font-weight: 600;
             margin-bottom: 4px;
             line-height: 1.3;
+            white-space: normal; /* السماح بعرض الاسم بالكامل */
+            word-wrap: break-word;
+            max-height: none;
+            overflow: visible;
         }
 
         .product-package {
-            font-size: 12px;
+            font-size: 13px; /* زيادة حجم الخط */
             color: var(--light-text-color);
+            margin-top: 5px;
         }
 
         .branch-header {
-            font-size: 11px;
-            max-width: 80px;
+            font-size: 13px; /* زيادة حجم الخط */
+            max-width: 120px; /* زيادة العرض */
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            min-width: 60px;
+            min-width: 100px; /* زيادة العرض */
         }
 
         .total-cell {
             background-color: rgba(139, 158, 126, 0.1);
             font-weight: 700;
             color: var(--primary-color);
-            min-width: 80px;
+            min-width: 100px; /* زيادة العرض */
+            font-size: 14px; /* زيادة حجم الخط */
         }
 
         /* Loading Spinner */
@@ -628,43 +637,51 @@
             .production-table th,
             .production-table td {
                 border: 1px solid #ddd;
-                padding: 1px 0.5px !important;
+                padding: 3px 2px !important; /* زيادة padding للطباعة */
                 page-break-inside: avoid;
-                line-height: 1 !important;
+                line-height: 1.2 !important; /* زيادة line-height */
                 overflow: hidden;
                 text-overflow: ellipsis;
                 font-size: inherit !important;
             }
             
+            .product-name-print {
+                white-space: normal !important; /* عرض الاسم بالكامل */
+                word-wrap: break-word !important;
+                line-height: 1.3 !important;
+                padding: 4px 2px !important;
+                text-align: right !important;
+            }
+            
             .compact-view th,
             .compact-view td {
                 font-size: 11px !important;
-                padding: 0.8px 0.4px !important;
+                padding: 2px 1px !important; /* زيادة padding */
             }
             
             .very-compact-view th,
             .very-compact-view td {
                 font-size: 10px !important;
-                padding: 0.6px 0.3px !important;
+                padding: 2px 1px !important; /* زيادة padding */
             }
             
             .extremely-compact-view th,
             .extremely-compact-view td {
                 font-size: 9px !important;
-                padding: 0.4px 0.2px !important;
+                padding: 2px 1px !important; /* زيادة padding */
             }
             
             .super-compact-view th,
             .super-compact-view td {
                 font-size: 8px !important;
-                padding: 0.2px 0.1px !important;
+                padding: 2px 1px !important; /* زيادة padding */
             }
             
             h2 {
                 page-break-after: avoid;
                 margin: 2px 0 !important;
                 font-size: 17px !important;
-                line-height: 1.1 !important;
+                line-height: 1.2 !important; /* زيادة line-height */
             }
             
             table {
@@ -687,37 +704,48 @@
             
             @page {
                 size: A4 portrait; /* تغيير إلى portrait للعرض بالطول */
-                margin: 0.1cm !important;
+                margin: 0.3cm !important; /* زيادة الهوامش قليلاً */
             }
             
             @page :first {
-                margin-top: 0.1cm !important;
+                margin-top: 0.3cm !important; /* زيادة الهوامش قليلاً */
             }
             
             /* تقليل الهوامش */
             .print-header {
-                margin-bottom: 3px !important;
-                padding-bottom: 2px !important;
+                margin-bottom: 5px !important;
+                padding-bottom: 3px !important;
             }
             
             .print-title {
                 font-size: 14px !important;
-                margin-bottom: 1px !important;
+                margin-bottom: 2px !important;
             }
             
             .print-date {
-                font-size: 8px !important;
+                font-size: 9px !important; /* زيادة حجم الخط */
             }
             
             .print-footer {
-                margin-top: 3px !important;
-                padding-top: 2px !important;
-                font-size: 6px !important;
-                line-height: 1 !important;
+                margin-top: 5px !important;
+                padding-top: 3px !important;
+                font-size: 7px !important; /* زيادة حجم الخط */
+                line-height: 1.2 !important; /* زيادة line-height */
             }
         }
 
         /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .production-table {
+                font-size: 13px;
+                min-width: 1000px;
+            }
+            
+            .product-info {
+                min-width: 280px;
+            }
+        }
+
         @media (max-width: 768px) {
             .filter-row {
                 flex-direction: column;
@@ -734,6 +762,11 @@
             
             .production-table {
                 font-size: 12px;
+                min-width: 800px;
+            }
+
+            .product-info {
+                min-width: 250px;
             }
 
             .stats-container {
@@ -781,6 +814,11 @@
             
             .production-table {
                 font-size: 11px;
+                min-width: 700px;
+            }
+            
+            .product-info {
+                min-width: 200px;
             }
         }
 
@@ -854,18 +892,18 @@
 
         /* Scrollbar Styling */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 10px; /* زيادة عرض scrollbar */
+            height: 10px;
         }
 
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--secondary-color);
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -1211,22 +1249,26 @@
             const printContent = generatePrintContent(type, 'single', tableId);
             openPrintWindow(printContent, type);
         }
-function calculateOptimalTableSize(uniqueProducts, branches) {
-    const rows = uniqueProducts.length;
-    const cols = branches.length + 2; // +2 لأعمدة المنتج والإجمالي
 
-    const fontSize = 14; // حجم خط ثابت (يمكن تغييره لأي رقم تريده)
-    const tableClass = '';
-    const viewClass = '';
+        // حساب الحجم الأمثل للجدول مع تحسين لعرض اسم المنتج بالكامل
+        function calculateOptimalTableSize(uniqueProducts, branches) {
+            const rows = uniqueProducts.length;
+            const cols = branches.length + 2;
+            
+            // زيادة الحجم لجعل الخلايا أوسع
+            const fontSize = 11; // زيادة حجم الخط قليلاً
+            const tableClass = 'wider-table';
+            const viewClass = 'wide-view';
+            
+            return {
+                fontSize,
+                tableClass,
+                viewClass,
+                fitsInOnePage: rows <= 100
+            };
+        }
 
-    return {
-        fontSize,
-        tableClass,
-        viewClass,
-        fitsInOnePage: rows <= 200
-    };
-}
-   // إنشاء محتوى الجدول للطباعة - كل جدول في صفحة واحدة بالطول
+        // إنشاء محتوى الجدول للطباعة - مع تحسينات لعرض اسم المنتج بالكامل
         function generateTablePrintContent(category, products, branches) {
             const organizedData = organizeItemsByBranchAndProductForCategory(products);
             const uniqueProducts = getUniqueProductsFromOrganizedData(organizedData);
@@ -1238,27 +1280,26 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
             const sizeUnitText = appState.currentLang === 'ar' ? '(الحجم/وحدة)' : '(Size/Unit)';
             const totalText = appState.currentLang === 'ar' ? 'الإجمالي' : 'Total';
             
-            // حساب الحجم الأمثل للجدول
             const optimalSize = calculateOptimalTableSize(uniqueProducts, branches);
             
             return `
                 <div class="print-table-container ${optimalSize.tableClass}">
-                    <h2 style="color: #2E5E3A; text-align: center; margin-bottom: 3px; padding-bottom: 2px; border-bottom: 1px solid #2E5E3A; font-size: ${optimalSize.fontSize + 2}px; line-height: 1;">
+                    <h2 style="color: #2E5E3A; text-align: center; margin-bottom: 5px; padding-bottom: 3px; border-bottom: 1px solid #2E5E3A; font-size: ${optimalSize.fontSize + 3}px; line-height: 1.2;">
                         ${category}
                     </h2>
-                    <table class="${optimalSize.viewClass}" style="width: 100%; border-collapse: collapse; font-size: ${optimalSize.fontSize}px; line-height: 0.9; table-layout: fixed;">
+                    <table class="production-table ${optimalSize.viewClass}" style="width: 100%; border-collapse: collapse; font-size: ${optimalSize.fontSize}px; line-height: 1.3; table-layout: auto;">
                         <thead>
                             <tr>
-                                <th style="background-color: #f0f0f0; padding: 1px; text-align: center; border: 1px solid #ddd; width: 25%; min-width: 80px;">
+                                <th style="background-color: #f0f0f0; padding: 4px 3px; text-align: center; border: 1px solid #ddd; width: 40%; min-width: 150px;">
                                     <div>${productsText}</div>
-                                    <div style="font-size: ${optimalSize.fontSize - 0.5}px; color: #666;">${sizeUnitText}</div>
+                                    <div style="font-size: ${optimalSize.fontSize}px; color: #666;">${sizeUnitText}</div>
                                 </th>
                                 ${branches.map(branch => `
-                                    <th style="background-color: #f0f0f0; padding: 1px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize - 0.5}px; max-width: 30px;">
-                                        ${getVeryShortBranchName(branch)}
+                                    <th style="background-color: #f0f0f0; padding: 4px 3px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize}px; min-width: 70px; max-width: 100px;">
+                                        ${getShortBranchName(branch)}
                                     </th>
                                 `).join('')}
-                                <th style="background-color: #f0f0f0; padding: 1px; text-align: center; border: 1px solid #ddd; min-width: 30px; color: #2E5E3A; font-size: ${optimalSize.fontSize}px;">
+                                <th style="background-color: #f0f0f0; padding: 4px 3px; text-align: center; border: 1px solid #ddd; min-width: 70px; color: #2E5E3A; font-size: ${optimalSize.fontSize}px;">
                                     ${totalText}
                                 </th>
                             </tr>
@@ -1266,55 +1307,51 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                         <tbody>
                             ${uniqueProducts.map(product => `
                                 <tr>
-                                    <td style="padding: 1px; text-align: right; border: 1px solid #ddd; max-width: 100px; overflow: hidden; text-overflow: ellipsis;">
-                                        <div style="font-weight: bold; font-size: ${optimalSize.fontSize}px; line-height: 0.9;">
-                                            ${truncateText(product.name, 20)}
+                                    <td style="padding: 4px 3px; text-align: right; border: 1px solid #ddd; max-width: none; overflow: visible; white-space: normal;" class="product-name-print">
+                                        <div style="font-weight: bold; font-size: ${optimalSize.fontSize}px; line-height: 1.3;">
+                                            ${product.name}
                                         </div>
-                                        <div style="font-size: ${optimalSize.fontSize - 0.5}px; color: #666; line-height: 0.8;">
-                                            ${product.package && product.package !== '0' && product.package !== 'null' ? truncateText(product.package, 8) : ''} 
-                                            ${product.packageUnitname ? truncateText(product.packageUnitname, 3) : ''}
+                                        <div style="font-size: ${optimalSize.fontSize}px; color: #666; line-height: 1.2;">
+                                            ${product.package && product.package !== '0' && product.package !== 'null' ? product.package : ''} 
+                                            ${product.packageUnitname ? product.packageUnitname : ''}
                                             ${!product.package || product.package === '0' || product.package === 'null' ? notSpecifiedText : ''}
                                         </div>
                                     </td>
                                     ${branches.map(branch => `
-                                        <td style="padding: 1px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize}px; line-height: 0.9;">
+                                        <td style="padding: 4px 3px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize}px; line-height: 1.3; min-width: 70px;">
                                             ${organizedData[branch] && organizedData[branch][product.name] 
                                                 ? formatNumber(organizedData[branch][product.name].requestedQty) 
                                                 : '-'}
                                         </td>
                                     `).join('')}
-                                    <td style="padding: 1px; text-align: center; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold; color: #2E5E3A; font-size: ${optimalSize.fontSize}px; line-height: 0.9;">
+                                    <td style="padding: 4px 3px; text-align: center; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold; color: #2E5E3A; font-size: ${optimalSize.fontSize}px; line-height: 1.3; min-width: 70px;">
                                         ${formatNumber(calculateTotalForProduct(product.name, organizedData))}
                                     </td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
-                    <div style="text-align: center; font-size: ${optimalSize.fontSize - 0.5}px; color: #666; margin-top: 2px; line-height: 0.9;">
+                    <div style="text-align: center; font-size: ${optimalSize.fontSize}px; color: #666; margin-top: 5px; line-height: 1.2;">
                         ${appState.currentLang === 'ar' ? 'عدد العناصر: ' : 'Items: '}${uniqueProducts.length}
                     </div>
                 </div>
             `;
         }
 
-        // دالة لاختصار النص
-        function truncateText(text, maxLength) {
-            if (!text) return '';
-            if (text.length <= maxLength) return text;
-            return text.substring(0, maxLength) + '...';
-        }
-
-        // دالة للحصول على اسم فرع مختصر جداً
-        function getVeryShortBranchName(branch) {
-            if (branch.length <= 2) return branch;
+        // دالة للحصول على اسم فرع مختصر
+        function getShortBranchName(branch) {
+            if (branch.length <= 10) return branch;
             
             const words = branch.split(' ');
             if (words.length > 1) {
-                const initials = words.map(word => word.charAt(0)).join('');
-                return initials.substring(0, 2);
+                if (words.length > 2) {
+                    const initials = words.map(word => word.charAt(0)).join('');
+                    return initials.substring(0, 4);
+                }
+                return words.map(word => word.substring(0, 3)).join(' ');
             }
             
-            return branch.substring(0, 2);
+            return branch.substring(0, 10);
         }
 
         // إنشاء محتوى الطباعة - كل جدول في صفحة واحدة بالطول
@@ -1361,12 +1398,12 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                 // إضافة صفحة لكل جدول
                 content += `
                     <div class="print-section">
-                        <div class="print-header" style="margin-bottom: 3px; padding-bottom: 2px;">
-                            <h1 class="print-title" style="font-size: 12px; margin-bottom: 1px; line-height: 1;">${title}</h1>
-                            <div class="print-date" style="font-size: 7px; line-height: 0.9;">${date}</div>
+                        <div class="print-header" style="margin-bottom: 5px; padding-bottom: 3px;">
+                            <h1 class="print-title" style="font-size: 14px; margin-bottom: 2px; line-height: 1.2;">${title}</h1>
+                            <div class="print-date" style="font-size: 9px; line-height: 1.2;">${date}</div>
                         </div>
                         ${generateTablePrintContent(category, categoryProducts, branches)}
-                        <div class="print-footer" style="margin-top: 3px; padding-top: 2px; font-size: 6px; line-height: 0.9;">
+                        <div class="print-footer" style="margin-top: 5px; padding-top: 3px; font-size: 7px; line-height: 1.2;">
                             <p>${appState.currentLang === 'ar' ? 'صفحة ' : 'Page '}${counter + 1} من ${totalTables}</p>
                             <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
                         </div>
@@ -1388,15 +1425,15 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
             
             return `
                 <div class="print-section">
-                    <div class="print-header" style="margin-bottom: 3px; padding-bottom: 2px;">
-                        <h1 class="print-title" style="font-size: 12px; margin-bottom: 1px; line-height: 1;">${title}</h1>
-                        <div class="print-subtitle" style="font-size: 9px; color: #3a7a4a; margin: 2px 0; line-height: 0.9;">
+                    <div class="print-header" style="margin-bottom: 5px; padding-bottom: 3px;">
+                        <h1 class="print-title" style="font-size: 14px; margin-bottom: 2px; line-height: 1.2;">${title}</h1>
+                        <div class="print-subtitle" style="font-size: 11px; color: #3a7a4a; margin: 3px 0; line-height: 1.2;">
                             ${appState.currentLang === 'ar' ? 'جدول: ' : 'Table: '}${category}
                         </div>
-                        <div class="print-date" style="font-size: 7px; line-height: 0.9;">${date}</div>
+                        <div class="print-date" style="font-size: 9px; line-height: 1.2;">${date}</div>
                     </div>
                     ${generateTablePrintContent(category, categoryProducts, branches)}
-                    <div class="print-footer" style="margin-top: 3px; padding-top: 2px; font-size: 6px; line-height: 0.9;">
+                    <div class="print-footer" style="margin-top: 5px; padding-top: 3px; font-size: 7px; line-height: 1.2;">
                         <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
                         <p>${date}</p>
                     </div>
@@ -1425,11 +1462,11 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                         @media print {
                             @page {
                                 size: A4 portrait; /* تغيير إلى portrait للعرض بالطول */
-                                margin: 0.1cm !important;
+                                margin: 0.3cm !important; /* زيادة الهوامش */
                             }
                             
                             @page :first {
-                                margin-top: 0.1cm !important;
+                                margin-top: 0.3cm !important; /* زيادة الهوامش */
                             }
                             
                             body {
@@ -1445,7 +1482,7 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                                 width: 100% !important;
                                 height: 100% !important;
                                 margin: 0 !important;
-                                padding: 2mm !important;
+                                padding: 4mm !important; /* زيادة padding */
                                 box-sizing: border-box;
                                 overflow: hidden !important;
                             }
@@ -1460,41 +1497,36 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                                 overflow: hidden !important;
                             }
                             
-                            .compact-table {
-                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
-                                transform: scale(0.95);
+                            .wider-table {
                                 width: 100% !important;
+                                table-layout: auto !important;
                             }
                             
-                            .very-compact-table {
-                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
-                                transform: scale(0.85);
-                                width: 100% !important;
+                            .wide-view th,
+                            .wide-view td {
+                                padding: 3px 2px !important;
+                                font-size: 10px !important;
+                                line-height: 1.2 !important;
                             }
                             
-                            .extremely-compact-table {
-                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
-                                transform: scale(0.75);
-                                width: 100% !important;
-                            }
-                            
-                            .super-compact-table {
-                                transform-origin: top ${direction === 'rtl' ? 'right' : 'left'};
-                                transform: scale(0.65);
-                                width: 100% !important;
+                            .product-name-print {
+                                white-space: normal !important;
+                                word-wrap: break-word !important;
+                                line-height: 1.3 !important;
+                                min-width: 150px !important;
                             }
                             
                             table {
                                 page-break-inside: avoid;
                                 width: 100% !important;
-                                table-layout: fixed !important;
+                                table-layout: auto !important;
                             }
                             
                             h2 {
                                 page-break-after: avoid;
-                                margin: 2px 0 !important;
-                                font-size: 10px !important;
-                                line-height: 1 !important;
+                                margin: 3px 0 !important;
+                                font-size: 12px !important;
+                                line-height: 1.3 !important;
                             }
                             
                             tr {
@@ -1507,35 +1539,6 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                             
                             tfoot {
                                 display: table-footer-group;
-                            }
-                            
-                            /* أنماط الخطوط المدمجة للعرض بالطول */
-                            .compact-view th,
-                            .compact-view td {
-                                font-size: 5px !important;
-                                padding: 0.8px 0.4px !important;
-                                line-height: 0.9 !important;
-                            }
-                            
-                            .very-compact-view th,
-                            .very-compact-view td {
-                                font-size: 4px !important;
-                                padding: 0.6px 0.3px !important;
-                                line-height: 0.8 !important;
-                            }
-                            
-                            .extremely-compact-view th,
-                            .extremely-compact-view td {
-                                font-size: 3px !important;
-                                padding: 0.4px 0.2px !important;
-                                line-height: 0.7 !important;
-                            }
-                            
-                            .super-compact-view th,
-                            .super-compact-view td {
-                                font-size: 2.5px !important;
-                                padding: 0.2px 0.1px !important;
-                                line-height: 0.6 !important;
                             }
                         }
                         
@@ -1550,7 +1553,7 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                         .print-section {
                             width: 100%;
                             min-height: 100vh;
-                            padding: 3mm;
+                            padding: 5mm;
                             box-sizing: border-box;
                             display: flex;
                             flex-direction: column;
@@ -1559,46 +1562,47 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                         
                         .print-header {
                             text-align: center;
-                            margin-bottom: 5px;
-                            padding-bottom: 3px;
+                            margin-bottom: 8px;
+                            padding-bottom: 4px;
                             border-bottom: 1px solid #2E5E3A;
                         }
                         
                         .print-title {
                             color: #2E5E3A;
-                            font-size: 12px;
-                            margin: 0 0 2px 0;
+                            font-size: 14px;
+                            margin: 0 0 3px 0;
                         }
                         
                         .print-subtitle {
                             color: #3a7a4a;
-                            font-size: 8px;
-                            margin: 3px 0;
+                            font-size: 11px;
+                            margin: 4px 0;
                             font-weight: bold;
                         }
                         
                         .print-date {
                             color: #666;
-                            font-size: 7px;
+                            font-size: 9px;
                         }
                         
                         .print-footer {
                             text-align: center;
-                            margin-top: 5px;
-                            padding-top: 3px;
+                            margin-top: 8px;
+                            padding-top: 4px;
                             border-top: 1px solid #ddd;
                             color: #666;
-                            font-size: 6px;
+                            font-size: 7px;
                         }
                         
                         .print-table-container {
                             flex-grow: 1;
-                            margin-bottom: 5px;
+                            margin-bottom: 8px;
                         }
                         
                         table {
                             width: 100%;
                             border-collapse: collapse;
+                            table-layout: auto;
                         }
                         
                         th {
@@ -1606,10 +1610,18 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                             text-align: center;
                             border: 1px solid #ddd;
                             font-weight: bold;
+                            padding: 4px 3px;
                         }
                         
                         td {
                             border: 1px solid #ddd;
+                            padding: 4px 3px;
+                        }
+                        
+                        .product-name-print {
+                            white-space: normal;
+                            word-wrap: break-word;
+                            max-width: none;
                         }
                     </style>
                 </head>
@@ -1630,27 +1642,27 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
             printWindow.document.close();
         }
 
-        // تصدير إلى PDF بالطول
+        // تصدير إلى PDF بالطول مع تحسينات لعرض اسم المنتج
         function exportToPDF(type) {
             const printContent = generatePrintContent(type, 'all');
             
             const options = {
-                margin: [1, 1, 1, 1], // هوامش صغيرة جداً للعرض بالطول
+                margin: [5, 5, 5, 5], // زيادة الهوامش
                 filename: `${type === 'production' ? 'production' : 'supply'}_report.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { 
-                    scale: 4, // زيادة الدقة للعرض بالطول
+                    scale: 3, // زيادة الدقة
                     useCORS: true,
                     letterRendering: true,
-                    width: 794, // عرض A4 portrait بالبكسل
-                    height: 1123, // ارتفاع A4 portrait بالبكسل
+                    width: 794,
+                    height: 1123,
                     windowWidth: 794,
                     windowHeight: 1123
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'portrait' // تغيير إلى portrait
+                    orientation: 'portrait'
                 },
                 pagebreak: { 
                     mode: ['css', 'legacy'],
@@ -1665,7 +1677,7 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
             tempElement.innerHTML = printContent;
             document.body.appendChild(tempElement);
 
-            // إضافة أنماط CSS للضغط للعرض بالطول
+            // إضافة أنماط CSS للعرض الواسع
             const style = document.createElement('style');
             style.innerHTML = `
                 @media print {
@@ -1675,25 +1687,32 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                         width: 100% !important;
                         height: 100% !important;
                         margin: 0 !important;
-                        padding: 1mm !important;
+                        padding: 5mm !important;
                         box-sizing: border-box;
                         overflow: hidden !important;
                     }
                     
                     .print-table-container {
-                        max-height: 98% !important;
+                        max-height: 95% !important;
                         overflow: hidden !important;
                     }
                     
                     table {
-                        table-layout: fixed !important;
+                        table-layout: auto !important;
                         width: 100% !important;
                     }
                     
                     th, td {
-                        padding: 0.5px 0.3px !important;
-                        font-size: 5px !important;
-                        line-height: 0.8 !important;
+                        padding: 3px 2px !important;
+                        font-size: 10px !important;
+                        line-height: 1.2 !important;
+                    }
+                    
+                    .product-name-print {
+                        white-space: normal !important;
+                        word-wrap: break-word !important;
+                        max-width: none !important;
+                        min-width: 150px !important;
                     }
                 }
                 
@@ -1705,7 +1724,7 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                 .print-section {
                     width: 100%;
                     min-height: 100vh;
-                    padding: 1.5mm;
+                    padding: 5mm;
                     box-sizing: border-box;
                 }
             `;
@@ -1839,10 +1858,10 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                 const printContent = generatePrintContent(type, 'single', category);
                 
                 const options = {
-                    margin: [1, 1, 1, 1],
+                    margin: [5, 5, 5, 5],
                     filename: `${category.replace(/\s+/g, '_')}.pdf`,
                     image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 4 },
+                    html2canvas: { scale: 3 },
                     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
                     pagebreak: { 
                         mode: ['css', 'legacy'],
@@ -1855,7 +1874,7 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                 tempElement.innerHTML = printContent;
                 document.body.appendChild(tempElement);
                 
-                // إضافة أنماط CSS للضغط للعرض بالطول
+                // إضافة أنماط CSS للعرض الواسع
                 const style = document.createElement('style');
                 style.innerHTML = `
                     @media print {
@@ -1865,20 +1884,26 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
                             width: 100% !important;
                             height: 100% !important;
                             margin: 0 !important;
-                            padding: 1mm !important;
+                            padding: 5mm !important;
                             box-sizing: border-box;
                             overflow: hidden !important;
                         }
                         
                         table {
-                            table-layout: fixed !important;
+                            table-layout: auto !important;
                             width: 100% !important;
                         }
                         
                         th, td {
-                            padding: 0.5px 0.3px !important;
-                            font-size: 5px !important;
-                            line-height: 0.8 !important;
+                            padding: 3px 2px !important;
+                            font-size: 10px !important;
+                            line-height: 1.2 !important;
+                        }
+                        
+                        .product-name-print {
+                            white-space: normal !important;
+                            word-wrap: break-word !important;
+                            min-width: 150px !important;
                         }
                     }
                 `;
@@ -2672,9 +2697,9 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
             return `
                 <thead>
                     <tr>
-                        <th style="min-width: 200px;">
+                        <th style="min-width: 300px;">
                             <div>${productsText}</div>
-                            <div style="font-size: 10px; color: #666; margin-top: 4px;">${sizeUnitText}</div>
+                            <div style="font-size: 11px; color: #666; margin-top: 4px;">${sizeUnitText}</div>
                         </th>
                         ${branches.map(branch => `
                             <th class="branch-header">${getAbbreviatedBranchName(branch)}</th>
@@ -2719,14 +2744,14 @@ function calculateOptimalTableSize(uniqueProducts, branches) {
 
         // اختصار اسم الفرع
         function getAbbreviatedBranchName(branch) {
-            if (branch.length <= 8) return branch;
+            if (branch.length <= 12) return branch;
             
             const words = branch.split(' ');
             if (words.length > 1) {
-                return words.map(word => word.charAt(0)).join('');
+                return words.map(word => word.substring(0, 3)).join(' ');
             }
             
-            return branch.substring(0, 6);
+            return branch.substring(0, 10);
         }
 
         // حساب الإجمالي للمنتج
