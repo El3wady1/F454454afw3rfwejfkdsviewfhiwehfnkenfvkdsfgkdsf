@@ -6,21 +6,8 @@
     <title>Salad Factory System - نظام مصنع السلطة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
-        :root {
-            --primary-color: #2E5E3A;
-            --accent-color: #E6B905;
-            --secondary-color: #8B9E7E;
-            --background-color: #F8F8F8;
-            --text-color: #333333;
-            --light-text-color: #666666;
-            --white: #FFFFFF;
-            --border-radius: 12px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
+        /* إعادة تعيين كل الهوامش والمسافات */
         * {
             margin: 0;
             padding: 0;
@@ -29,8 +16,7 @@
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: #f5f5f5;
             direction: rtl;
             overflow-x: hidden;
         }
@@ -38,18 +24,18 @@
         .container {
             max-width: 100%;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 5px;
         }
 
-        /* Header Styles */
+        /* Header Styles - Medium size */
         .header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 12px 0;
-            box-shadow: var(--box-shadow);
+            background-color: #2E5E3A;
+            color: white;
+            padding: 8px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .header-content {
@@ -58,41 +44,18 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
         .refresh-btn {
-            background: var(--accent-color);
-            color: var(--primary-color);
+            background: #E6B905;
+            color: #2E5E3A;
             border: none;
-            padding: 8px 15px;
+            padding: 6px 15px;
             border-radius: 20px;
             cursor: pointer;
+            font-size: 14px;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: var(--transition);
         }
 
         .refresh-btn:hover {
@@ -100,103 +63,34 @@
         }
 
         .refresh-btn:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
-        /* Print Controls Styles */
-        .print-controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .print-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-
-        .print-btn:hover {
-            background: #1e4a2a;
-        }
-
-        .print-btn.print-pdf {
-            background: #d32f2f;
-        }
-
-        .print-btn.print-pdf:hover {
-            background: #b71c1c;
-        }
-
-        .print-btn.print-single {
-            background: var(--secondary-color);
-        }
-
-        .print-btn.print-single:hover {
-            background: #7a8b6e;
-        }
-
-        /* Language Toggle */
-        .language-toggle {
-            display: flex;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 4px;
-            margin: 0 15px;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        .lang-btn.active {
-            background: var(--accent-color);
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /* Navigation Tabs */
+        /* Navigation Tabs - Medium size */
         .nav-tabs {
             display: flex;
-            background-color: var(--white);
-            border-bottom: 1px solid #e0e0e0;
-            overflow-x: auto;
+            background-color: white;
+            border-bottom: 2px solid #ccc;
             position: sticky;
-            top: 64px;
+            top: 48px;
             z-index: 999;
         }
 
         .nav-tab {
-            padding: 15px 20px;
+            padding: 12px 20px;
             cursor: pointer;
             border-bottom: 3px solid transparent;
-            transition: var(--transition);
-            white-space: nowrap;
+            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         .nav-tab.active {
-            border-bottom-color: var(--primary-color);
-            color: var(--primary-color);
-            font-weight: 600;
+            border-bottom-color: #2E5E3A;
+            color: #2E5E3A;
         }
 
         .nav-tab:hover {
@@ -207,310 +101,251 @@
         .main-content {
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 90px);
             overflow: hidden;
         }
 
-        /* Auto Scroll Controls */
-        .auto-scroll-controls {
-            background-color: var(--white);
-            padding: 10px 15px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin-bottom: 15px;
+        /* Print Controls */
+        .print-controls {
+            background-color: white;
+            padding: 8px 12px;
+            margin: 5px 0;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 10px;
+            border-bottom: 2px solid #eee;
         }
 
-        .auto-scroll-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .scroll-btn {
-            background: var(--primary-color);
+        .print-btn {
+            background: #2E5E3A;
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
+            font-size: 14px;
             cursor: pointer;
-            font-weight: bold;
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: var(--transition);
         }
 
-        .scroll-btn:hover {
+        .print-btn:hover {
             background: #1e4a2a;
         }
 
-        .scroll-btn.active {
-            background: var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        .scroll-speed-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .speed-label {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .speed-slider {
-            width: 120px;
-        }
-
-        /* Stats Header */
-        .stats-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 0 10px;
-        }
-
-        .stats-title {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 18px;
-        }
-
-        .toggle-stats-btn {
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition);
-        }
-
-        .toggle-stats-btn:hover {
-            background: var(--primary-color);
-        }
-
-        /* Stats Cards */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary-color), #3a7a4a);
-            color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .stat-number {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            opacity: 0.9;
+        .print-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         /* Filter Section */
         .filter-section {
-            padding: 15px 0;
-            background-color: var(--white);
-            margin-bottom: 15px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            flex-shrink: 0;
-        }
-
-        .filter-row {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .filter-group {
-            flex: 1;
-            min-width: 250px;
+            background-color: white;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-bottom: 2px solid #eee;
         }
 
         .filter-label {
-            display: block;
-            margin-bottom: 8px;
+            font-size: 14px;
             font-weight: 600;
-            color: var(--primary-color);
+            color: #2E5E3A;
+            margin-bottom: 3px;
         }
 
-        .select2-container {
-            width: 100% !important;
+        .branch-select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #8B9E7E;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: white;
         }
 
-        .select2-selection {
-            border: 1px solid var(--secondary-color) !important;
-            border-radius: 8px !important;
-            padding: 8px 12px !important;
-            height: auto !important;
-        }
-
-        .select2-selection--multiple {
-            min-height: 42px !important;
+        .branch-select:focus {
+            outline: none;
+            border-color: #2E5E3A;
         }
 
         /* Data Container */
         .data-container {
             flex: 1;
             overflow: auto;
-            padding-bottom: 20px;
-            scroll-behavior: smooth;
+            padding: 5px;
         }
 
-        /* Card Styles */
+        /* ===== أنماط الجداول المدمجة بالكامل ===== */
         .card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin-bottom: 15px;
+            background-color: white;
+            margin: 8px 0;
+            border: 1px solid #888;
+            border-radius: 4px;
             overflow: hidden;
-            position: relative;
         }
 
         .card-header {
-            background-color: rgba(46, 94, 58, 0.1);
-            padding: 12px 15px;
+            background-color: #e0e8e0;
+            padding: 6px 10px;
             font-weight: 700;
-            color: var(--primary-color);
+            font-size: 16px;
+            color: #2E5E3A;
             text-align: center;
-            border-bottom: 1px solid rgba(139, 158, 126, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            border-bottom: 1px solid #888;
         }
 
         .card-body {
-            padding: 15px;
+            padding: 0;
         }
 
-        /* Card Print Controls */
-        .card-print-controls {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 20;
-            display: flex;
-            gap: 5px;
-        }
-
-        .card-print-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            opacity: 0.8;
-        }
-
-        .card-print-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .card-print-btn.print-pdf {
-            background: #d32f2f;
-        }
-
-        /* Table Styles - تم التعديل هنا */
         .table-container {
             overflow-x: auto;
-            margin-bottom: 15px;
         }
 
+        /* جدول مدمج - حجم خط متوسط */
         .production-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
-            min-width: 900px; /* تم زيادة العرض */
+            table-layout: auto;
+            font-size: 13px;
+            line-height: 1.3;
         }
 
-        .production-table th {
-            background-color: rgba(46, 94, 58, 0.05);
-            padding: 12px 10px; /* زيادة padding */
-            text-align: center;
-            font-weight: 700;
-            color: var(--primary-color);
-            border-bottom: 1px solid rgba(139, 158, 126, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            min-width: 100px; /* زيادة العرض */
-        }
-
+        /* مسافات مناسبة للخلايا */
+        .production-table th,
         .production-table td {
-            padding: 10px 10px; /* زيادة padding */
+            border: 1px solid #888;
+            padding: 4px 6px;
+            margin: 0;
             text-align: center;
-            border-bottom: 1px solid rgba(139, 158, 126, 0.1);
-            min-width: 100px; /* زيادة العرض */
+            vertical-align: middle;
+            font-size: 13px;
         }
 
-        .product-info {
+        /* العمود الأول (المنتجات) */
+        .production-table th:first-child,
+        .production-table td:first-child {
             text-align: right;
-            min-width: 300px; /* زيادة عرض عمود المنتجات */
-            max-width: 400px;
+            padding: 4px 8px;
+            min-width: 150px;
+            max-width: 200px;
+            white-space: normal;
+            word-wrap: break-word;
         }
 
+        /* رأس الجدول */
+        .production-table th {
+            background-color: #e8e8e8;
+            font-weight: 700;
+            color: #2E5E3A;
+            white-space: nowrap;
+        }
+
+        /* خلية الإجمالي */
+        .total-cell {
+            background-color: #f0f0f0;
+            font-weight: 700;
+        }
+
+        /* معلومات المنتج */
         .product-name {
             font-weight: 600;
-            margin-bottom: 4px;
             line-height: 1.3;
-            white-space: normal; /* السماح بعرض الاسم بالكامل */
+            white-space: normal;
             word-wrap: break-word;
-            max-height: none;
-            overflow: visible;
+            font-size: 13px;
         }
 
         .product-package {
-            font-size: 13px; /* زيادة حجم الخط */
-            color: var(--light-text-color);
-            margin-top: 5px;
+            font-size: 11px;
+            color: #666;
+            line-height: 1.2;
         }
 
+        /* عناوين الفروع */
         .branch-header {
-            font-size: 13px; /* زيادة حجم الخط */
-            max-width: 120px; /* زيادة العرض */
+            font-size: 12px;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
-            min-width: 100px; /* زيادة العرض */
+            max-width: 60px;
         }
 
-        .total-cell {
-            background-color: rgba(139, 158, 126, 0.1);
-            font-weight: 700;
-            color: var(--primary-color);
-            min-width: 100px; /* زيادة العرض */
-            font-size: 14px; /* زيادة حجم الخط */
+        /* ===== أنماط الطباعة ===== */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+                margin: 0;
+                padding: 2mm;
+            }
+            
+            .main-content {
+                height: auto;
+                overflow: visible;
+            }
+            
+            .data-container {
+                overflow: visible;
+                padding: 0;
+            }
+            
+            .card {
+                margin: 1mm 0;
+                border: 0.5px solid black;
+                page-break-inside: avoid;
+            }
+            
+            .card-header {
+                padding: 2px 4px;
+                font-size: 12px;
+                border-bottom: 0.5px solid black;
+            }
+            
+            .production-table {
+                font-size: 10px;
+                line-height: 1.2;
+                border-collapse: collapse;
+            }
+            
+            .production-table th,
+            .production-table td {
+                border: 0.3px solid black;
+                padding: 2px 3px;
+                font-size: 10px;
+            }
+            
+            .production-table th:first-child,
+            .production-table td:first-child {
+                padding: 2px 4px;
+                min-width: 100px;
+            }
+            
+            .product-name {
+                font-size: 10px;
+            }
+            
+            .product-package {
+                font-size: 8px;
+            }
+            
+            .branch-header {
+                font-size: 8px;
+                max-width: 30px;
+            }
+            
+            .print-page {
+                page-break-after: always;
+                margin: 0;
+                padding: 1mm;
+            }
+            
+            @page {
+                size: A4 landscape;
+                margin: 3mm;
+            }
         }
 
         /* Loading Spinner */
@@ -520,14 +355,14 @@
             align-items: center;
             height: 200px;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(46, 94, 58, 0.2);
-            border-left: 4px solid var(--primary-color);
+            width: 35px;
+            height: 35px;
+            border: 3px solid rgba(46, 94, 58, 0.2);
+            border-left: 3px solid #2E5E3A;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -543,496 +378,127 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 300px;
+            height: 250px;
             text-align: center;
         }
 
         .empty-icon {
-            font-size: 70px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
+            font-size: 50px;
+            color: #8B9E7E;
+            margin-bottom: 10px;
         }
 
-        /* Print Styles - تم التعديل للعرض بالطول */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            
-            .print-section, .print-section * {
-                visibility: visible;
-            }
-            
-            .print-section {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100% !important;
-                page-break-after: always !important;
-                page-break-inside: avoid !important;
-                overflow: hidden !important;
-                margin: 0 !important;
-                padding: 2mm !important;
-                box-sizing: border-box;
-            }
-            
-            .print-section:last-child {
-                page-break-after: auto !important;
-            }
-            
-            .print-table-container {
-                page-break-inside: avoid !important;
-                max-height: 100% !important;
-                overflow: hidden !important;
-            }
-            
-            /* أنماط للجداول المدمجة */
-            .compact-table {
-                transform-origin: top right;
-                transform: scale(0.95);
-                width: 100% !important;
-            }
-            
-            .very-compact-table {
-                transform-origin: top right;
-                transform: scale(0.85);
-                width: 100% !important;
-            }
-            
-            .extremely-compact-table {
-                transform-origin: top right;
-                transform: scale(0.75);
-                width: 100% !important;
-            }
-            
-            .super-compact-table {
-                transform-origin: top right;
-                transform: scale(0.65);
-                width: 100% !important;
-            }
-            
-            .no-print {
-                display: none !important;
-            }
-            
-            .card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                margin: 0;
-                page-break-inside: avoid;
-                height: 100%;
-                width: 100%;
-            }
-            
-            .production-table {
-                font-size: 12px !important;
-                min-width: 100%;
-                page-break-inside: avoid;
-                border-collapse: collapse;
-                table-layout: fixed !important;
-                width: 100% !important;
-            }
-            
-            .production-table th,
-            .production-table td {
-                border: 1px solid #ddd;
-                padding: 3px 2px !important; /* زيادة padding للطباعة */
-                page-break-inside: avoid;
-                line-height: 1.2 !important; /* زيادة line-height */
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: inherit !important;
-            }
-            
-            .product-name-print {
-                white-space: normal !important; /* عرض الاسم بالكامل */
-                word-wrap: break-word !important;
-                line-height: 1.3 !important;
-                padding: 4px 2px !important;
-                text-align: right !important;
-            }
-            
-            .compact-view th,
-            .compact-view td {
-                font-size: 11px !important;
-                padding: 2px 1px !important; /* زيادة padding */
-            }
-            
-            .very-compact-view th,
-            .very-compact-view td {
-                font-size: 10px !important;
-                padding: 2px 1px !important; /* زيادة padding */
-            }
-            
-            .extremely-compact-view th,
-            .extremely-compact-view td {
-                font-size: 9px !important;
-                padding: 2px 1px !important; /* زيادة padding */
-            }
-            
-            .super-compact-view th,
-            .super-compact-view td {
-                font-size: 8px !important;
-                padding: 2px 1px !important; /* زيادة padding */
-            }
-            
-            h2 {
-                page-break-after: avoid;
-                margin: 2px 0 !important;
-                font-size: 17px !important;
-                line-height: 1.2 !important; /* زيادة line-height */
-            }
-            
-            table {
-                page-break-inside: avoid;
-                width: 100% !important;
-            }
-            
-            tr {
-                page-break-inside: avoid;
-                page-break-after: auto;
-            }
-            
-            thead {
-                display: table-header-group;
-            }
-            
-            tfoot {
-                display: table-footer-group;
-            }
-            
-            @page {
-                size: A4 portrait; /* تغيير إلى portrait للعرض بالطول */
-                margin: 0.3cm !important; /* زيادة الهوامش قليلاً */
-            }
-            
-            @page :first {
-                margin-top: 0.3cm !important; /* زيادة الهوامش قليلاً */
-            }
-            
-            /* تقليل الهوامش */
-            .print-header {
-                margin-bottom: 5px !important;
-                padding-bottom: 3px !important;
-            }
-            
-            .print-title {
-                font-size: 14px !important;
-                margin-bottom: 2px !important;
-            }
-            
-            .print-date {
-                font-size: 9px !important; /* زيادة حجم الخط */
-            }
-            
-            .print-footer {
-                margin-top: 5px !important;
-                padding-top: 3px !important;
-                font-size: 7px !important; /* زيادة حجم الخط */
-                line-height: 1.2 !important; /* زيادة line-height */
-            }
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 1200px) {
-            .production-table {
-                font-size: 13px;
-                min-width: 1000px;
-            }
-            
-            .product-info {
-                min-width: 280px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .filter-row {
-                flex-direction: column;
-            }
-            
-            .filter-group {
-                min-width: 100%;
-            }
-            
-            .nav-tab {
-                padding: 12px 15px;
-                font-size: 14px;
-            }
-            
-            .production-table {
-                font-size: 12px;
-                min-width: 800px;
-            }
-
-            .product-info {
-                min-width: 250px;
-            }
-
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-
-            .header-content {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .main-content {
-                height: calc(100vh - 140px);
-            }
-
-            .auto-scroll-controls {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .print-controls {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .print-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .card-print-controls {
-                position: relative;
-                top: 0;
-                left: 0;
-                justify-content: center;
-                margin-bottom: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-tab {
-                padding: 10px 12px;
-                font-size: 12px;
-            }
-            
-            .production-table {
-                font-size: 11px;
-                min-width: 700px;
-            }
-            
-            .product-info {
-                min-width: 200px;
-            }
-        }
-
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .d-flex {
-            display: flex;
-        }
-
-        .justify-content-center {
-            justify-content: center;
-        }
-
-        .align-items-center {
-            align-items: center;
-        }
-
-        .gap-10 {
-            gap: 10px;
-        }
-
-        .mb-15 {
-            margin-bottom: 15px;
-        }
-
-        .mt-15 {
-            margin-top: 15px;
-        }
-
-        .p-15 {
-            padding: 15px;
+        .empty-state p {
+            font-size: 14px;
+            color: #666;
         }
 
         .hidden {
             display: none;
         }
 
-        .error-message {
-            background-color: #fee;
-            color: #c33;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            border: 1px solid #fcc;
-            margin-bottom: 15px;
+        /* Messages */
+        .message {
+            padding: 8px 12px;
+            margin: 5px 0;
+            font-size: 14px;
+            border-radius: 5px;
         }
 
-        .success-message {
-            background-color: #efe;
-            color: #363;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            border: 1px solid #cfc;
-            margin-bottom: 15px;
+        .success-message { 
+            background: #efe; 
+            color: #363; 
+            border: 1px solid #cfc; 
+        }
+        
+        .error-message { 
+            background: #fee; 
+            color: #c33; 
+            border: 1px solid #fcc; 
+        }
+        
+        .warning-message { 
+            background: #ffecb5; 
+            color: #7d6608; 
+            border: 1px solid #ffd54f; 
         }
 
-        .warning-message {
-            background-color: #ffecb5;
-            color: #7d6608;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            border: 1px solid #ffd54f;
-            margin-bottom: 15px;
-        }
-
-        /* Scrollbar Styling */
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px; /* زيادة عرض scrollbar */
-            height: 10px;
+            width: 8px;
+            height: 8px;
         }
-
+        
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 5px;
         }
-
+        
         ::-webkit-scrollbar-thumb {
-            background: var(--secondary-color);
-            border-radius: 5px;
+            background: #8B9E7E;
+            border-radius: 4px;
         }
-
+        
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-color);
+            background: #2E5E3A;
         }
 
-        /* Auto Scroll Status */
-        .auto-scroll-status {
-            background-color: rgba(230, 185, 5, 0.1);
-            border: 1px solid var(--accent-color);
-            border-radius: 20px;
-            padding: 5px 15px;
-            font-size: 14px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Print Preview Styles */
-        .print-preview {
-            background: white;
-            padding: 20px;
-            margin: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            display: none;
-        }
-
-        .print-preview.active {
-            display: block;
-        }
-
-        .print-header {
-            text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        .print-title {
-            color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .print-date {
-            color: var(--light-text-color);
-            font-size: 14px;
-        }
-
-        .print-footer {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 10px;
-            border-top: 1px solid #ddd;
-            color: var(--light-text-color);
-            font-size: 12px;
-        }
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .d-flex { display: flex; }
+        .gap-5 { gap: 5px; }
+        .mt-5 { margin-top: 5px; }
+        .mb-5 { margin-bottom: 5px; }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header no-print">
         <div class="container">
             <div class="header-content">
-                <div class="d-flex align-items-center gap-10">
-                    <div class="language-toggle">
-                        <button class="lang-btn active" data-lang="ar">العربية</button>
-                        <button class="lang-btn" data-lang="en">English</button>
-                    </div>
-                  
-                    <button id="refresh-btn" class="refresh-btn">
-                        <i class="fas fa-sync-alt"></i> <span data-ar="تحديث البيانات" data-en="Refresh Data">تحديث البيانات</span>
-                    </button>
-                </div>
+                <button id="refresh-btn" class="refresh-btn">
+                    <i class="fas fa-sync-alt"></i> <span>تحديث البيانات</span>
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Navigation Tabs -->
-    <div class="nav-tabs">
-        <div class="container">
-            <div class="nav-tab active" data-tab="production">
-                <i class="fas fa-industry"></i>
-                <span data-ar="الانتاج اليومي" data-en="Daily Production">الانتاج اليومي</span>
-            </div>
-            <div class="nav-tab" data-tab="supply">
-                <i class="fas fa-truck-loading"></i>
-                <span data-ar="توريد" data-en="Supply">توريد</span>
-            </div>
+    <div class="nav-tabs no-print">
+        <div class="nav-tab active" data-tab="production">
+            <i class="fas fa-industry"></i> <span>الإنتاج</span>
+        </div>
+        <div class="nav-tab" data-tab="supply">
+            <i class="fas fa-truck-loading"></i> <span>توريد</span>
         </div>
     </div>
 
     <!-- Main Content -->
     <main class="container">
-        <!-- Production Tab Content -->
+        <!-- Production Tab -->
         <div id="production-tab" class="tab-content">
             <div class="main-content">
-                <!-- Print Controls for Production -->
-                <div class="auto-scroll-controls">
-                   
-                    <div class="print-controls no-print">
-                        <button id="print-all-production" class="print-btn">
-                            <i class="fas fa-print"></i> <span data-ar="طباعة جميع الجداول" data-en="Print All Tables">طباعة جميع الجداول</span>
-                        </button>
-                      
-                        <button id="print-single-production" class="print-btn print-single">
-                            <i class="fas fa-print"></i> <span data-ar="طباعة جدول واحد" data-en="Print Single Table">طباعة جدول واحد</span>
-                        </button>
-                    </div>
-              
+                <!-- Print Controls -->
+                <div class="print-controls no-print">
+                    <button id="print-all-production" class="print-btn">
+                        <i class="fas fa-print"></i> طباعة الكل
+                    </button>
+                    <button id="load-sample-production" class="print-btn" style="background:#8B9E7E;">
+                        <i class="fas fa-database"></i> بيانات تجريبية
+                    </button>
                 </div>
 
-                <!-- Stats Section -->
-             
-
-                <!-- Filter Section -->
-                <div class="filter-section">
-                    <div class="filter-row">
-                
-                        <div class="filter-group">
-                            <label class="filter-label" data-ar="الفرع:" data-en="Branch:">الفرع:</label>
-                            <select id="branch-filter-production" class="form-control">
-                                <option value="" data-ar="كل الفروع" data-en="All Branches">كل الفروع</option>
-                                <!-- سيتم ملؤها ديناميكياً -->
-                            </select>
-                        </div>
-                    </div>
+                <!-- Filter -->
+                <div class="filter-section no-print">
+                    <label class="filter-label">الفرع:</label>
+                    <select id="branch-filter-production" class="branch-select">
+                        <option value="">كل الفروع</option>
+                    </select>
                 </div>
 
                 <!-- Messages -->
@@ -1040,60 +506,45 @@
 
                 <!-- Data Container -->
                 <div class="data-container" id="scroll-container-production">
-                    <!-- Loading State -->
+                    <!-- Loading -->
                     <div id="loading-state-production" class="loading-spinner">
                         <div class="spinner"></div>
-                        <span data-ar="جاري تحميل بيانات الإنتاج من السيرفر..." data-en="Loading production data from server...">جاري تحميل بيانات الإنتاج من السيرفر...</span>
+                        <span>جاري تحميل بيانات الإنتاج...</span>
                     </div>
 
-                    <!-- Empty State -->
+                    <!-- Empty -->
                     <div id="empty-state-production" class="empty-state hidden">
-                        <div class="empty-icon">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                        <h3 data-ar="لا توجد طلبات في هذا القسم" data-en="No requests in this section">لا توجد طلبات في هذا القسم</h3>
-                        <p data-ar="لا توجد عناصر إنتاج متاحة للعرض حالياً" data-en="No production items available for display">لا توجد عناصر إنتاج متاحة للعرض حالياً</p>
+                        <div class="empty-icon"><i class="fas fa-industry"></i></div>
+                        <h3>لا توجد بيانات</h3>
+                        <p>لم يتم العثور على بيانات من API</p>
+                        <button id="try-sample-production" class="print-btn" style="margin-top:5px; background:#2E5E3A;">عرض بيانات تجريبية</button>
                     </div>
 
-                    <!-- Production Data -->
-                    <div id="production-data" class="hidden">
-                        <!-- سيتم ملؤها ديناميكياً -->
-                    </div>
+                    <!-- Data -->
+                    <div id="production-data" class="hidden"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Supply Tab Content -->
+        <!-- Supply Tab -->
         <div id="supply-tab" class="tab-content hidden">
             <div class="main-content">
-                <!-- Print Controls for Supply -->
-                <div class="auto-scroll-controls">
-                  
-                    <div class="print-controls no-print">
-                        <button id="print-all-supply" class="print-btn">
-                            <i class="fas fa-print"></i> <span data-ar="طباعة جميع الجداول" data-en="Print All Tables">طباعة جميع الجداول</span>
-                        </button>
-                      
-                        <button id="print-single-supply" class="print-btn print-single">
-                            <i class="fas fa-print"></i> <span data-ar="طباعة جدول واحد" data-en="Print Single Table">طباعة جدول واحد</span>
-                        </button>
-                    </div>
-              
+                <!-- Print Controls -->
+                <div class="print-controls no-print">
+                    <button id="print-all-supply" class="print-btn">
+                        <i class="fas fa-print"></i> طباعة الكل
+                    </button>
+                    <button id="load-sample-supply" class="print-btn" style="background:#8B9E7E;">
+                        <i class="fas fa-database"></i> بيانات تجريبية
+                    </button>
                 </div>
 
-            
-                <!-- Filter Section -->
-                <div class="filter-section">
-                    <div class="filter-row">
-             
-                        <div class="filter-group">
-                            <label class="filter-label" data-ar="الفرع:" data-en="Branch:">الفرع:</label>
-                            <select id="branch-filter-supply" class="form-control">
-                                <option value="" data-ar="كل الفروع" data-en="All Branches">كل الفروع</option>
-                                <!-- سيتم ملؤها ديناميكياً -->
-                            </select>
-                        </div>
-                    </div>
+                <!-- Filter -->
+                <div class="filter-section no-print">
+                    <label class="filter-label">الفرع:</label>
+                    <select id="branch-filter-supply" class="branch-select">
+                        <option value="">كل الفروع</option>
+                    </select>
                 </div>
 
                 <!-- Messages -->
@@ -1101,1220 +552,144 @@
 
                 <!-- Data Container -->
                 <div class="data-container" id="scroll-container-supply">
-                    <!-- Loading State -->
+                    <!-- Loading -->
                     <div id="loading-state-supply" class="loading-spinner">
                         <div class="spinner"></div>
-                        <span data-ar="جاري تحميل بيانات التوريد من السيرفر..." data-en="Loading supply data from server...">جاري تحميل بيانات التوريد من السيرفر...</span>
+                        <span>جاري تحميل بيانات التوريد...</span>
                     </div>
 
-                    <!-- Empty State -->
+                    <!-- Empty -->
                     <div id="empty-state-supply" class="empty-state hidden">
-                        <div class="empty-icon">
-                            <i class="fas fa-truck-loading"></i>
-                        </div>
-                        <h3 data-ar="لا توجد طلبات توريد في هذا القسم" data-en="No supply requests in this section">لا توجد طلبات توريد في هذا القسم</h3>
-                        <p data-ar="لا توجد عناصر توريد متاحة للعرض حالياً" data-en="No supply items available for display">لا توجد عناصر توريد متاحة للعرض حالياً</p>
+                        <div class="empty-icon"><i class="fas fa-truck-loading"></i></div>
+                        <h3>لا توجد بيانات</h3>
+                        <p>لم يتم العثور على بيانات من API</p>
+                        <button id="try-sample-supply" class="print-btn" style="margin-top:5px; background:#2E5E3A;">عرض بيانات تجريبية</button>
                     </div>
 
-                    <!-- Supply Data -->
-                    <div id="supply-data" class="hidden">
-                        <!-- سيتم ملؤها ديناميكياً -->
-                    </div>
+                    <!-- Data -->
+                    <div id="supply-data" class="hidden"></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Print Preview Modal -->
-    <div id="print-preview" class="print-preview">
-        <!-- سيتم ملؤها ديناميكياً -->
-    </div>
-
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <!-- مكتبة html2pdf -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         // حالة التطبيق
         let appState = {
-            currentLang: 'ar',
             currentTab: 'production',
-            showStats: {
-                production: true,
-                supply: true
-            },
             production: {
-                isLoading: false,
                 items: [],
                 filteredItems: [],
-                allCategories: [],
                 allBranches: [],
-                selectedCategories: [],
                 selectedBranch: '',
                 apiUrl: 'https://ramadanv2026-production.up.railway.app/api/orderProduction/getOrderPof2Days',
-                autoScrollInterval: null,
-                scrollSpeed: 5,
-                isAutoScrolling: false,
-                scrollDirection: 'down'
+                isLoading: false,
+                useSampleData: false
             },
             supply: {
-                isLoading: false,
                 items: [],
                 filteredItems: [],
-                allCategories: [],
                 allBranches: [],
-                selectedCategories: [],
                 selectedBranch: '',
                 apiUrl: 'https://ramadanv2026-production.up.railway.app/api/orderSupply/getOrderPof2Days',
-                autoScrollInterval: null,
-                scrollSpeed: 5,
-                isAutoScrolling: false,
-                scrollDirection: 'down'
+                isLoading: false,
+                useSampleData: false
             }
         };
 
-        // تهيئة التطبيق
         $(document).ready(function() {
-            initializeSelect2();
             loadProductionData();
             setupEventListeners();
-            setupAutoScrollControls();
-            setupLanguageToggle();
-            setupStatsToggle();
-            setupPrintControls();
         });
 
-        // تهيئة Select2
-        function initializeSelect2() {
-            const placeholder = appState.currentLang === 'ar' ? 'اختر الفئات' : 'Select Categories';
-            const branchPlaceholder = appState.currentLang === 'ar' ? 'اختر الفرع' : 'Select Branch';
-            
-            $('#category-filter-production, #category-filter-supply').select2({
-                placeholder: placeholder,
-                allowClear: true,
-                closeOnSelect: false
-            });
-
-            $('#branch-filter-production, #branch-filter-supply').select2({
-                placeholder: branchPlaceholder
-            });
-        }
-
-        // إعداد عناصر التحكم في الطباعة
-        function setupPrintControls() {
-            // طباعة جميع الجداول للإنتاج
-            $('#print-all-production').on('click', function() {
-                printAllTables('production');
-            });
-
-            // طباعة PDF للإنتاج
-            $('#print-pdf-production').on('click', function() {
-                exportToPDF('production');
-            });
-
-            // طباعة جدول واحد للإنتاج
-            $('#print-single-production').on('click', function() {
-                showSingleTablePrintDialog('production');
-            });
-
-            // طباعة جميع الجداول للتوريد
-            $('#print-all-supply').on('click', function() {
-                printAllTables('supply');
-            });
-
-            // طباعة PDF للتوريد
-            $('#print-pdf-supply').on('click', function() {
-                exportToPDF('supply');
-            });
-
-            // طباعة جدول واحد للتوريد
-            $('#print-single-supply').on('click', function() {
-                showSingleTablePrintDialog('supply');
-            });
-        }
-
-        // طباعة جميع الجداول
-        function printAllTables(type) {
-            const printContent = generatePrintContent(type, 'all');
-            openPrintWindow(printContent, type);
-        }
-
-        // طباعة جدول واحد
-        function printSingleTable(type, tableId) {
-            const printContent = generatePrintContent(type, 'single', tableId);
-            openPrintWindow(printContent, type);
-        }
-
-        // حساب الحجم الأمثل للجدول مع تحسين لعرض اسم المنتج بالكامل
-        function calculateOptimalTableSize(uniqueProducts, branches) {
-            const rows = uniqueProducts.length;
-            const cols = branches.length + 2;
-            
-            // زيادة الحجم لجعل الخلايا أوسع
-            const fontSize = 11; // زيادة حجم الخط قليلاً
-            const tableClass = 'wider-table';
-            const viewClass = 'wide-view';
-            
-            return {
-                fontSize,
-                tableClass,
-                viewClass,
-                fitsInOnePage: rows <= 100
-            };
-        }
-
-        // إنشاء محتوى الجدول للطباعة - مع تحسينات لعرض اسم المنتج بالكامل
-        function generateTablePrintContent(category, products, branches) {
-            const organizedData = organizeItemsByBranchAndProductForCategory(products);
-            const uniqueProducts = getUniqueProductsFromOrganizedData(organizedData);
-            
-            if (uniqueProducts.length === 0) return '';
-            
-            const notSpecifiedText = appState.currentLang === 'ar' ? 'لم يحدد' : 'Not specified';
-            const productsText = appState.currentLang === 'ar' ? 'المنتجات' : 'Products';
-            const sizeUnitText = appState.currentLang === 'ar' ? '(الحجم/وحدة)' : '(Size/Unit)';
-            const totalText = appState.currentLang === 'ar' ? 'الإجمالي' : 'Total';
-            
-            const optimalSize = calculateOptimalTableSize(uniqueProducts, branches);
-            
-            return `
-                <div class="print-table-container ${optimalSize.tableClass}">
-                    <h2 style="color: #2E5E3A; text-align: center; margin-bottom: 5px; padding-bottom: 3px; border-bottom: 1px solid #2E5E3A; font-size: ${optimalSize.fontSize + 3}px; line-height: 1.2;">
-                        ${category}
-                    </h2>
-                    <table class="production-table ${optimalSize.viewClass}" style="width: 100%; border-collapse: collapse; font-size: ${optimalSize.fontSize}px; line-height: 1.3; table-layout: auto;">
-                        <thead>
-                            <tr>
-                                <th style="background-color: #f0f0f0; padding: 4px 3px; text-align: center; border: 1px solid #ddd; width: 40%; min-width: 150px;">
-                                    <div>${productsText}</div>
-                                    <div style="font-size: ${optimalSize.fontSize}px; color: #666;">${sizeUnitText}</div>
-                                </th>
-                                ${branches.map(branch => `
-                                    <th style="background-color: #f0f0f0; padding: 4px 3px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize}px; min-width: 70px; max-width: 100px;">
-                                        ${getShortBranchName(branch)}
-                                    </th>
-                                `).join('')}
-                                <th style="background-color: #f0f0f0; padding: 4px 3px; text-align: center; border: 1px solid #ddd; min-width: 70px; color: #2E5E3A; font-size: ${optimalSize.fontSize}px;">
-                                    ${totalText}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${uniqueProducts.map(product => `
-                                <tr>
-                                    <td style="padding: 4px 3px; text-align: right; border: 1px solid #ddd; max-width: none; overflow: visible; white-space: normal;" class="product-name-print">
-                                        <div style="font-weight: bold; font-size: ${optimalSize.fontSize}px; line-height: 1.3;">
-                                            ${product.name}
-                                        </div>
-                                        <div style="font-size: ${optimalSize.fontSize}px; color: #666; line-height: 1.2;">
-                                            ${product.package && product.package !== '0' && product.package !== 'null' ? product.package : ''} 
-                                            ${product.packageUnitname ? product.packageUnitname : ''}
-                                            ${!product.package || product.package === '0' || product.package === 'null' ? notSpecifiedText : ''}
-                                        </div>
-                                    </td>
-                                    ${branches.map(branch => `
-                                        <td style="padding: 4px 3px; text-align: center; border: 1px solid #ddd; font-size: ${optimalSize.fontSize}px; line-height: 1.3; min-width: 70px;">
-                                            ${organizedData[branch] && organizedData[branch][product.name] 
-                                                ? formatNumber(organizedData[branch][product.name].requestedQty) 
-                                                : '-'}
-                                        </td>
-                                    `).join('')}
-                                    <td style="padding: 4px 3px; text-align: center; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold; color: #2E5E3A; font-size: ${optimalSize.fontSize}px; line-height: 1.3; min-width: 70px;">
-                                        ${formatNumber(calculateTotalForProduct(product.name, organizedData))}
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                    <div style="text-align: center; font-size: ${optimalSize.fontSize}px; color: #666; margin-top: 5px; line-height: 1.2;">
-                        ${appState.currentLang === 'ar' ? 'عدد العناصر: ' : 'Items: '}${uniqueProducts.length}
-                    </div>
-                </div>
-            `;
-        }
-
-        // دالة للحصول على اسم فرع مختصر
-        function getShortBranchName(branch) {
-            if (branch.length <= 10) return branch;
-            
-            const words = branch.split(' ');
-            if (words.length > 1) {
-                if (words.length > 2) {
-                    const initials = words.map(word => word.charAt(0)).join('');
-                    return initials.substring(0, 4);
-                }
-                return words.map(word => word.substring(0, 3)).join(' ');
-            }
-            
-            return branch.substring(0, 10);
-        }
-
-        // إنشاء محتوى الطباعة - كل جدول في صفحة واحدة بالطول
-        function generatePrintContent(type, mode = 'all', tableId = null) {
-            const state = appState[type];
-            const items = mode === 'single' && tableId 
-                ? state.filteredItems.filter(item => item.category === tableId)
-                : state.filteredItems;
-            
-            const title = type === 'production' 
-                ? (appState.currentLang === 'ar' ? 'تقرير الإنتاج اليومي' : 'Daily Production Report')
-                : (appState.currentLang === 'ar' ? 'تقرير التوريد' : 'Supply Report');
-            
-            const date = new Date().toLocaleDateString(appState.currentLang === 'ar' ? 'ar-SA' : 'en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            let content = '';
-            
-            if (mode === 'single' && tableId) {
-                // جدول واحد فقط في صفحة منفصلة
-                content = generateSingleTablePerPageContent(items, state.allBranches, title, date);
-            } else {
-                // جميع الجداول - كل جدول في صفحة منفصلة
-                content = generateAllTablesPerPageContent(items, state.allBranches, title, date);
-            }
-            
-            return content;
-        }
-
-        // إنشاء محتوى لجميع الجداول - كل جدول في صفحة منفصلة بالطول
-        function generateAllTablesPerPageContent(items, branches, title, date) {
-            const organizedData = organizeItemsByMainCategory(items);
-            let content = '';
-            
-            let counter = 0;
-            const totalTables = Object.keys(organizedData).length;
-            
-            Object.keys(organizedData).forEach(category => {
-                const categoryProducts = organizedData[category];
-                
-                // إضافة صفحة لكل جدول
-                content += `
-                    <div class="print-section">
-                        <div class="print-header" style="margin-bottom: 5px; padding-bottom: 3px;">
-                            <h1 class="print-title" style="font-size: 14px; margin-bottom: 2px; line-height: 1.2;">${title}</h1>
-                            <div class="print-date" style="font-size: 9px; line-height: 1.2;">${date}</div>
-                        </div>
-                        ${generateTablePrintContent(category, categoryProducts, branches)}
-                        <div class="print-footer" style="margin-top: 5px; padding-top: 3px; font-size: 7px; line-height: 1.2;">
-                            <p>${appState.currentLang === 'ar' ? 'صفحة ' : 'Page '}${counter + 1} من ${totalTables}</p>
-                            <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
-                        </div>
-                    </div>
-                `;
-                counter++;
-            });
-            
-            return content;
-        }
-
-        // إنشاء محتوى لجدول واحد في صفحة منفصلة بالطول
-        function generateSingleTablePerPageContent(items, branches, title, date) {
-            if (!items || items.length === 0) return '';
-            const category = items[0].category;
-            
-            const organizedData = organizeItemsByMainCategory(items);
-            const categoryProducts = organizedData[category] || items;
-            
-            return `
-                <div class="print-section">
-                    <div class="print-header" style="margin-bottom: 5px; padding-bottom: 3px;">
-                        <h1 class="print-title" style="font-size: 14px; margin-bottom: 2px; line-height: 1.2;">${title}</h1>
-                        <div class="print-subtitle" style="font-size: 11px; color: #3a7a4a; margin: 3px 0; line-height: 1.2;">
-                            ${appState.currentLang === 'ar' ? 'جدول: ' : 'Table: '}${category}
-                        </div>
-                        <div class="print-date" style="font-size: 9px; line-height: 1.2;">${date}</div>
-                    </div>
-                    ${generateTablePrintContent(category, categoryProducts, branches)}
-                    <div class="print-footer" style="margin-top: 5px; padding-top: 3px; font-size: 7px; line-height: 1.2;">
-                        <p>${appState.currentLang === 'ar' ? 'نظام مصنع السلطة' : 'Salad Factory System'}</p>
-                        <p>${date}</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        // فتح نافذة الطباعة مع كل جدول في صفحة منفصلة بالطول
-        function openPrintWindow(printContent, type) {
-            const printWindow = window.open('', '_blank');
-            const title = type === 'production' 
-                ? (appState.currentLang === 'ar' ? 'طباعة تقرير الإنتاج' : 'Print Production Report')
-                : (appState.currentLang === 'ar' ? 'طباعة تقرير التوريد' : 'Print Supply Report');
-            
-            const isArabic = appState.currentLang === 'ar';
-            const direction = isArabic ? 'rtl' : 'ltr';
-            
-            printWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="${isArabic ? 'ar' : 'en'}" dir="${direction}">
-                <head>
-                    <title>${title}</title>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <style>
-                        @media print {
-                            @page {
-                                size: A4 portrait; /* تغيير إلى portrait للعرض بالطول */
-                                margin: 0.3cm !important; /* زيادة الهوامش */
-                            }
-                            
-                            @page :first {
-                                margin-top: 0.3cm !important; /* زيادة الهوامش */
-                            }
-                            
-                            body {
-                                font-family: 'Cairo', 'Arial', sans-serif;
-                                direction: ${direction};
-                                margin: 0;
-                                padding: 0;
-                            }
-                            
-                            .print-section {
-                                page-break-after: always !important;
-                                page-break-inside: avoid !important;
-                                width: 100% !important;
-                                height: 100% !important;
-                                margin: 0 !important;
-                                padding: 4mm !important; /* زيادة padding */
-                                box-sizing: border-box;
-                                overflow: hidden !important;
-                            }
-                            
-                            .print-section:last-child {
-                                page-break-after: auto !important;
-                            }
-                            
-                            .print-table-container {
-                                page-break-inside: avoid !important;
-                                max-height: 95% !important;
-                                overflow: hidden !important;
-                            }
-                            
-                            .wider-table {
-                                width: 100% !important;
-                                table-layout: auto !important;
-                            }
-                            
-                            .wide-view th,
-                            .wide-view td {
-                                padding: 3px 2px !important;
-                                font-size: 10px !important;
-                                line-height: 1.2 !important;
-                            }
-                            
-                            .product-name-print {
-                                white-space: normal !important;
-                                word-wrap: break-word !important;
-                                line-height: 1.3 !important;
-                                min-width: 150px !important;
-                            }
-                            
-                            table {
-                                page-break-inside: avoid;
-                                width: 100% !important;
-                                table-layout: auto !important;
-                            }
-                            
-                            h2 {
-                                page-break-after: avoid;
-                                margin: 3px 0 !important;
-                                font-size: 12px !important;
-                                line-height: 1.3 !important;
-                            }
-                            
-                            tr {
-                                page-break-inside: avoid;
-                            }
-                            
-                            thead {
-                                display: table-header-group;
-                            }
-                            
-                            tfoot {
-                                display: table-footer-group;
-                            }
-                        }
-                        
-                        body {
-                            font-family: 'Cairo', 'Arial', sans-serif;
-                            margin: 0;
-                            padding: 0;
-                            direction: ${direction};
-                            background: white;
-                        }
-                        
-                        .print-section {
-                            width: 100%;
-                            min-height: 100vh;
-                            padding: 5mm;
-                            box-sizing: border-box;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                        }
-                        
-                        .print-header {
-                            text-align: center;
-                            margin-bottom: 8px;
-                            padding-bottom: 4px;
-                            border-bottom: 1px solid #2E5E3A;
-                        }
-                        
-                        .print-title {
-                            color: #2E5E3A;
-                            font-size: 14px;
-                            margin: 0 0 3px 0;
-                        }
-                        
-                        .print-subtitle {
-                            color: #3a7a4a;
-                            font-size: 11px;
-                            margin: 4px 0;
-                            font-weight: bold;
-                        }
-                        
-                        .print-date {
-                            color: #666;
-                            font-size: 9px;
-                        }
-                        
-                        .print-footer {
-                            text-align: center;
-                            margin-top: 8px;
-                            padding-top: 4px;
-                            border-top: 1px solid #ddd;
-                            color: #666;
-                            font-size: 7px;
-                        }
-                        
-                        .print-table-container {
-                            flex-grow: 1;
-                            margin-bottom: 8px;
-                        }
-                        
-                        table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            table-layout: auto;
-                        }
-                        
-                        th {
-                            background-color: #f5f5f5;
-                            text-align: center;
-                            border: 1px solid #ddd;
-                            font-weight: bold;
-                            padding: 4px 3px;
-                        }
-                        
-                        td {
-                            border: 1px solid #ddd;
-                            padding: 4px 3px;
-                        }
-                        
-                        .product-name-print {
-                            white-space: normal;
-                            word-wrap: break-word;
-                            max-width: none;
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${printContent}
-                    <script>
-                        window.onload = function() {
-                            window.print();
-                            setTimeout(function() {
-                                window.close();
-                            }, 1000);
-                        };
-                    <\/script>
-                </body>
-                </html>
-            `);
-            
-            printWindow.document.close();
-        }
-
-        // تصدير إلى PDF بالطول مع تحسينات لعرض اسم المنتج
-        function exportToPDF(type) {
-            const printContent = generatePrintContent(type, 'all');
-            
-            const options = {
-                margin: [5, 5, 5, 5], // زيادة الهوامش
-                filename: `${type === 'production' ? 'production' : 'supply'}_report.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 3, // زيادة الدقة
-                    useCORS: true,
-                    letterRendering: true,
-                    width: 794,
-                    height: 1123,
-                    windowWidth: 794,
-                    windowHeight: 1123
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'portrait'
-                },
-                pagebreak: { 
-                    mode: ['css', 'legacy'],
-                    before: '.print-section',
-                    after: '.print-section',
-                    avoid: ['tr', 'td', 'th']
-                }
-            };
-
-            // إنشاء عنصر مؤقت للطباعة
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = printContent;
-            document.body.appendChild(tempElement);
-
-            // إضافة أنماط CSS للعرض الواسع
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @media print {
-                    .print-section {
-                        page-break-after: always !important;
-                        page-break-inside: avoid !important;
-                        width: 100% !important;
-                        height: 100% !important;
-                        margin: 0 !important;
-                        padding: 5mm !important;
-                        box-sizing: border-box;
-                        overflow: hidden !important;
-                    }
-                    
-                    .print-table-container {
-                        max-height: 95% !important;
-                        overflow: hidden !important;
-                    }
-                    
-                    table {
-                        table-layout: auto !important;
-                        width: 100% !important;
-                    }
-                    
-                    th, td {
-                        padding: 3px 2px !important;
-                        font-size: 10px !important;
-                        line-height: 1.2 !important;
-                    }
-                    
-                    .product-name-print {
-                        white-space: normal !important;
-                        word-wrap: break-word !important;
-                        max-width: none !important;
-                        min-width: 150px !important;
-                    }
-                }
-                
-                body {
-                    margin: 0;
-                    padding: 0;
-                }
-                
-                .print-section {
-                    width: 100%;
-                    min-height: 100vh;
-                    padding: 5mm;
-                    box-sizing: border-box;
-                }
-            `;
-            tempElement.appendChild(style);
-
-            // إنشاء PDF
-            html2pdf()
-                .from(tempElement)
-                .set(options)
-                .save()
-                .then(() => {
-                    // إزالة العنصر المؤقت
-                    document.body.removeChild(tempElement);
-                    
-                    const message = appState.currentLang === 'ar' 
-                        ? '✅ تم تصدير PDF بنجاح - كل جدول في صفحة واحدة بالطول'
-                        : '✅ PDF exported successfully - each table in one portrait page';
-                    showMessage(type, message, 'success');
-                })
-                .catch((error) => {
-                    console.error('PDF export error:', error);
-                    document.body.removeChild(tempElement);
-                    
-                    const message = appState.currentLang === 'ar' 
-                        ? '❌ فشل في تصدير PDF'
-                        : '❌ Failed to export PDF';
-                    showMessage(type, message, 'error');
-                });
-        }
-
-        // عرض حوار طباعة جدول واحد
-        function showSingleTablePrintDialog(type) {
-            const state = appState[type];
-            const categories = [...new Set(state.filteredItems.map(item => item.category))];
-            
-            if (categories.length === 0) {
-                const message = appState.currentLang === 'ar' 
-                    ? '❌ لا توجد جداول متاحة للطباعة'
-                    : '❌ No tables available for printing';
-                showMessage(type, message, 'error');
-                return;
-            }
-            
-            const dialogTitle = appState.currentLang === 'ar' 
-                ? 'اختر الجدول للطباعة' 
-                : 'Select table to print';
-            
-            const categoryList = categories.map(category => 
-                `<option value="${category}">${category}</option>`
-            ).join('');
-            
-            const dialogContent = `
-                <div style="padding: 20px; background: white; border-radius: 10px; min-width: 300px;">
-                    <h3 style="margin-bottom: 15px; color: #2E5E3A;">${dialogTitle}</h3>
-                    <select id="print-table-select" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
-                        ${categoryList}
-                    </select>
-                    <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                        <button id="print-cancel" style="padding: 8px 15px; background: #ccc; border: none; border-radius: 5px; cursor: pointer;">
-                            ${appState.currentLang === 'ar' ? 'إلغاء' : 'Cancel'}
-                        </button>
-                        <button id="print-confirm" style="padding: 8px 15px; background: #2E5E3A; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                            ${appState.currentLang === 'ar' ? 'طباعة' : 'Print'}
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            // إنشاء عنصر الحوار
-            const dialog = document.createElement('div');
-            dialog.id = 'print-dialog';
-            dialog.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-            `;
-            dialog.innerHTML = dialogContent;
-            
-            document.body.appendChild(dialog);
-            
-            // إضافة مستمعي الأحداث
-            $('#print-cancel').on('click', function() {
-                document.body.removeChild(dialog);
-            });
-            
-            $('#print-confirm').on('click', function() {
-                const selectedTable = $('#print-table-select').val();
-                if (selectedTable) {
-                    printSingleTable(type, selectedTable);
-                    document.body.removeChild(dialog);
-                }
-            });
-        }
-
-        // إضافة أزرار الطباعة على البطاقات
-        function addPrintButtonsToCards(type) {
-            $(`#${type}-data .card`).each(function(index) {
-                const card = $(this);
-                const category = card.find('.card-header').text().trim();
-                
-                if (!card.find('.card-print-controls').length) {
-                    const printControls = `
-                
-                    `;
-                    card.prepend(printControls);
-                }
-            });
-            
-            // إضافة مستمعي الأحداث لأزرار البطاقات
-            $(`.print-card`).off('click').on('click', function() {
-                const category = $(this).data('category');
-                printSingleTable(type, category);
-            });
-            
-            $(`.print-card-pdf`).off('click').on('click', function() {
-                const category = $(this).data('category');
-                const printContent = generatePrintContent(type, 'single', category);
-                
-                const options = {
-                    margin: [5, 5, 5, 5],
-                    filename: `${category.replace(/\s+/g, '_')}.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 3 },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                    pagebreak: { 
-                        mode: ['css', 'legacy'],
-                        before: '.print-section',
-                        after: '.print-section'
-                    }
-                };
-                
-                const tempElement = document.createElement('div');
-                tempElement.innerHTML = printContent;
-                document.body.appendChild(tempElement);
-                
-                // إضافة أنماط CSS للعرض الواسع
-                const style = document.createElement('style');
-                style.innerHTML = `
-                    @media print {
-                        .print-section {
-                            page-break-after: always !important;
-                            page-break-inside: avoid !important;
-                            width: 100% !important;
-                            height: 100% !important;
-                            margin: 0 !important;
-                            padding: 5mm !important;
-                            box-sizing: border-box;
-                            overflow: hidden !important;
-                        }
-                        
-                        table {
-                            table-layout: auto !important;
-                            width: 100% !important;
-                        }
-                        
-                        th, td {
-                            padding: 3px 2px !important;
-                            font-size: 10px !important;
-                            line-height: 1.2 !important;
-                        }
-                        
-                        .product-name-print {
-                            white-space: normal !important;
-                            word-wrap: break-word !important;
-                            min-width: 150px !important;
-                        }
-                    }
-                `;
-                tempElement.appendChild(style);
-                
-                html2pdf()
-                    .from(tempElement)
-                    .set(options)
-                    .save()
-                    .then(() => {
-                        document.body.removeChild(tempElement);
-                        const message = appState.currentLang === 'ar' 
-                            ? `✅ تم تصدير جدول ${category} إلى PDF`
-                            : `✅ Table ${category} exported to PDF`;
-                        showMessage(type, message, 'success');
-                    })
-                    .catch((error) => {
-                        console.error('PDF export error:', error);
-                        document.body.removeChild(tempElement);
-                        const message = appState.currentLang === 'ar' 
-                            ? `❌ فشل في تصدير جدول ${category}`
-                            : `❌ Failed to export table ${category}`;
-                        showMessage(type, message, 'error');
-                    });
-            });
-        }
-
-        // إعداد تبديل اللغة
-        function setupLanguageToggle() {
-            $('.lang-btn').on('click', function() {
-                const lang = $(this).data('lang');
-                switchLanguage(lang);
-            });
-        }
-
-        // تبديل اللغة
-        function switchLanguage(lang) {
-            appState.currentLang = lang;
-            
-            // تحديث الأزرار النشطة
-            $('.lang-btn').removeClass('active');
-            $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
-            
-            // تحديث جميع النصوص
-            $('[data-ar]').each(function() {
-                const arText = $(this).data('ar');
-                const enText = $(this).data('en');
-                $(this).text(lang === 'ar' ? arText : enText);
-            });
-            
-            // تحديث اتجاه الصفحة
-            if (lang === 'ar') {
-                $('html').attr('dir', 'rtl');
-                $('body').css('direction', 'rtl');
-            } else {
-                $('html').attr('dir', 'ltr');
-                $('body').css('direction', 'ltr');
-            }
-            
-            // إعادة تهيئة Select2 مع النصوص الجديدة
-            initializeSelect2();
-        }
-
-        // إعداد تبديل إظهار/إخفاء الإحصائيات
-        function setupStatsToggle() {
-            $('.toggle-stats-btn').on('click', function() {
-                const statsType = $(this).data('stats');
-                toggleStats(statsType);
-            });
-        }
-
-        // تبديل إظهار/إخفاء الإحصائيات
-        function toggleStats(type) {
-            appState.showStats[type] = !appState.showStats[type];
-            const statsContainer = $(`#stats-section-${type} .stats-container`);
-            const toggleBtn = $(`.toggle-stats-btn[data-stats="${type}"]`);
-            
-            if (appState.showStats[type]) {
-                statsContainer.slideDown();
-                toggleBtn.html('<i class="fas fa-eye-slash"></i> <span data-ar="إخفاء الإحصائيات" data-en="Hide Statistics">إخفاء الإحصائيات</span>');
-                const span = toggleBtn.find('span');
-                span.text(appState.currentLang === 'ar' ? 'إخفاء الإحصائيات' : 'Hide Statistics');
-            } else {
-                statsContainer.slideUp();
-                toggleBtn.html('<i class="fas fa-eye"></i> <span data-ar="إظهار الإحصائيات" data-en="Show Statistics">إظهار الإحصائيات</span>');
-                const span = toggleBtn.find('span');
-                span.text(appState.currentLang === 'ar' ? 'إظهار الإحصائيات' : 'Show Statistics');
-            }
-        }
-
-        // إعداد عناصر التحكم في التمرير التلقائي
-        function setupAutoScrollControls() {
-            // عناصر التحكم للإنتاج
-            $('#scroll-speed-production').on('input', function() {
-                appState.production.scrollSpeed = parseInt($(this).val());
-                updateSpeedDisplay('production');
-                
-                if (appState.production.isAutoScrolling) {
-                    stopAutoScroll('production');
-                    startAutoScroll('production');
-                }
-            });
-
-            $('#start-scroll-production').on('click', function() {
-                startAutoScroll('production');
-            });
-
-            $('#stop-scroll-production').on('click', function() {
-                stopAutoScroll('production');
-            });
-
-            $('#reset-scroll-production').on('click', function() {
-                resetScroll('production');
-            });
-
-            // عناصر التحكم للتوريد
-            $('#scroll-speed-supply').on('input', function() {
-                appState.supply.scrollSpeed = parseInt($(this).val());
-                updateSpeedDisplay('supply');
-                
-                if (appState.supply.isAutoScrolling) {
-                    stopAutoScroll('supply');
-                    startAutoScroll('supply');
-                }
-            });
-
-            $('#start-scroll-supply').on('click', function() {
-                startAutoScroll('supply');
-            });
-
-            $('#stop-scroll-supply').on('click', function() {
-                stopAutoScroll('supply');
-            });
-
-            $('#reset-scroll-supply').on('click', function() {
-                resetScroll('supply');
-            });
-        }
-
-        // بدء التمرير التلقائي
-        function startAutoScroll(type) {
-            const state = appState[type];
-            if (state.isAutoScrolling) return;
-            
-            const container = $(`#scroll-container-${type}`)[0];
-            if (!container) return;
-            
-            state.isAutoScrolling = true;
-            state.scrollDirection = 'down';
-            $(`#start-scroll-${type}`).addClass('active');
-            $(`#scroll-status-${type}`).removeClass('hidden');
-            
-            const speedMap = {
-                1: 80, 2: 60, 3: 45, 4: 35, 5: 25, 
-                6: 20, 7: 15, 8: 12, 9: 8, 10: 5
-            };
-            
-            const scrollInterval = speedMap[state.scrollSpeed] || 25;
-            
-            state.autoScrollInterval = setInterval(() => {
-                if (state.scrollDirection === 'down') {
-                    container.scrollTop += 2;
-                    
-                    if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
-                        state.scrollDirection = 'up';
-                        setTimeout(() => {
-                            container.scrollTop -= 2;
-                        }, 500);
-                    }
-                } else {
-                    container.scrollTop -= 2;
-                    
-                    if (container.scrollTop <= 10) {
-                        state.scrollDirection = 'down';
-                        setTimeout(() => {
-                            container.scrollTop += 2;
-                        }, 500);
-                    }
-                }
-            }, scrollInterval);
-            
-            const message = appState.currentLang === 'ar' 
-                ? '🔄 تم تفعيل التمرير التلقائي - سيتحرك تلقائياً لأعلى ولأسفل'
-                : '🔄 Auto scroll activated - will move up and down automatically';
-            showMessage(type, message, 'success');
-        }
-
-        // إيقاف التمرير التلقائي
-        function stopAutoScroll(type) {
-            const state = appState[type];
-            if (!state.isAutoScrolling) return;
-            
-            clearInterval(state.autoScrollInterval);
-            state.isAutoScrolling = false;
-            $(`#start-scroll-${type}`).removeClass('active');
-            $(`#scroll-status-${type}`).addClass('hidden');
-            
-            const message = appState.currentLang === 'ar' 
-                ? '⏸️ تم إيقاف التمرير التلقائي'
-                : '⏸️ Auto scroll stopped';
-            showMessage(type, message, 'warning');
-        }
-
-        // الرجوع للأعلى
-        function resetScroll(type) {
-            const container = $(`#scroll-container-${type}`)[0];
-            if (container) {
-                container.scrollTop = 0;
-                appState[type].scrollDirection = 'down';
-            }
-            const message = appState.currentLang === 'ar' 
-                ? '⬆️ تم الرجوع إلى أعلى الصفحة'
-                : '⬆️ Returned to top of page';
-            showMessage(type, message, 'success');
-        }
-
-        // تحديث عرض السرعة
-        function updateSpeedDisplay(type) {
-            const speedLabelsAr = {
-                1: 'بطيء جداً', 2: 'بطيء', 3: 'متوسط بطيء', 4: 'متوسطة', 
-                5: 'متوسطة سريعة', 6: 'سريعة', 7: 'سريعة جداً', 
-                8: 'أسرع', 9: 'أقصى سرعة', 10: 'أقصى سرعة'
-            };
-            
-            const speedLabelsEn = {
-                1: 'Very Slow', 2: 'Slow', 3: 'Medium Slow', 4: 'Medium', 
-                5: 'Medium Fast', 6: 'Fast', 7: 'Very Fast', 
-                8: 'Faster', 9: 'Maximum', 10: 'Maximum'
-            };
-            
-            const speedLabels = appState.currentLang === 'ar' ? speedLabelsAr : speedLabelsEn;
-            $(`#speed-value-${type}`).text(speedLabels[appState[type].scrollSpeed] || 'Medium');
-        }
-
-        // إعداد مستمعي الأحداث
         function setupEventListeners() {
-            // التنقل بين التبويبات
-            $('.nav-tab').on('click', function() {
-                const tab = $(this).data('tab');
-                switchTab(tab);
-            });
-
-            // فلتر الفئات للإنتاج
-            $('#category-filter-production').on('change', function() {
-                appState.production.selectedCategories = $(this).val() || [];
-                filterItems('production');
+            // تبديل التبويبات
+            $('.nav-tab').click(function() {
+                let tab = $(this).data('tab');
+                $('.nav-tab').removeClass('active');
+                $(this).addClass('active');
+                $('.tab-content').addClass('hidden');
+                $(`#${tab}-tab`).removeClass('hidden');
+                appState.currentTab = tab;
             });
 
             // فلتر الفروع للإنتاج
-            $('#branch-filter-production').on('change', function() {
+            $('#branch-filter-production').change(function() {
                 appState.production.selectedBranch = $(this).val() || '';
                 filterItems('production');
             });
 
-            // فلتر الفئات للتوريد
-            $('#category-filter-supply').on('change', function() {
-                appState.supply.selectedCategories = $(this).val() || [];
-                filterItems('supply');
-            });
-
             // فلتر الفروع للتوريد
-            $('#branch-filter-supply').on('change', function() {
+            $('#branch-filter-supply').change(function() {
                 appState.supply.selectedBranch = $(this).val() || '';
                 filterItems('supply');
             });
 
             // زر التحديث
-            $('#refresh-btn').on('click', function() {
+            $('#refresh-btn').click(function() {
                 if (appState.currentTab === 'production') {
                     loadProductionData();
                 } else {
                     loadSupplyData();
                 }
             });
-        }
 
-        // تبديل التبويبات
-        function switchTab(tab) {
-            // تحديث التبويب النشط
-            $('.nav-tab').removeClass('active');
-            $(`.nav-tab[data-tab="${tab}"]`).addClass('active');
+            // أزرار البيانات التجريبية
+            $('#load-sample-production, #try-sample-production').click(function() {
+                loadSampleProductionData();
+            });
 
-            // إخفاء كل المحتوى
-            $('.tab-content').addClass('hidden');
+            $('#load-sample-supply, #try-sample-supply').click(function() {
+                loadSampleSupplyData();
+            });
 
-            // إظهار المحتوى المحدد
-            $(`#${tab}-tab`).removeClass('hidden');
-
-            appState.currentTab = tab;
-            
-            // إيقاف التمرير التلقائي عند تبديل التبويبات
-            stopAutoScroll('production');
-            stopAutoScroll('supply');
-            
-            // تحميل بيانات التوريد إذا لم تكن محملة مسبقاً
-            if (tab === 'supply' && appState.supply.items.length === 0) {
-                loadSupplyData();
-            }
+            // أزرار الطباعة
+            $('#print-all-production').click(() => printAllTables('production'));
+            $('#print-all-supply').click(() => printAllTables('supply'));
         }
 
         // تحميل بيانات الإنتاج من API
         async function loadProductionData() {
-            setLoadingState('production', true);
-            clearMessages('production');
+            if (appState.production.isLoading) return;
+            
+            appState.production.isLoading = true;
+            appState.production.useSampleData = false;
+            $('#loading-state-production').removeClass('hidden');
+            $('#production-data').addClass('hidden');
+            $('#empty-state-production').addClass('hidden');
             $('#refresh-btn').prop('disabled', true);
 
             try {
-                console.log('جاري جلب بيانات الإنتاج من:', appState.production.apiUrl);
+                console.log('جاري تحميل بيانات الإنتاج من:', appState.production.apiUrl);
                 
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-                const targetUrl = appState.production.apiUrl;
-                
-                const response = await fetch(proxyUrl + targetUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`خطأ في الشبكة: ${response.status} ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                console.log('بيانات الإنتاج المستلمة:', data);
-
-                if (data.status === 200) {
-                    processProductionData(data);
-                    const message = appState.currentLang === 'ar' 
-                        ? '✅ تم تحميل بيانات الإنتاج بنجاح'
-                        : '✅ Production data loaded successfully';
-                    showMessage('production', message, 'success');
-                } else {
-                    throw new Error(data.message || 'خطأ في استجابة السيرفر');
-                }
-            } catch (error) {
-                console.error('Error loading production data:', error);
-                
+                // محاولة الاتصال المباشر أولاً
                 try {
-                    const message = appState.currentLang === 'ar' 
-                        ? '🔄 جاري محاولة بديلة لتحميل البيانات...'
-                        : '🔄 Trying alternative method to load data...';
-                    showMessage('production', message, 'warning');
-                    await loadWithoutProxy('production');
-                } catch (secondError) {
-                    console.error('Second attempt failed:', secondError);
-                    const message = appState.currentLang === 'ar' 
-                        ? `❌ فشل في تحميل بيانات الإنتاج: ${error.message}`
-                        : `❌ Failed to load production data: ${error.message}`;
-                    showMessage('production', message, 'error');
-                    loadSampleData('production');
-                }
-            } finally {
-                setLoadingState('production', false);
-                $('#refresh-btn').prop('disabled', false);
-            }
-        }
+                    const response = await fetch(appState.production.apiUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
 
-        // تحميل بيانات التوريد من API
-        async function loadSupplyData() {
-            setLoadingState('supply', true);
-            clearMessages('supply');
-            $('#refresh-btn').prop('disabled', true);
-
-            try {
-                console.log('جاري جلب بيانات التوريد من:', appState.supply.apiUrl);
-                
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-                const targetUrl = appState.supply.apiUrl;
-                
-                const response = await fetch(proxyUrl + targetUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('بيانات الإنتاج المستلمة (مباشر):', data);
+                        
+                        if (data.status === 200 && data.data && data.data.length > 0) {
+                            processProductionData(data);
+                            showMessage('production', '✅ تم تحميل بيانات الإنتاج بنجاح', 'success');
+                            return;
+                        }
                     }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`خطأ في الشبكة: ${response.status} ${response.statusText}`);
+                } catch (e) {
+                    console.log('فشل الاتصال المباشر، جرب proxy:', e);
                 }
 
-                const data = await response.json();
-                console.log('بيانات التوريد المستلمة:', data);
-
-                if (data.status === 200) {
-                    processSupplyData(data);
-                    const message = appState.currentLang === 'ar' 
-                        ? '✅ تم تحميل بيانات التوريد بنجاح'
-                        : '✅ Supply data loaded successfully';
-                    showMessage('supply', message, 'success');
-                } else {
-                    throw new Error(data.message || 'خطأ في استجابة السيرفر');
-                }
-            } catch (error) {
-                console.error('Error loading supply data:', error);
-                
-                try {
-                    const message = appState.currentLang === 'ar' 
-                        ? '🔄 جاري محاولة بديلة لتحميل البيانات...'
-                        : '🔄 Trying alternative method to load data...';
-                    showMessage('supply', message, 'warning');
-                    await loadWithoutProxy('supply');
-                } catch (secondError) {
-                    console.error('Second attempt failed:', secondError);
-                    const message = appState.currentLang === 'ar' 
-                        ? `❌ فشل في تحميل بيانات التوريد: ${error.message}`
-                        : `❌ Failed to load supply data: ${error.message}`;
-                    showMessage('supply', message, 'error');
-                    loadSampleData('supply');
-                }
-            } finally {
-                setLoadingState('supply', false);
-                $('#refresh-btn').prop('disabled', false);
-            }
-        }
-
-        // محاولة التحميل بدون proxy
-        async function loadWithoutProxy(type) {
-            try {
-                const response = await fetch(appState[type].apiUrl, {
+                // استخدام proxy
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const response = await fetch(proxyUrl + appState.production.apiUrl, {
                     method: 'GET',
-                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -2325,214 +700,261 @@
                 }
 
                 const data = await response.json();
-                if (type === 'production') {
+                console.log('بيانات الإنتاج المستلمة (proxy):', data);
+
+                if (data.status === 200 && data.data && data.data.length > 0) {
                     processProductionData(data);
+                    showMessage('production', '✅ تم تحميل بيانات الإنتاج بنجاح', 'success');
                 } else {
-                    processSupplyData(data);
+                    showMessage('production', '⚠️ لا توجد بيانات في API، استخدم البيانات التجريبية', 'warning');
+                    $('#empty-state-production').removeClass('hidden');
                 }
-                const message = appState.currentLang === 'ar' 
-                    ? '✅ تم تحميل البيانات بنجاح (بدون proxy)'
-                    : '✅ Data loaded successfully (without proxy)';
-                showMessage(type, message, 'success');
             } catch (error) {
-                throw error;
+                console.error('خطأ في تحميل بيانات الإنتاج:', error);
+                showMessage('production', '❌ فشل الاتصال بالخادم: ' + error.message, 'error');
+                $('#empty-state-production').removeClass('hidden');
+            } finally {
+                appState.production.isLoading = false;
+                $('#loading-state-production').addClass('hidden');
+                $('#refresh-btn').prop('disabled', false);
             }
         }
 
-        // تحميل بيانات المثال (للطوارئ)
-        function loadSampleData(type) {
-            const sampleData = {
-                data: [],
-                itemsnumber: 0,
-                status: 200
+        // تحميل بيانات التوريد من API
+        async function loadSupplyData() {
+            if (appState.supply.isLoading) return;
+            
+            appState.supply.isLoading = true;
+            appState.supply.useSampleData = false;
+            $('#loading-state-supply').removeClass('hidden');
+            $('#supply-data').addClass('hidden');
+            $('#empty-state-supply').addClass('hidden');
+            $('#refresh-btn').prop('disabled', true);
+
+            try {
+                console.log('جاري تحميل بيانات التوريد من:', appState.supply.apiUrl);
+                
+                // محاولة الاتصال المباشر أولاً
+                try {
+                    const response = await fetch(appState.supply.apiUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('بيانات التوريد المستلمة (مباشر):', data);
+                        
+                        if (data.status === 200 && data.data && data.data.length > 0) {
+                            processSupplyData(data);
+                            showMessage('supply', '✅ تم تحميل بيانات التوريد بنجاح', 'success');
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.log('فشل الاتصال المباشر، جرب proxy:', e);
+                }
+
+                // استخدام proxy
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const response = await fetch(proxyUrl + appState.supply.apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`خطأ في الشبكة: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('بيانات التوريد المستلمة (proxy):', data);
+
+                if (data.status === 200 && data.data && data.data.length > 0) {
+                    processSupplyData(data);
+                    showMessage('supply', '✅ تم تحميل بيانات التوريد بنجاح', 'success');
+                } else {
+                    showMessage('supply', '⚠️ لا توجد بيانات في API، استخدم البيانات التجريبية', 'warning');
+                    $('#empty-state-supply').removeClass('hidden');
+                }
+            } catch (error) {
+                console.error('خطأ في تحميل بيانات التوريد:', error);
+                showMessage('supply', '❌ فشل الاتصال بالخادم: ' + error.message, 'error');
+                $('#empty-state-supply').removeClass('hidden');
+            } finally {
+                appState.supply.isLoading = false;
+                $('#loading-state-supply').addClass('hidden');
+                $('#refresh-btn').prop('disabled', false);
+            }
+        }
+
+        // تحميل بيانات تجريبية للإنتاج
+        function loadSampleProductionData() {
+            appState.production.useSampleData = true;
+            
+            let sampleData = {
+                data: [
+                    // سلطات - فرع مكة
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 5, isSend: false },
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة يونانية تقليدية' }, package: '500', packageUnit: { name: 'جرام' }, qty: 3, isSend: false },
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 4, isSend: false },
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة تبولة' }, package: '400', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    
+                    // سلطات - فرع جدة
+                    { branch: { name: 'جدة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 7, isSend: false },
+                    { branch: { name: 'جدة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 4, isSend: false },
+                    { branch: { name: 'جدة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة يونانية تقليدية' }, package: '500', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    
+                    // سلطات - فرع المدينة
+                    { branch: { name: 'المدينة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 2, isSend: false },
+                    { branch: { name: 'المدينة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    
+                    // سلطات - فرع الرياض
+                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 8, isSend: false },
+                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة يونانية تقليدية' }, package: '500', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    
+                    // سلطات - فرع الدمام
+                    { branch: { name: 'الدمام' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    
+                    // مقبلات - فرع الرياض
+                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 10, isSend: false },
+                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'متبل باذنجان' }, package: '500', packageUnit: { name: 'جرام' }, qty: 8, isSend: false },
+                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    
+                    // مقبلات - فرع الدمام
+                    { branch: { name: 'الدمام' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    { branch: { name: 'الدمام' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'جرام' }, qty: 7, isSend: false },
+                    
+                    // مقبلات - فرع مكة
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 12, isSend: false },
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'متبل باذنجان' }, package: '500', packageUnit: { name: 'جرام' }, qty: 9, isSend: false },
+                    
+                    // مقبلات - فرع جدة
+                    { branch: { name: 'جدة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    { branch: { name: 'جدة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 8, isSend: false }
+                ]
             };
             
-            if (type === 'production') {
-                processProductionData(sampleData);
-            } else {
-                processSupplyData(sampleData);
-            }
-            const message = appState.currentLang === 'ar' 
-                ? '⚠️ تم تحميل بيانات تجريبية للعرض'
-                : '⚠️ Loaded sample data for display';
-            showMessage(type, message, 'warning');
+            processProductionData(sampleData);
+            showMessage('production', '✅ تم تحميل بيانات تجريبية', 'success');
+        }
+
+        // تحميل بيانات تجريبية للتوريد
+        function loadSampleSupplyData() {
+            appState.supply.useSampleData = true;
+            
+            let sampleData = {
+                data: [
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
+                    { branch: { name: 'مكة' }, mainProductOP: { name: 'خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
+                    { branch: { name: 'جدة' }, mainProductOP: { name: 'خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 60, isSend: false },
+                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'فواكه' }, product: { name: 'برتقال' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false }
+                ]
+            };
+            
+            processSupplyData(sampleData);
+            showMessage('supply', '✅ تم تحميل بيانات تجريبية', 'success');
         }
 
         // معالجة بيانات الإنتاج
         function processProductionData(data) {
-            const productionData = data.data || [];
+            let items = [];
+            let branches = new Set();
             
-            console.log('عدد عناصر الإنتاج المستلمة:', productionData.length);
-            
-            const filteredProductionData = productionData.filter(item => item.isSend === false);
-            
-            console.log('عدد عناصر الإنتاج بعد التصفية:', filteredProductionData.length);
-            
-            const combinedItems = {};
-            
-            filteredProductionData.forEach(item => {
-                try {
-                    const branchName = item.branch?.name || 'غير معروف';
-                    const categoryName = item.mainProductOP?.name || 'غير معروف';
-                    const productName = item.product?.name || 'غير معروف';
-                    const packageInfo = item.package || '0';
-                    const packageUnit = item.packageUnit?.name || '';
+            (data.data || []).forEach(item => {
+                if (!item.isSend) {
+                    let productName = item.product?.name || 'منتج بدون اسم';
+                    let packageInfo = item.package || '';
+                    let packageUnit = item.packageUnit?.name || '';
+                    let categoryName = item.mainProductOP?.name || 'غير مصنف';
+                    let branchName = item.branch?.name || 'فرع غير معروف';
+                    let quantity = parseFloat(item.qty) || 0;
                     
-                    const productKey = `${productName}-${packageInfo}-${categoryName}-${branchName}`;
+                    items.push({
+                        name: productName,
+                        package: packageInfo,
+                        packageUnit: packageUnit,
+                        qty: quantity,
+                        category: categoryName,
+                        branch: branchName
+                    });
                     
-                    if (combinedItems[productKey]) {
-                        combinedItems[productKey].requestedQty += parseFloat(item.qty) || 0;
-                    } else {
-                        combinedItems[productKey] = {
-                            id: item._id || '',
-                            productId: item.product?._id || '',
-                            name: productName,
-                            package: packageInfo,
-                            quantity: 0,
-                            requestedQty: parseFloat(item.qty) || 0,
-                            category: categoryName,
-                            branch: branchName,
-                            orderName: item.name || '',
-                            packageUnitname: packageUnit,
-                            isSend: item.isSend || false
-                        };
-                    }
-                } catch (e) {
-                    console.error("Error processing production item:", e, item);
+                    branches.add(branchName);
                 }
             });
             
-            appState.production.items = Object.values(combinedItems);
-            console.log('عدد عناصر الإنتاج بعد التجميع:', appState.production.items.length);
+            appState.production.items = items;
+            appState.production.allBranches = Array.from(branches).sort();
             
-            updateStatistics('production');
-            updateFilterOptions('production');
+            updateBranchFilter('production');
             filterItems('production');
+            
+            $('#empty-state-production').addClass('hidden');
         }
 
         // معالجة بيانات التوريد
         function processSupplyData(data) {
-            const supplyData = data.data || [];
+            let items = [];
+            let branches = new Set();
             
-            console.log('عدد عناصر التوريد المستلمة:', supplyData.length);
-            
-            const filteredSupplyData = supplyData.filter(item => item.isSend === false);
-            
-            console.log('عدد عناصر التوريد بعد التصفية:', filteredSupplyData.length);
-            
-            const combinedItems = {};
-            
-            filteredSupplyData.forEach(item => {
-                try {
-                    const branchName = item.branch?.name || 'غير معروف';
-                    const categoryName = item.mainProductOP?.name || 'غير معروف';
-                    const productName = item.product?.name || 'غير معروف';
-                    const packageInfo = item.package || '0';
-                    const packageUnit = item.packageUnit?.name || '';
+            (data.data || []).forEach(item => {
+                if (!item.isSend) {
+                    let productName = item.product?.name || 'منتج بدون اسم';
+                    let packageInfo = item.package || '';
+                    let packageUnit = item.packageUnit?.name || '';
+                    let categoryName = item.mainProductOP?.name || 'غير مصنف';
+                    let branchName = item.branch?.name || 'فرع غير معروف';
+                    let quantity = parseFloat(item.qty) || 0;
                     
-                    const productKey = `${productName}-${packageInfo}-${categoryName}-${branchName}`;
+                    items.push({
+                        name: productName,
+                        package: packageInfo,
+                        packageUnit: packageUnit,
+                        qty: quantity,
+                        category: categoryName,
+                        branch: branchName
+                    });
                     
-                    if (combinedItems[productKey]) {
-                        combinedItems[productKey].requestedQty += parseFloat(item.qty) || 0;
-                    } else {
-                        combinedItems[productKey] = {
-                            id: item._id || '',
-                            productId: item.product?._id || '',
-                            name: productName,
-                            package: packageInfo,
-                            quantity: 0,
-                            requestedQty: parseFloat(item.qty) || 0,
-                            category: categoryName,
-                            branch: branchName,
-                            orderName: item.name || '',
-                            packageUnitname: packageUnit,
-                            isSend: item.isSend || false
-                        };
-                    }
-                } catch (e) {
-                    console.error("Error processing supply item:", e, item);
+                    branches.add(branchName);
                 }
             });
             
-            appState.supply.items = Object.values(combinedItems);
-            console.log('عدد عناصر التوريد بعد التجميع:', appState.supply.items.length);
+            appState.supply.items = items;
+            appState.supply.allBranches = Array.from(branches).sort();
             
-            updateStatistics('supply');
-            updateFilterOptions('supply');
+            updateBranchFilter('supply');
             filterItems('supply');
+            
+            $('#empty-state-supply').addClass('hidden');
         }
 
-        // تحديث الإحصائيات
-        function updateStatistics(type) {
-            const state = appState[type];
-            const totalItems = state.items.length;
-            const totalCategories = new Set(state.items.map(item => item.category)).size;
-            const totalBranches = new Set(state.items.map(item => item.branch)).size;
-            const totalQuantity = state.items.reduce((sum, item) => sum + item.requestedQty, 0);
-            
-            $(`#total-items-${type}`).text(totalItems);
-            $(`#total-categories-${type}`).text(totalCategories);
-            $(`#total-branches-${type}`).text(totalBranches);
-            $(`#total-quantity-${type}`).text(formatNumber(totalQuantity));
-        }
-
-        // تحديث خيارات الفلتر
-        function updateFilterOptions(type) {
-            const state = appState[type];
-            
-            // تحديث الفئات
-            const uniqueCategories = [...new Set(state.items.map(item => item.category).filter(Boolean))];
-            state.allCategories = uniqueCategories.sort();
-            
-            $(`#category-filter-${type}`).empty();
-            uniqueCategories.forEach(category => {
-                $(`#category-filter-${type}`).append(new Option(category, category, false, false));
-            });
-            
-            // تحديد جميع الفئات كافتراضي
-            $(`#category-filter-${type}`).val(uniqueCategories).trigger('change');
-            state.selectedCategories = uniqueCategories;
-            
-            // تحديث الفروع
-            const uniqueBranches = [...new Set(state.items.map(item => item.branch).filter(Boolean))];
-            state.allBranches = getOrderedBranches(uniqueBranches);
-            
-            $(`#branch-filter-${type}`).empty();
-            const allBranchesText = appState.currentLang === 'ar' ? 'كل الفروع' : 'All Branches';
-            $(`#branch-filter-${type}`).append(new Option(allBranchesText, '', false, false));
-            state.allBranches.forEach(branch => {
-                $(`#branch-filter-${type}`).append(new Option(branch, branch, false, false));
+        // تحديث فلتر الفروع
+        function updateBranchFilter(type) {
+            let select = $(`#branch-filter-${type}`);
+            select.empty().append('<option value="">كل الفروع</option>');
+            appState[type].allBranches.forEach(b => {
+                select.append(`<option value="${b}">${b}</option>`);
             });
         }
 
         // تصفية العناصر
         function filterItems(type) {
-            const state = appState[type];
-            let tempItems = [...state.items];
-            
-            // تطبيق فلتر الفئات
-            if (state.selectedCategories.length > 0 && 
-                state.selectedCategories.length !== state.allCategories.length) {
-                tempItems = tempItems.filter(item => 
-                    state.selectedCategories.includes(item.category)
-                );
-            }
-            
-            // تطبيق فلتر الفروع
+            let state = appState[type];
             if (state.selectedBranch) {
-                tempItems = tempItems.filter(item => 
-                    item.branch === state.selectedBranch
-                );
+                state.filteredItems = state.items.filter(i => i.branch === state.selectedBranch);
+            } else {
+                state.filteredItems = [...state.items];
             }
-            
-            state.filteredItems = tempItems;
             renderData(type);
         }
 
         // عرض البيانات
         function renderData(type) {
-            const container = type === 'production' ? $('#production-data') : $('#supply-data');
-            const state = appState[type];
+            let container = type === 'production' ? $('#production-data') : $('#supply-data');
+            let state = appState[type];
             
             if (state.filteredItems.length === 0) {
                 $(`#empty-state-${type}`).removeClass('hidden');
@@ -2543,266 +965,175 @@
             $(`#empty-state-${type}`).addClass('hidden');
             container.removeClass('hidden');
             
-            const organizedData = organizeItemsByMainCategory(state.filteredItems);
+            // تنظيم حسب الفئة
+            let categories = {};
+            state.filteredItems.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+            
+            let branches = state.selectedBranch ? [state.selectedBranch] : state.allBranches;
             
             let html = '';
-            
-            Object.keys(organizedData).forEach(category => {
-                const categoryProducts = organizedData[category];
-                html += buildCategorySection(category, categoryProducts, state.allBranches);
-            });
+            for (let cat in categories) {
+                html += buildCompactTable(cat, categories[cat], branches);
+            }
             
             container.html(html);
-            
-            // إضافة أزرار الطباعة للبطاقات
-            setTimeout(() => {
-                addPrintButtonsToCards(type);
-            }, 100);
         }
 
-        // تنظيم البيانات حسب الفئة الرئيسية
-        function organizeItemsByMainCategory(items) {
-            const organizedData = {};
-            
+        // بناء جدول مدمج
+        function buildCompactTable(category, items, allBranches) {
+            // تجميع المنتجات
+            let products = {};
             items.forEach(item => {
-                if (!organizedData[item.category]) {
-                    organizedData[item.category] = [];
+                let key = item.name + '-' + item.package + '-' + item.packageUnit;
+                if (!products[key]) {
+                    products[key] = {
+                        name: item.name,
+                        package: item.package,
+                        packageUnit: item.packageUnit,
+                        branches: {}
+                    };
                 }
-                organizedData[item.category].push(item);
+                products[key].branches[item.branch] = (products[key].branches[item.branch] || 0) + item.qty;
             });
             
-            Object.keys(organizedData).forEach(category => {
-                organizedData[category].sort((a, b) => a.name.localeCompare(b.name));
-            });
+            let productList = Object.values(products).sort((a, b) => a.name.localeCompare(b.name));
             
-            return organizedData;
-        }
-
-        // بناء قسم الفئة
-        function buildCategorySection(category, products, allBranches) {
-            const organizedData = organizeItemsByBranchAndProductForCategory(products);
-            const branches = getOrderedBranches(allBranches);
-            
-            return `
+            // بناء الجدول
+            let table = `
                 <div class="card">
                     <div class="card-header">${category}</div>
                     <div class="card-body">
-                        ${buildProductsTable(organizedData, branches)}
+                        <div class="table-container">
+                            <table class="production-table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                    <tr>
+                                        <th>المنتج</th>
+                                        ${allBranches.map(b => `<th class="branch-header" title="${b}">${shortenBranchName(b)}</th>`).join('')}
+                                        <th>الإجمالي</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${productList.map(p => {
+                                        let total = 0;
+                                        return `
+                                            <tr>
+                                                <td style="text-align:right;">
+                                                    <div class="product-name">${p.name}</div>
+                                                    <div class="product-package">${p.package || ''} ${p.packageUnit || ''}</div>
+                                                </td>
+                                                ${allBranches.map(b => {
+                                                    let val = p.branches[b] || '-';
+                                                    if (val !== '-') total += val;
+                                                    return `<td>${val}</td>`;
+                                                }).join('')}
+                                                <td class="total-cell">${total || '-'}</td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             `;
-        }
-
-        // تنظيم البيانات حسب الفروع والمنتجات لفئة معينة
-        function organizeItemsByBranchAndProductForCategory(products) {
-            const organizedData = {};
             
-            products.forEach(item => {
-                if (!organizedData[item.branch]) {
-                    organizedData[item.branch] = {};
-                }
-                
-                if (!organizedData[item.branch][item.name]) {
-                    organizedData[item.branch][item.name] = {
-                        ...item,
-                        requestedQty: 0
-                    };
-                }
-                
-                organizedData[item.branch][item.name].requestedQty += item.requestedQty;
-            });
-            
-            return organizedData;
-        }
-
-        // ترتيب الفروع
-        function getOrderedBranches(branches) {
-            return branches.sort((a, b) => {
-                const firstCharA = a.charAt(0).toUpperCase();
-                const firstCharB = b.charAt(0).toUpperCase();
-                
-                const getWeight = (char) => {
-                    if (char === 'M') return 1;
-                    if (char === 'S') return 2;
-                    if (char === 'A') return 3;
-                    return 4;
-                };
-                
-                const weightA = getWeight(firstCharA);
-                const weightB = getWeight(firstCharB);
-                
-                if (weightA !== weightB) {
-                    return weightA - weightB;
-                }
-                
-                return a.localeCompare(b);
-            });
-        }
-
-        // بناء جدول المنتجات
-        function buildProductsTable(organizedData, branches) {
-            const uniqueProducts = getUniqueProductsFromOrganizedData(organizedData);
-            
-            if (uniqueProducts.length === 0) {
-                const noProductsText = appState.currentLang === 'ar' 
-                    ? 'لا توجد منتجات في هذه الفئة' 
-                    : 'No products in this category';
-                return `<p class="text-center">${noProductsText}</p>`;
-            }
-            
-            return `
-                <div class="table-container">
-                    <table class="production-table">
-                        ${buildTableHeader(branches)}
-                        ${buildTableBody(uniqueProducts, branches, organizedData)}
-                    </table>
-                </div>
-            `;
-        }
-
-        // الحصول على المنتجات الفريدة
-        function getUniqueProductsFromOrganizedData(organizedData) {
-            const productNames = new Set();
-            const uniqueProducts = [];
-            
-            Object.values(organizedData).forEach(branchData => {
-                Object.values(branchData).forEach(product => {
-                    if (!productNames.has(product.name)) {
-                        productNames.add(product.name);
-                        uniqueProducts.push(product);
-                    }
-                });
-            });
-            
-            return uniqueProducts.sort((a, b) => a.name.localeCompare(b.name));
-        }
-
-        // بناء رأس الجدول
-        function buildTableHeader(branches) {
-            const productsText = appState.currentLang === 'ar' ? 'المنتجات' : 'Products';
-            const sizeUnitText = appState.currentLang === 'ar' ? '(الحجم / الوحدة)' : '(Size / Unit)';
-            const totalText = appState.currentLang === 'ar' ? 'الإجمالي' : 'Total';
-            
-            return `
-                <thead>
-                    <tr>
-                        <th style="min-width: 300px;">
-                            <div>${productsText}</div>
-                            <div style="font-size: 11px; color: #666; margin-top: 4px;">${sizeUnitText}</div>
-                        </th>
-                        ${branches.map(branch => `
-                            <th class="branch-header">${getAbbreviatedBranchName(branch)}</th>
-                        `).join('')}
-                        <th class="total-cell">${totalText}</th>
-                    </tr>
-                </thead>
-            `;
-        }
-
-        // بناء جسم الجدول
-        function buildTableBody(uniqueProducts, branches, organizedData) {
-            const notSpecifiedText = appState.currentLang === 'ar' ? 'لم يحدد' : 'Not specified';
-            
-            return `
-                <tbody>
-                    ${uniqueProducts.map(product => `
-                        <tr>
-                            <td class="product-info">
-                                <div class="product-name">${product.name}</div>
-                                <div class="product-package">
-                                    ${product.package && product.package !== '0' && product.package !== 'null' ? product.package : ''} 
-                                    ${product.packageUnitname ? product.packageUnitname : ''}
-                                    ${!product.package || product.package === '0' || product.package === 'null' ? notSpecifiedText : ''}
-                                </div>
-                            </td>
-                            ${branches.map(branch => `
-                                <td>
-                                    ${organizedData[branch] && organizedData[branch][product.name] 
-                                        ? formatNumber(organizedData[branch][product.name].requestedQty) 
-                                        : '-'}
-                                </td>
-                            `).join('')}
-                            <td class="total-cell">
-                                ${formatNumber(calculateTotalForProduct(product.name, organizedData))}
-                            </td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            `;
+            return table;
         }
 
         // اختصار اسم الفرع
-        function getAbbreviatedBranchName(branch) {
-            if (branch.length <= 12) return branch;
-            
-            const words = branch.split(' ');
-            if (words.length > 1) {
-                return words.map(word => word.substring(0, 3)).join(' ');
+        function shortenBranchName(name) {
+            if (name.length <= 6) return name;
+            let parts = name.split(' ');
+            if (parts.length > 1) {
+                return parts.map(p => p.substring(0, 2)).join('');
             }
-            
-            return branch.substring(0, 10);
+            return name.substring(0, 4);
         }
 
-        // حساب الإجمالي للمنتج
-        function calculateTotalForProduct(productName, organizedData) {
-            let total = 0;
-            Object.values(organizedData).forEach(branchData => {
-                if (branchData[productName]) {
-                    total += branchData[productName].requestedQty;
-                }
+        // طباعة جميع الجداول
+        function printAllTables(type) {
+            let state = appState[type];
+            
+            if (state.filteredItems.length === 0) {
+                alert('لا توجد بيانات للطباعة');
+                return;
+            }
+            
+            // تنظيم حسب الفئة
+            let categories = {};
+            state.filteredItems.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
             });
-            return total;
-        }
-
-        // تنسيق الأرقام
-        function formatNumber(number) {
-            if (number === 0) return '0';
-            if (!number) return '-';
             
-            let numberStr = number.toString();
+            let branches = state.selectedBranch ? [state.selectedBranch] : state.allBranches;
+            let categoryList = Object.keys(categories);
             
-            if (numberStr.includes('.')) {
-                numberStr = numberStr.replace(/\.0+$/, '');
-                numberStr = numberStr.replace(/(\.\d*[1-9])0+$/, '$1');
-            }
+            let title = type === 'production' ? 'تقرير الإنتاج' : 'تقرير التوريد';
+            let date = new Date().toLocaleDateString('ar-SA');
             
-            return numberStr;
-        }
-
-        // تعيين حالة التحميل
-        function setLoadingState(type, isLoading) {
-            appState[type].isLoading = isLoading;
+            let printContent = `
+                <html dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; }
+                        body { background:white; padding:2mm; }
+                        .print-page { page-break-after: always; margin:0; padding:1mm; }
+                        .card { border:0.5px solid black; margin:1mm 0; }
+                        .card-header { background:#e0e8e0; padding:2px 4px; text-align:center; font-weight:bold; font-size:12px; border-bottom:0.5px solid black; }
+                        .production-table { width:100%; border-collapse:collapse; font-size:10px; line-height:1.2; }
+                        .production-table th, .production-table td { border:0.3px solid black; padding:2px 3px; text-align:center; }
+                        .production-table th:first-child, .production-table td:first-child { text-align:right; min-width:100px; }
+                        .product-name { font-weight:bold; font-size:10px; }
+                        .product-package { font-size:8px; color:#666; }
+                        .branch-header { font-size:8px; max-width:30px; overflow:hidden; }
+                        .total-cell { background:#f0f0f0; font-weight:bold; }
+                        @page { size:A4 landscape; margin:3mm; }
+                    </style>
+                </head>
+                <body>
+            `;
             
-            if (isLoading) {
-                $(`#loading-state-${type}`).removeClass('hidden');
-                $(`#empty-state-${type}`).addClass('hidden');
-                if (type === 'production') {
-                    $('#production-data').addClass('hidden');
-                } else {
-                    $('#supply-data').addClass('hidden');
+            // حساب عدد الفئات في كل صفحة (صفحتين كحد أقصى)
+            let itemsPerPage = Math.ceil(categoryList.length / 2);
+            
+            for (let page = 0; page < categoryList.length; page += itemsPerPage) {
+                printContent += '<div class="print-page">';
+                printContent += `<div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:bold;">${title} - ${date} - صفحة ${Math.floor(page/itemsPerPage)+1}</div>`;
+                
+                for (let i = page; i < page + itemsPerPage && i < categoryList.length; i++) {
+                    let cat = categoryList[i];
+                    printContent += buildCompactTable(cat, categories[cat], branches);
                 }
-            } else {
-                $(`#loading-state-${type}`).addClass('hidden');
+                
+                printContent += '</div>';
             }
+            
+            printContent += '</body></html>';
+            
+            let printWindow = window.open('', '_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
         }
 
         // عرض الرسائل
         function showMessage(type, message, messageType = 'info') {
-            const messageContainer = $(`#message-container-${type}`);
-            const messageClass = messageType === 'error' ? 'error-message' : 
-                               messageType === 'success' ? 'success-message' : 
-                               'warning-message';
+            let container = $(`#message-container-${type}`);
+            let className = messageType === 'success' ? 'success-message' : 
+                           messageType === 'error' ? 'error-message' : 'warning-message';
             
-            messageContainer.html(`<div class="${messageClass}">${message}</div>`);
+            container.html(`<div class="message ${className}">${message}</div>`);
             
             setTimeout(() => {
-                clearMessages(type);
-            }, 5000);
-        }
-
-        // مسح الرسائل
-        function clearMessages(type) {
-            $(`#message-container-${type}`).empty();
+                container.empty();
+            }, 4000);
         }
     </script>
 </body>
