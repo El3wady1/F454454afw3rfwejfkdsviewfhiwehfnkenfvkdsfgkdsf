@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salad Factory System - نظام مصنع السلطة</title>
+    <title>مصنع السلطة - جداول ملتصقة بالكامل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -27,7 +27,7 @@
             padding: 0 5px;
         }
 
-        /* Header Styles - Medium size */
+        /* Header Styles */
         .header {
             background-color: #2E5E3A;
             color: white;
@@ -67,7 +67,7 @@
             cursor: not-allowed;
         }
 
-        /* Navigation Tabs - Medium size */
+        /* Navigation Tabs */
         .nav-tabs {
             display: flex;
             background-color: white;
@@ -174,46 +174,106 @@
             padding: 5px;
         }
 
-        /* ===== أنماط الجداول المدمجة بالكامل ===== */
-        .card {
-            background-color: white;
-            margin: 8px 0;
-            border: 1px solid #888;
-            border-radius: 4px;
+        /* تقسيم الصفحة إلى عمودين */
+        .split-view {
+            display: flex;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
 
-        .card-header {
-            background-color: #e0e8e0;
+        .column-header {
+            background-color: #2E5E3A;
+            color: white;
             padding: 6px 10px;
             font-weight: 700;
-            font-size: 16px;
-            color: #2E5E3A;
+            font-size: 14px;
             text-align: center;
-            border-bottom: 1px solid #888;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 5px;
+        }
+
+        .column-content {
+            overflow-y: auto;
+            padding: 0;
+            flex: 1;
+        }
+
+        /* ===== أنماط الجداول - مدمجة بالكامل بدون أي مسافات ===== */
+        .card {
+            background-color: white;
+            border: 1px solid #000;
+            border-radius: 0;
+            margin: 0;
+            border-top-width: 1px;
+            border-bottom-width: 0;
+        }
+        
+        /* كل الكروت متلاصقة تماماً */
+        .card {
+            border-bottom: none;
+        }
+        
+        /* الكارد الأخير له حد سفلي */
+        .column-content .card:last-child {
+            border-bottom: 1px solid #000;
+        }
+        
+        /* تداخل الحدود لإلغاء المضاعفة - الكروت ملتصقة */
+        .card + .card {
+            margin-top: -1px;
+            border-top: 1px solid #000;
+        }
+        
+        /* إزالة أي مسافات داخلية قد تسبب فراغات */
+        .card-header, .card-body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .card-header {
+            background-color: #d0d8d0;
+            padding: 4px 8px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #000;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            margin: 0;
         }
 
         .card-body {
             padding: 0;
+            margin: 0;
         }
 
         .table-container {
             overflow-x: auto;
+            margin: 0;
+            padding: 0;
         }
 
-        /* جدول مدمج - حجم خط متوسط */
+        /* جدول بنفس تنسيق الصورة */
         .production-table {
             width: 100%;
             border-collapse: collapse;
             table-layout: auto;
             font-size: 13px;
-            line-height: 1.3;
+            line-height: 1.2;
+            margin: 0;
+            padding: 0;
         }
 
-        /* مسافات مناسبة للخلايا */
         .production-table th,
         .production-table td {
-            border: 1px solid #888;
+            border: 1px solid #000;
             padding: 4px 6px;
             margin: 0;
             text-align: center;
@@ -221,7 +281,6 @@
             font-size: 13px;
         }
 
-        /* العمود الأول (المنتجات) */
         .production-table th:first-child,
         .production-table td:first-child {
             text-align: right;
@@ -232,21 +291,22 @@
             word-wrap: break-word;
         }
 
-        /* رأس الجدول */
         .production-table th {
-            background-color: #e8e8e8;
+            background-color: #e0e0e0;
             font-weight: 700;
-            color: #2E5E3A;
+            color: #000;
             white-space: nowrap;
         }
 
-        /* خلية الإجمالي */
+        .production-table th:nth-child(4) { /* الإجمالي */
+            background-color: #d0d0d0;
+        }
+
         .total-cell {
-            background-color: #f0f0f0;
+            background-color: #d0d0d0;
             font-weight: 700;
         }
 
-        /* معلومات المنتج */
         .product-name {
             font-weight: 600;
             line-height: 1.3;
@@ -257,20 +317,11 @@
 
         .product-package {
             font-size: 11px;
-            color: #666;
+            color: #555;
             line-height: 1.2;
         }
 
-        /* عناوين الفروع */
-        .branch-header {
-            font-size: 12px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 60px;
-        }
-
-        /* ===== أنماط الطباعة ===== */
+        /* ===== أنماط الطباعة - بدون أي مسافات بين الجداول ===== */
         @media print {
             .no-print {
                 display: none !important;
@@ -279,7 +330,7 @@
             body {
                 background: white;
                 margin: 0;
-                padding: 2mm;
+                padding: 0;
             }
             
             .main-content {
@@ -292,59 +343,87 @@
                 padding: 0;
             }
             
+            .split-view {
+                display: flex;
+                gap: 3mm;
+                page-break-after: avoid;
+            }
+            
+            .column {
+                flex: 1;
+                page-break-inside: auto; /* يسمح بكسر الصفحة داخل العمود */
+            }
+            
+            .column-content {
+                page-break-inside: auto;
+            }
+            
+            .column-header {
+                font-size: 11px;
+                padding: 2px;
+                margin-bottom: 0;
+                page-break-after: avoid;
+            }
+            
             .card {
-                margin: 1mm 0;
                 border: 0.5px solid black;
-                page-break-inside: avoid;
+                margin: 0;
+                border-radius: 0;
+                page-break-inside: avoid; /* كل جدول يحاول البقاء في صفحة واحدة */
+                border-top-width: 0.5px;
+                border-bottom-width: 0;
+            }
+            
+            .card + .card {
+                margin-top: -0.5px;
+                border-top: 0.5px solid black;
+            }
+            
+            .column-content .card:last-child {
+                border-bottom: 0.5px solid black;
             }
             
             .card-header {
                 padding: 2px 4px;
-                font-size: 12px;
+                font-size: 11px;
                 border-bottom: 0.5px solid black;
             }
             
             .production-table {
-                font-size: 10px;
-                line-height: 1.2;
-                border-collapse: collapse;
+                font-size: 9px;
             }
             
             .production-table th,
             .production-table td {
                 border: 0.3px solid black;
-                padding: 2px 3px;
-                font-size: 10px;
-            }
-            
-            .production-table th:first-child,
-            .production-table td:first-child {
-                padding: 2px 4px;
-                min-width: 100px;
+                padding: 1px 2px;
+                font-size: 9px;
             }
             
             .product-name {
-                font-size: 10px;
+                font-size: 9px;
             }
             
             .product-package {
-                font-size: 8px;
+                font-size: 7px;
             }
             
-            .branch-header {
-                font-size: 8px;
-                max-width: 30px;
-            }
-            
+            /* التحكم في كسر الصفحات - الجداول تبدأ من حيث انتهت */
             .print-page {
                 page-break-after: always;
                 margin: 0;
-                padding: 1mm;
+                padding: 0; /* إزالة أي padding */
+            }
+            
+            /* إزالة أي هوامش أو paddings من كل العناصر */
+            .column-content, .card, .card-body, .table-container {
+                padding: 0 !important;
+                margin: 0 !important;
             }
             
             @page {
                 size: A4 landscape;
-                margin: 3mm;
+                margin: 3mm; /* هامش الصفحة فقط */
             }
         }
 
@@ -447,13 +526,25 @@
             background: #2E5E3A;
         }
 
-        /* Utility Classes */
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .d-flex { display: flex; }
-        .gap-5 { gap: 5px; }
-        .mt-5 { margin-top: 5px; }
-        .mb-5 { margin-bottom: 5px; }
+        /* إزالة أي مسافات قد تسبب فراغات */
+        .column-content > *:first-child {
+            margin-top: 0;
+        }
+        
+        .column-content > *:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* ضمان عدم وجود مسافات داخلية */
+        .table-container {
+            line-height: 0;
+            font-size: 0;
+        }
+        
+        .table-container table {
+            line-height: normal;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -797,44 +888,57 @@
             
             let sampleData = {
                 data: [
-                    // سلطات - فرع مكة
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 5, isSend: false },
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة يونانية تقليدية' }, package: '500', packageUnit: { name: 'جرام' }, qty: 3, isSend: false },
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 4, isSend: false },
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة تبولة' }, package: '400', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    // المقرمشات سنوي
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'كريش تيك' }, package: '2000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     
-                    // سلطات - فرع جدة
-                    { branch: { name: 'جدة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 7, isSend: false },
-                    { branch: { name: 'جدة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 4, isSend: false },
-                    { branch: { name: 'جدة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة يونانية تقليدية' }, package: '500', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    // ساندويتشتت البار شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'بسط عادي' }, package: '300', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'green pesto بيسوت رحل' }, package: '650', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     
-                    // سلطات - فرع المدينة
-                    { branch: { name: 'المدينة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 2, isSend: false },
-                    { branch: { name: 'المدينة' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
+                    // ريزو لنجش شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'حمرى جبل' }, package: '10', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة شامه' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '700', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '600', packageUnit: { name: 'g' }, qty: 5, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
                     
-                    // سلطات - فرع الرياض
-                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة سيزر كلاسيك' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 8, isSend: false },
-                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة يونانية تقليدية' }, package: '500', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    // الروالت شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
                     
-                    // سلطات - فرع الدمام
-                    { branch: { name: 'الدمام' }, mainProductOP: { name: 'سلطات' }, product: { name: 'سلطة خضراء مشكلة' }, package: '750', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    // الحلويات شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'بيكان مكرمل شامه' }, package: '1', packageUnit: { name: 'عسل' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'كراش شوكلت Crunch Chocolate' }, package: '', packageUnit: { name: '' }, qty: 1, isSend: false },
                     
-                    // مقبلات - فرع الرياض
-                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 10, isSend: false },
-                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'متبل باذنجان' }, package: '500', packageUnit: { name: 'جرام' }, qty: 8, isSend: false },
-                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
+                    // الصورات شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'برشيل قزعة' }, package: '1', packageUnit: { name: 'عسل' }, qty: 2, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'هليك اونال جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'الهليك جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
                     
-                    // مقبلات - فرع الدمام
-                    { branch: { name: 'الدمام' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 5, isSend: false },
-                    { branch: { name: 'الدمام' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'جرام' }, qty: 7, isSend: false },
+                    // الصوصات شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'جاكاين' }, package: '700', packageUnit: { name: 'g' }, qty: 14, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'سرير قزعة' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'Pink مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'كافين' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مسكن' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ألمانيا' }, package: '600', packageUnit: { name: 'g' }, qty: 14, isSend: false },
                     
-                    // مقبلات - فرع مكة
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 12, isSend: false },
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'متبل باذنجان' }, package: '500', packageUnit: { name: 'جرام' }, qty: 9, isSend: false },
+                    // الأجبان شامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'بارزان' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'جون فينا' }, package: '500', packageUnit: { name: 'g' }, qty: 9, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'البروتين' }, package: '500', packageUnit: { name: 'g' }, qty: 13, isSend: false },
                     
-                    // مقبلات - فرع جدة
-                    { branch: { name: 'جدة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'جرام' }, qty: 6, isSend: false },
-                    { branch: { name: 'جدة' }, mainProductOP: { name: 'مقبلات' }, product: { name: 'حمص بالطحينة' }, package: '500', packageUnit: { name: 'جرام' }, qty: 8, isSend: false }
+                    // الخيوط الشامية
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'ديك جبل' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'كاراب' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false }
                 ]
             };
             
@@ -848,10 +952,8 @@
             
             let sampleData = {
                 data: [
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
-                    { branch: { name: 'مكة' }, mainProductOP: { name: 'خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
-                    { branch: { name: 'جدة' }, mainProductOP: { name: 'خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 60, isSend: false },
-                    { branch: { name: 'الرياض' }, mainProductOP: { name: 'فواكه' }, product: { name: 'برتقال' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false }
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false }
                 ]
             };
             
@@ -951,7 +1053,7 @@
             renderData(type);
         }
 
-        // عرض البيانات
+        // عرض البيانات في عمودين - مع جداول ملتصقة تماماً
         function renderData(type) {
             let container = type === 'production' ? $('#production-data') : $('#supply-data');
             let state = appState[type];
@@ -973,11 +1075,30 @@
             });
             
             let branches = state.selectedBranch ? [state.selectedBranch] : state.allBranches;
+            let categoryList = Object.keys(categories);
             
-            let html = '';
-            for (let cat in categories) {
-                html += buildCompactTable(cat, categories[cat], branches);
-            }
+            // تقسيم الفئات إلى نصفين (عمودين)
+            let midIndex = Math.ceil(categoryList.length / 2);
+            let firstHalf = categoryList.slice(0, midIndex);
+            let secondHalf = categoryList.slice(midIndex);
+            
+            // بناء هيكل الصفحة المقسمة
+            let html = `
+                <div class="split-view">
+                    <div class="column">
+                        <div class="column-header">الفئة (1)</div>
+                        <div class="column-content">
+                            ${firstHalf.map(cat => buildCompactTable(cat, categories[cat], branches)).join('')}
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="column-header">الفئة (2)</div>
+                        <div class="column-content">
+                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat], branches)).join('') : '<div style="text-align:center; color:#888; padding:20px;">لا توجد فئات إضافية</div>'}
+                        </div>
+                    </div>
+                </div>
+            `;
             
             container.html(html);
         }
@@ -1011,24 +1132,32 @@
                                 <thead>
                                     <tr>
                                         <th>المنتج</th>
-                                        ${allBranches.map(b => `<th class="branch-header" title="${b}">${shortenBranchName(b)}</th>`).join('')}
+                                        <th>عر</th>
+                                        <th>الس</th>
                                         <th>الإجمالي</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     ${productList.map(p => {
+                                        // حساب الإجمالي
                                         let total = 0;
+                                        for (let branch in p.branches) {
+                                            total += p.branches[branch];
+                                        }
+                                        
+                                        // توزيع الكميات على الأعمدة (افتراضي أن أول فرعين هما عر والس)
+                                        let branchKeys = Object.keys(p.branches);
+                                        let val1 = branchKeys[0] ? p.branches[branchKeys[0]] : '-';
+                                        let val2 = branchKeys[1] ? p.branches[branchKeys[1]] : '-';
+                                        
                                         return `
                                             <tr>
                                                 <td style="text-align:right;">
                                                     <div class="product-name">${p.name}</div>
                                                     <div class="product-package">${p.package || ''} ${p.packageUnit || ''}</div>
                                                 </td>
-                                                ${allBranches.map(b => {
-                                                    let val = p.branches[b] || '-';
-                                                    if (val !== '-') total += val;
-                                                    return `<td>${val}</td>`;
-                                                }).join('')}
+                                                <td>${val2}</td>
+                                                <td>${val1}</td>
                                                 <td class="total-cell">${total || '-'}</td>
                                             </tr>
                                         `;
@@ -1043,17 +1172,7 @@
             return table;
         }
 
-        // اختصار اسم الفرع
-        function shortenBranchName(name) {
-            if (name.length <= 6) return name;
-            let parts = name.split(' ');
-            if (parts.length > 1) {
-                return parts.map(p => p.substring(0, 2)).join('');
-            }
-            return name.substring(0, 4);
-        }
-
-        // طباعة جميع الجداول
+        // طباعة جميع الجداول - مع الحفاظ على التصاق الجداول
         function printAllTables(type) {
             let state = appState[type];
             
@@ -1082,37 +1201,57 @@
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
                     <style>
                         * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; }
-                        body { background:white; padding:2mm; }
-                        .print-page { page-break-after: always; margin:0; padding:1mm; }
-                        .card { border:0.5px solid black; margin:1mm 0; }
-                        .card-header { background:#e0e8e0; padding:2px 4px; text-align:center; font-weight:bold; font-size:12px; border-bottom:0.5px solid black; }
-                        .production-table { width:100%; border-collapse:collapse; font-size:10px; line-height:1.2; }
-                        .production-table th, .production-table td { border:0.3px solid black; padding:2px 3px; text-align:center; }
-                        .production-table th:first-child, .production-table td:first-child { text-align:right; min-width:100px; }
-                        .product-name { font-weight:bold; font-size:10px; }
-                        .product-package { font-size:8px; color:#666; }
-                        .branch-header { font-size:8px; max-width:30px; overflow:hidden; }
-                        .total-cell { background:#f0f0f0; font-weight:bold; }
+                        body { background:white; margin:0; padding:0; }
+                        .print-page { page-break-after: always; margin:0; padding:0; }
+                        .split-view { display:flex; gap:3mm; margin:0; padding:0; }
+                        .column { flex:1; margin:0; padding:0; }
+                        .column-header { background:#2E5E3A; color:white; padding:2px; text-align:center; font-size:11px; margin:0; border-radius:2px; page-break-after:avoid; }
+                        .column-content { margin:0; padding:0; }
+                        .card { border:0.5px solid black; margin:0; border-radius:0; page-break-inside:avoid; border-top-width:0.5px; border-bottom-width:0; }
+                        .card + .card { margin-top:-0.5px; border-top:0.5px solid black; }
+                        .column-content .card:last-child { border-bottom:0.5px solid black; }
+                        .card-header { background:#d0d8d0; padding:2px 4px; text-align:center; font-weight:bold; font-size:11px; border-bottom:0.5px solid black; margin:0; }
+                        .production-table { width:100%; border-collapse:collapse; font-size:9px; margin:0; }
+                        .production-table th, .production-table td { border:0.3px solid black; padding:1px 2px; text-align:center; margin:0; }
+                        .production-table th:first-child, .production-table td:first-child { text-align:right; min-width:80px; }
+                        .product-name { font-weight:bold; font-size:9px; }
+                        .product-package { font-size:7px; color:#555; }
+                        .total-cell { background:#d0d0d0; font-weight:bold; }
                         @page { size:A4 landscape; margin:3mm; }
                     </style>
                 </head>
                 <body>
             `;
             
-            // حساب عدد الفئات في كل صفحة (صفحتين كحد أقصى)
-            let itemsPerPage = Math.ceil(categoryList.length / 2);
+            // عرض كل الفئات في صفحة واحدة - بدون تقسيم إلى صفحات منفصلة
+            printContent += '<div class="print-page">';
+            printContent += `<div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:bold;">${title} - ${date}</div>`;
             
-            for (let page = 0; page < categoryList.length; page += itemsPerPage) {
-                printContent += '<div class="print-page">';
-                printContent += `<div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:bold;">${title} - ${date} - صفحة ${Math.floor(page/itemsPerPage)+1}</div>`;
-                
-                for (let i = page; i < page + itemsPerPage && i < categoryList.length; i++) {
-                    let cat = categoryList[i];
+            // تقسيم الفئات إلى مجموعتين للعرض في عمودين
+            let midIndex = Math.ceil(categoryList.length / 2);
+            let firstHalf = categoryList.slice(0, midIndex);
+            let secondHalf = categoryList.slice(midIndex);
+            
+            printContent += '<div class="split-view">';
+            
+            // العمود الأول
+            printContent += '<div class="column">';
+            firstHalf.forEach(cat => {
+                printContent += buildCompactTable(cat, categories[cat], branches);
+            });
+            printContent += '</div>';
+            
+            // العمود الثاني
+            printContent += '<div class="column">';
+            if (secondHalf.length) {
+                secondHalf.forEach(cat => {
                     printContent += buildCompactTable(cat, categories[cat], branches);
-                }
-                
-                printContent += '</div>';
+                });
             }
+            printContent += '</div>';
+            
+            printContent += '</div>'; // split-view
+            printContent += '</div>'; // print-page
             
             printContent += '</body></html>';
             
