@@ -351,7 +351,7 @@
             
             .column {
                 flex: 1;
-                page-break-inside: auto; /* يسمح بكسر الصفحة داخل العمود */
+                page-break-inside: auto;
             }
             
             .column-content {
@@ -369,7 +369,7 @@
                 border: 0.5px solid black;
                 margin: 0;
                 border-radius: 0;
-                page-break-inside: avoid; /* كل جدول يحاول البقاء في صفحة واحدة */
+                page-break-inside: avoid;
                 border-top-width: 0.5px;
                 border-bottom-width: 0;
             }
@@ -408,14 +408,12 @@
                 font-size: 7px;
             }
             
-            /* التحكم في كسر الصفحات - الجداول تبدأ من حيث انتهت */
             .print-page {
                 page-break-after: always;
                 margin: 0;
-                padding: 0; /* إزالة أي padding */
+                padding: 0;
             }
             
-            /* إزالة أي هوامش أو paddings من كل العناصر */
             .column-content, .card, .card-body, .table-container {
                 padding: 0 !important;
                 margin: 0 !important;
@@ -423,7 +421,7 @@
             
             @page {
                 size: A4 landscape;
-                margin: 3mm; /* هامش الصفحة فقط */
+                margin: 3mm;
             }
         }
 
@@ -526,7 +524,6 @@
             background: #2E5E3A;
         }
 
-        /* إزالة أي مسافات قد تسبب فراغات */
         .column-content > *:first-child {
             margin-top: 0;
         }
@@ -535,7 +532,6 @@
             margin-bottom: 0;
         }
         
-        /* ضمان عدم وجود مسافات داخلية */
         .table-container {
             line-height: 0;
             font-size: 0;
@@ -953,7 +949,9 @@
             let sampleData = {
                 data: [
                     { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false }
+                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
+                    { branch: { name: 'فرع ثانوي' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
+                    { branch: { name: 'فرع ثانوي' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
                 ]
             };
             
@@ -1074,7 +1072,6 @@
                 categories[item.category].push(item);
             });
             
-            let branches = state.selectedBranch ? [state.selectedBranch] : state.allBranches;
             let categoryList = Object.keys(categories);
             
             // تقسيم الفئات إلى نصفين (عمودين)
@@ -1088,13 +1085,13 @@
                     <div class="column">
                         <div class="column-header">الفئة (1)</div>
                         <div class="column-content">
-                            ${firstHalf.map(cat => buildCompactTable(cat, categories[cat], branches)).join('')}
+                            ${firstHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
                         </div>
                     </div>
                     <div class="column">
                         <div class="column-header">الفئة (2)</div>
                         <div class="column-content">
-                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat], branches)).join('') : '<div style="text-align:center; color:#888; padding:20px;">لا توجد فئات إضافية</div>'}
+                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('') : '<div style="text-align:center; color:#888; padding:20px;">لا توجد فئات إضافية</div>'}
                         </div>
                     </div>
                 </div>
@@ -1103,8 +1100,11 @@
             container.html(html);
         }
 
-        // بناء جدول مدمج
-        function buildCompactTable(category, items, allBranches) {
+        // بناء جدول مدمج مع عرض جميع الفروع بشكل صحيح
+        function buildCompactTable(category, items) {
+            // الحصول على جميع الفروع الموجودة في العناصر
+            let allBranchesInItems = [...new Set(items.map(item => item.branch))].sort();
+            
             // تجميع المنتجات
             let products = {};
             items.forEach(item => {
@@ -1116,11 +1116,22 @@
                         packageUnit: item.packageUnit,
                         branches: {}
                     };
+                    
+                    // تهيئة جميع الفروع بالقيمة 0
+                    allBranchesInItems.forEach(branch => {
+                        products[key].branches[branch] = 0;
+                    });
                 }
                 products[key].branches[item.branch] = (products[key].branches[item.branch] || 0) + item.qty;
             });
             
             let productList = Object.values(products).sort((a, b) => a.name.localeCompare(b.name));
+            
+            // بناء رؤوس الأعمدة للفروع
+            let branchHeaders = '';
+            allBranchesInItems.forEach(branch => {
+                branchHeaders += `<th>${branch}</th>`;
+            });
             
             // بناء الجدول
             let table = `
@@ -1132,8 +1143,7 @@
                                 <thead>
                                     <tr>
                                         <th>المنتج</th>
-                                        <th>عر</th>
-                                        <th>الس</th>
+                                        ${branchHeaders}
                                         <th>الإجمالي</th>
                                     </tr>
                                 </thead>
@@ -1141,14 +1151,13 @@
                                     ${productList.map(p => {
                                         // حساب الإجمالي
                                         let total = 0;
-                                        for (let branch in p.branches) {
-                                            total += p.branches[branch];
-                                        }
+                                        let branchCells = '';
                                         
-                                        // توزيع الكميات على الأعمدة (افتراضي أن أول فرعين هما عر والس)
-                                        let branchKeys = Object.keys(p.branches);
-                                        let val1 = branchKeys[0] ? p.branches[branchKeys[0]] : '-';
-                                        let val2 = branchKeys[1] ? p.branches[branchKeys[1]] : '-';
+                                        allBranchesInItems.forEach(branch => {
+                                            let qty = p.branches[branch] || 0;
+                                            total += qty;
+                                            branchCells += `<td>${qty || '-'}</td>`;
+                                        });
                                         
                                         return `
                                             <tr>
@@ -1156,8 +1165,7 @@
                                                     <div class="product-name">${p.name}</div>
                                                     <div class="product-package">${p.package || ''} ${p.packageUnit || ''}</div>
                                                 </td>
-                                                <td>${val2}</td>
-                                                <td>${val1}</td>
+                                                ${branchCells}
                                                 <td class="total-cell">${total || '-'}</td>
                                             </tr>
                                         `;
@@ -1188,7 +1196,6 @@
                 categories[item.category].push(item);
             });
             
-            let branches = state.selectedBranch ? [state.selectedBranch] : state.allBranches;
             let categoryList = Object.keys(categories);
             
             let title = type === 'production' ? 'تقرير الإنتاج' : 'تقرير التوريد';
@@ -1223,7 +1230,7 @@
                 <body>
             `;
             
-            // عرض كل الفئات في صفحة واحدة - بدون تقسيم إلى صفحات منفصلة
+            // عرض كل الفئات في صفحة واحدة
             printContent += '<div class="print-page">';
             printContent += `<div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:bold;">${title} - ${date}</div>`;
             
@@ -1237,7 +1244,7 @@
             // العمود الأول
             printContent += '<div class="column">';
             firstHalf.forEach(cat => {
-                printContent += buildCompactTable(cat, categories[cat], branches);
+                printContent += buildCompactTable(cat, categories[cat]);
             });
             printContent += '</div>';
             
@@ -1245,7 +1252,7 @@
             printContent += '<div class="column">';
             if (secondHalf.length) {
                 secondHalf.forEach(cat => {
-                    printContent += buildCompactTable(cat, categories[cat], branches);
+                    printContent += buildCompactTable(cat, categories[cat]);
                 });
             }
             printContent += '</div>';
