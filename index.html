@@ -682,7 +682,7 @@
             }
         };
 
-        // ترتيب الفروع المطلوب: M (شوران), S (سلطنة), A (عزيزية)
+        // ترتيب الفروع المطلوب: M (شوران) أولاً، ثم S (سلطنة)، ثم A (عزيزية)
         const BRANCH_ORDER = ['M', 'S', 'A'];
         
         // أسماء الفروع المعروضة
@@ -691,6 +691,24 @@
             'S': 'سلطنة S',
             'A': 'عزيزية A'
         };
+
+        // دالة لترتيب الفروع حسب الترتيب المحدد
+        function sortBranches(branches) {
+            return branches.sort((a, b) => {
+                // استخراج الحرف الأول من اسم الفرع (M, S, A)
+                let codeA = a.charAt(0);
+                let codeB = b.charAt(0);
+                
+                let indexA = BRANCH_ORDER.indexOf(codeA);
+                let indexB = BRANCH_ORDER.indexOf(codeB);
+                
+                // إذا كان الفرع غير موجود في الترتيب المحدد، يظهر في النهاية
+                if (indexA === -1) indexA = BRANCH_ORDER.length;
+                if (indexB === -1) indexB = BRANCH_ORDER.length;
+                
+                return indexA - indexB;
+            });
+        }
 
         $(document).ready(function() {
             loadProductionData();
@@ -892,62 +910,18 @@
             let sampleData = {
                 data: [
                     // المقرمشات سنوي
-                    { branch: { name: 'M' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     
-                    { branch: { name: 'M' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    
-                    { branch: { name: 'M' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'كريش تيك' }, package: '2000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    
-                    // ساندويتشتت البار شامية
-                    { branch: { name: 'S' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'بسط عادي' }, package: '300', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'green pesto بيسوت رحل' }, package: '650', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    
-                    // ريزو لنجش شامية
-                    { branch: { name: 'A' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'حمرى جبل' }, package: '10', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة شامه' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '700', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '600', packageUnit: { name: 'g' }, qty: 5, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
-                    
-                    // الروالت شامية
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    
-                    // الحلويات شامية
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'بيكان مكرمل شامه' }, package: '1', packageUnit: { name: 'عسل' }, qty: 1, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'كراش شوكلت Crunch Chocolate' }, package: '', packageUnit: { name: '' }, qty: 1, isSend: false },
-                    
-                    // الصورات شامية
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'برشيل قزعة' }, package: '1', packageUnit: { name: 'عسل' }, qty: 2, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'هليك اونال جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'الهليك جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     
                     // الصوصات شامية
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'جاكاين' }, package: '700', packageUnit: { name: 'g' }, qty: 14, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'سرير قزعة' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'Pink مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'كافين' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مسكن' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ألمانيا' }, package: '600', packageUnit: { name: 'g' }, qty: 14, isSend: false },
-                    
-                    // الأجبان شامية
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'بارزان' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'جون فينا' }, package: '500', packageUnit: { name: 'g' }, qty: 9, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'البروتين' }, package: '500', packageUnit: { name: 'g' }, qty: 13, isSend: false },
-                    
-                    // الخيوط الشامية
-                    { branch: { name: 'M' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'ديك جبل' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'كاراب' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false }
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false }
                 ]
             };
             
@@ -961,13 +935,13 @@
             
             let sampleData = {
                 data: [
-                    { branch: { name: 'M' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 20, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 20, isSend: false },
                     
-                    { branch: { name: 'M' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
-                    { branch: { name: 'S' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
-                    { branch: { name: 'A' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
                 ]
             };
             
@@ -1006,17 +980,7 @@
             appState.production.items = items;
             
             // ترتيب الفروع حسب الترتيب المطلوب M, S, A
-            appState.production.allBranches = Array.from(branches).sort((a, b) => {
-                // ترتيب حسب الترتيب المحدد M, S, A
-                let indexA = BRANCH_ORDER.indexOf(a);
-                let indexB = BRANCH_ORDER.indexOf(b);
-                
-                // إذا كان الفرع غير موجود في الترتيب المحدد، يظهر في النهاية
-                if (indexA === -1) indexA = BRANCH_ORDER.length;
-                if (indexB === -1) indexB = BRANCH_ORDER.length;
-                
-                return indexA - indexB;
-            });
+            appState.production.allBranches = sortBranches(Array.from(branches));
             
             updateBranchFilter('production');
             filterItems('production');
@@ -1055,17 +1019,7 @@
             appState.supply.items = items;
             
             // ترتيب الفروع حسب الترتيب المطلوب M, S, A
-            appState.supply.allBranches = Array.from(branches).sort((a, b) => {
-                // ترتيب حسب الترتيب المحدد M, S, A
-                let indexA = BRANCH_ORDER.indexOf(a);
-                let indexB = BRANCH_ORDER.indexOf(b);
-                
-                // إذا كان الفرع غير موجود في الترتيب المحدد، يظهر في النهاية
-                if (indexA === -1) indexA = BRANCH_ORDER.length;
-                if (indexB === -1) indexB = BRANCH_ORDER.length;
-                
-                return indexA - indexB;
-            });
+            appState.supply.allBranches = sortBranches(Array.from(branches));
             
             updateBranchFilter('supply');
             filterItems('supply');
@@ -1079,7 +1033,7 @@
             select.empty().append('<option value="">كل الفروع</option>');
             appState[type].allBranches.forEach(b => {
                 // عرض الاسم العربي إذا كان متوفراً
-                let displayName = BRANCH_NAMES[b] || b;
+                let displayName = BRANCH_NAMES[b.charAt(0)] || b;
                 select.append(`<option value="${b}">${displayName}</option>`);
             });
         }
@@ -1146,17 +1100,11 @@
 
         // بناء جدول مدمج مع عرض الفروع بترتيب M, S, A (شوران، سلطنة، عزيزية)
         function buildCompactTable(category, items) {
-            // الحصول على جميع الفروع الموجودة في العناصر وترتيبها حسب الترتيب المحدد M, S, A
+            // الحصول على جميع الفروع الموجودة في العناصر
             let branchesSet = new Set(items.map(item => item.branch));
-            let allBranchesInItems = Array.from(branchesSet).sort((a, b) => {
-                let indexA = BRANCH_ORDER.indexOf(a);
-                let indexB = BRANCH_ORDER.indexOf(b);
-                
-                if (indexA === -1) indexA = BRANCH_ORDER.length;
-                if (indexB === -1) indexB = BRANCH_ORDER.length;
-                
-                return indexA - indexB;
-            });
+            
+            // ترتيب الفروع حسب الترتيب المحدد M, S, A
+            let allBranchesInItems = sortBranches(Array.from(branchesSet));
             
             // تجميع المنتجات
             let products = {};
@@ -1183,7 +1131,7 @@
             // بناء رؤوس الأعمدة للفروع (مرتبة حسب M, S, A) مع عرض الأسماء العربية
             let branchHeaders = '';
             allBranchesInItems.forEach(branch => {
-                let displayName = BRANCH_NAMES[branch] || branch;
+                let displayName = BRANCH_NAMES[branch.charAt(0)] || branch;
                 branchHeaders += `<th>${displayName}</th>`;
             });
             
@@ -1297,19 +1245,23 @@
             
             // العمود الأول
             printContent += '<div class="column">';
+            printContent += '<div class="column-header">القسم (1)</div>';
+            printContent += '<div class="column-content">';
             firstHalf.forEach(cat => {
                 printContent += buildCompactTable(cat, categories[cat]);
             });
-            printContent += '</div>';
+            printContent += '</div></div>';
             
             // العمود الثاني
             printContent += '<div class="column">';
+            printContent += '<div class="column-header">القسم (2)</div>';
+            printContent += '<div class="column-content">';
             if (secondHalf.length) {
                 secondHalf.forEach(cat => {
                     printContent += buildCompactTable(cat, categories[cat]);
                 });
             }
-            printContent += '</div>';
+            printContent += '</div></div>';
             
             printContent += '</div>'; // split-view
             printContent += '</div>'; // print-page
