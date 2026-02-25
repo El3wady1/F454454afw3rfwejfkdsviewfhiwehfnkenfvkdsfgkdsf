@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
 
         body {
             background-color: #f5f5f5;
-            direction: rtl;
+            direction: ltr;
             overflow-x: hidden;
         }
 
@@ -283,7 +283,7 @@
 
         .production-table th:first-child,
         .production-table td:first-child {
-            text-align: right;
+            text-align: left;
             padding: 4px 8px;
             min-width: 150px;
             max-width: 200px;
@@ -296,10 +296,6 @@
             font-weight: 700;
             color: #000;
             white-space: nowrap;
-        }
-
-        .production-table th:nth-child(4) { /* الإجمالي */
-            background-color: #d0d0d0;
         }
 
         .total-cell {
@@ -331,6 +327,7 @@
                 background: white;
                 margin: 0;
                 padding: 0;
+                direction: ltr;
             }
             
             .main-content {
@@ -685,6 +682,16 @@
             }
         };
 
+        // ترتيب الفروع المطلوب: M (شوران), S (سلطنة), A (عزيزية)
+        const BRANCH_ORDER = ['M', 'S', 'A'];
+        
+        // أسماء الفروع المعروضة
+        const BRANCH_NAMES = {
+            'M': 'شوران M',
+            'S': 'سلطنة S',
+            'A': 'عزيزية A'
+        };
+
         $(document).ready(function() {
             loadProductionData();
             setupEventListeners();
@@ -878,85 +885,94 @@
             }
         }
 
-        // تحميل بيانات تجريبية للإنتاج
+        // تحميل بيانات تجريبية للإنتاج مع أسماء الفروع: شوران، سلطنة، عزيزية
         function loadSampleProductionData() {
             appState.production.useSampleData = true;
             
             let sampleData = {
                 data: [
                     // المقرمشات سنوي
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'كريش تيك' }, package: '2000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    
+                    { branch: { name: 'M' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    
+                    { branch: { name: 'M' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'كريش تيك' }, package: '2000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     
                     // ساندويتشتت البار شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'بسط عادي' }, package: '300', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'green pesto بيسوت رحل' }, package: '650', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'بسط عادي' }, package: '300', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# ساندويتشتت البار شامية' }, product: { name: 'green pesto بيسوت رحل' }, package: '650', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     
                     // ريزو لنجش شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'حمرى جبل' }, package: '10', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة شامه' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '700', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '600', packageUnit: { name: 'g' }, qty: 5, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'حمرى جبل' }, package: '10', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة شامه' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '700', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '600', packageUnit: { name: 'g' }, qty: 5, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# ريزو لنجش شامية' }, product: { name: 'زوجة جبل' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
                     
                     // الروالت شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت شامه' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '55', packageUnit: { name: 'g' }, qty: 2, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الروالت شامية' }, product: { name: 'روالت جبل' }, package: '50', packageUnit: { name: 'g' }, qty: 2, isSend: false },
                     
                     // الحلويات شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'بيكان مكرمل شامه' }, package: '1', packageUnit: { name: 'عسل' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'كراش شوكلت Crunch Chocolate' }, package: '', packageUnit: { name: '' }, qty: 1, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'بيكان مكرمل شامه' }, package: '1', packageUnit: { name: 'عسل' }, qty: 1, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الحلويات شامية' }, product: { name: 'كراش شوكلت Crunch Chocolate' }, package: '', packageUnit: { name: '' }, qty: 1, isSend: false },
                     
                     // الصورات شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'برشيل قزعة' }, package: '1', packageUnit: { name: 'عسل' }, qty: 2, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'هليك اونال جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'الهليك جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'برشيل قزعة' }, package: '1', packageUnit: { name: 'عسل' }, qty: 2, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'هليك اونال جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الصورات شامية' }, product: { name: 'الهليك جبل' }, package: '1', packageUnit: { name: 'عسل' }, qty: 4, isSend: false },
                     
                     // الصوصات شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'جاكاين' }, package: '700', packageUnit: { name: 'g' }, qty: 14, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'سرير قزعة' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'Pink مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'كافين' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مسكن' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ألمانيا' }, package: '600', packageUnit: { name: 'g' }, qty: 14, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'جاكاين' }, package: '700', packageUnit: { name: 'g' }, qty: 14, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'سرير قزعة' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'Pink مصنوع بنتون' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'كافين' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'مسكن' }, package: '700', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ألمانيا' }, package: '600', packageUnit: { name: 'g' }, qty: 14, isSend: false },
                     
                     // الأجبان شامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'بارزان' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'جون فينا' }, package: '500', packageUnit: { name: 'g' }, qty: 9, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'البروتين' }, package: '500', packageUnit: { name: 'g' }, qty: 13, isSend: false },
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'بارزان' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'جون فينا' }, package: '500', packageUnit: { name: 'g' }, qty: 9, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# الأجبان شامية' }, product: { name: 'البروتين' }, package: '500', packageUnit: { name: 'g' }, qty: 13, isSend: false },
                     
                     // الخيوط الشامية
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'ديك جبل' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'كاراب' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false }
+                    { branch: { name: 'M' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'ديك جبل' }, package: '1000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# الخيوط الشامية' }, product: { name: 'كاراب' }, package: '500', packageUnit: { name: 'g' }, qty: 3, isSend: false }
                 ]
             };
             
             processProductionData(sampleData);
-            showMessage('production', '✅ تم تحميل بيانات تجريبية', 'success');
+            showMessage('production', '✅ تم تحميل بيانات تجريبية بترتيب الفروع: شوران، سلطنة، عزيزية', 'success');
         }
 
-        // تحميل بيانات تجريبية للتوريد
+        // تحميل بيانات تجريبية للتوريد مع أسماء الفروع: شوران، سلطنة، عزيزية
         function loadSampleSupplyData() {
             appState.supply.useSampleData = true;
             
             let sampleData = {
                 data: [
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
-                    { branch: { name: 'الفرع الرئيسي' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
-                    { branch: { name: 'فرع ثانوي' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
-                    { branch: { name: 'فرع ثانوي' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
+                    { branch: { name: 'M' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 20, isSend: false },
+                    
+                    { branch: { name: 'M' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
+                    { branch: { name: 'S' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
+                    { branch: { name: 'A' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
                 ]
             };
             
             processSupplyData(sampleData);
-            showMessage('supply', '✅ تم تحميل بيانات تجريبية', 'success');
+            showMessage('supply', '✅ تم تحميل بيانات تجريبية بترتيب الفروع: شوران، سلطنة، عزيزية', 'success');
         }
 
         // معالجة بيانات الإنتاج
@@ -979,7 +995,8 @@
                         packageUnit: packageUnit,
                         qty: quantity,
                         category: categoryName,
-                        branch: branchName
+                        branch: branchName,
+                        branchCode: item.branch?.name || ''
                     });
                     
                     branches.add(branchName);
@@ -987,7 +1004,19 @@
             });
             
             appState.production.items = items;
-            appState.production.allBranches = Array.from(branches).sort();
+            
+            // ترتيب الفروع حسب الترتيب المطلوب M, S, A
+            appState.production.allBranches = Array.from(branches).sort((a, b) => {
+                // ترتيب حسب الترتيب المحدد M, S, A
+                let indexA = BRANCH_ORDER.indexOf(a);
+                let indexB = BRANCH_ORDER.indexOf(b);
+                
+                // إذا كان الفرع غير موجود في الترتيب المحدد، يظهر في النهاية
+                if (indexA === -1) indexA = BRANCH_ORDER.length;
+                if (indexB === -1) indexB = BRANCH_ORDER.length;
+                
+                return indexA - indexB;
+            });
             
             updateBranchFilter('production');
             filterItems('production');
@@ -1015,7 +1044,8 @@
                         packageUnit: packageUnit,
                         qty: quantity,
                         category: categoryName,
-                        branch: branchName
+                        branch: branchName,
+                        branchCode: item.branch?.name || ''
                     });
                     
                     branches.add(branchName);
@@ -1023,7 +1053,19 @@
             });
             
             appState.supply.items = items;
-            appState.supply.allBranches = Array.from(branches).sort();
+            
+            // ترتيب الفروع حسب الترتيب المطلوب M, S, A
+            appState.supply.allBranches = Array.from(branches).sort((a, b) => {
+                // ترتيب حسب الترتيب المحدد M, S, A
+                let indexA = BRANCH_ORDER.indexOf(a);
+                let indexB = BRANCH_ORDER.indexOf(b);
+                
+                // إذا كان الفرع غير موجود في الترتيب المحدد، يظهر في النهاية
+                if (indexA === -1) indexA = BRANCH_ORDER.length;
+                if (indexB === -1) indexB = BRANCH_ORDER.length;
+                
+                return indexA - indexB;
+            });
             
             updateBranchFilter('supply');
             filterItems('supply');
@@ -1036,7 +1078,9 @@
             let select = $(`#branch-filter-${type}`);
             select.empty().append('<option value="">كل الفروع</option>');
             appState[type].allBranches.forEach(b => {
-                select.append(`<option value="${b}">${b}</option>`);
+                // عرض الاسم العربي إذا كان متوفراً
+                let displayName = BRANCH_NAMES[b] || b;
+                select.append(`<option value="${b}">${displayName}</option>`);
             });
         }
 
@@ -1051,7 +1095,7 @@
             renderData(type);
         }
 
-        // عرض البيانات في عمودين - مع جداول ملتصقة تماماً
+        // عرض البيانات في عمودين - مع جداول ملتصقة تماماً وترتيب الفروع M, S, A
         function renderData(type) {
             let container = type === 'production' ? $('#production-data') : $('#supply-data');
             let state = appState[type];
@@ -1083,15 +1127,15 @@
             let html = `
                 <div class="split-view">
                     <div class="column">
-                        <div class="column-header">الفئة (1)</div>
+                        <div class="column-header">القسم (1)</div>
                         <div class="column-content">
                             ${firstHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
                         </div>
                     </div>
                     <div class="column">
-                        <div class="column-header">الفئة (2)</div>
+                        <div class="column-header">القسم (2)</div>
                         <div class="column-content">
-                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('') : '<div style="text-align:center; color:#888; padding:20px;">لا توجد فئات إضافية</div>'}
+                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('') : '<div style="text-align:center; color:#888; padding:20px;">لا توجد أقسام إضافية</div>'}
                         </div>
                     </div>
                 </div>
@@ -1100,10 +1144,19 @@
             container.html(html);
         }
 
-        // بناء جدول مدمج مع عرض جميع الفروع بشكل صحيح
+        // بناء جدول مدمج مع عرض الفروع بترتيب M, S, A (شوران، سلطنة، عزيزية)
         function buildCompactTable(category, items) {
-            // الحصول على جميع الفروع الموجودة في العناصر
-            let allBranchesInItems = [...new Set(items.map(item => item.branch))].sort();
+            // الحصول على جميع الفروع الموجودة في العناصر وترتيبها حسب الترتيب المحدد M, S, A
+            let branchesSet = new Set(items.map(item => item.branch));
+            let allBranchesInItems = Array.from(branchesSet).sort((a, b) => {
+                let indexA = BRANCH_ORDER.indexOf(a);
+                let indexB = BRANCH_ORDER.indexOf(b);
+                
+                if (indexA === -1) indexA = BRANCH_ORDER.length;
+                if (indexB === -1) indexB = BRANCH_ORDER.length;
+                
+                return indexA - indexB;
+            });
             
             // تجميع المنتجات
             let products = {};
@@ -1127,10 +1180,11 @@
             
             let productList = Object.values(products).sort((a, b) => a.name.localeCompare(b.name));
             
-            // بناء رؤوس الأعمدة للفروع
+            // بناء رؤوس الأعمدة للفروع (مرتبة حسب M, S, A) مع عرض الأسماء العربية
             let branchHeaders = '';
             allBranchesInItems.forEach(branch => {
-                branchHeaders += `<th>${branch}</th>`;
+                let displayName = BRANCH_NAMES[branch] || branch;
+                branchHeaders += `<th>${displayName}</th>`;
             });
             
             // بناء الجدول
@@ -1161,7 +1215,7 @@
                                         
                                         return `
                                             <tr>
-                                                <td style="text-align:right;">
+                                                <td style="text-align:left;">
                                                     <div class="product-name">${p.name}</div>
                                                     <div class="product-package">${p.package || ''} ${p.packageUnit || ''}</div>
                                                 </td>
@@ -1180,7 +1234,7 @@
             return table;
         }
 
-        // طباعة جميع الجداول - مع الحفاظ على التصاق الجداول
+        // طباعة جميع الجداول - مع الحفاظ على التصاق الجداول وترتيب الفروع M, S, A
         function printAllTables(type) {
             let state = appState[type];
             
@@ -1199,16 +1253,16 @@
             let categoryList = Object.keys(categories);
             
             let title = type === 'production' ? 'تقرير الإنتاج' : 'تقرير التوريد';
-            let date = new Date().toLocaleDateString('ar-SA');
+            let date = new Date().toLocaleDateString('ar-EG');
             
             let printContent = `
-                <html dir="rtl">
+                <html dir="ltr">
                 <head>
                     <meta charset="UTF-8">
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
                     <style>
                         * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; }
-                        body { background:white; margin:0; padding:0; }
+                        body { background:white; margin:0; padding:0; direction:ltr; }
                         .print-page { page-break-after: always; margin:0; padding:0; }
                         .split-view { display:flex; gap:3mm; margin:0; padding:0; }
                         .column { flex:1; margin:0; padding:0; }
@@ -1220,7 +1274,7 @@
                         .card-header { background:#d0d8d0; padding:2px 4px; text-align:center; font-weight:bold; font-size:11px; border-bottom:0.5px solid black; margin:0; }
                         .production-table { width:100%; border-collapse:collapse; font-size:9px; margin:0; }
                         .production-table th, .production-table td { border:0.3px solid black; padding:1px 2px; text-align:center; margin:0; }
-                        .production-table th:first-child, .production-table td:first-child { text-align:right; min-width:80px; }
+                        .production-table th:first-child, .production-table td:first-child { text-align:left; min-width:80px; }
                         .product-name { font-weight:bold; font-size:9px; }
                         .product-package { font-size:7px; color:#555; }
                         .total-cell { background:#d0d0d0; font-weight:bold; }
