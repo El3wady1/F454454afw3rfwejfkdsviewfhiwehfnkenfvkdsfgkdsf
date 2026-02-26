@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مصنع السلطة - جداول ملتصقة بالكامل</title>
+    <title>مصنع السلطة - توزيع الجداول على صفحتين</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -206,7 +206,7 @@
             flex: 1;
         }
 
-        /* ===== أنماط الجداول - بدون أي padding أو margin ===== */
+        /* ===== أنماط الجداول ===== */
         .card {
             background-color: white;
             border: 1px solid #000;
@@ -217,23 +217,19 @@
             border-bottom-width: 0;
         }
         
-        /* كل الكروت متلاصقة تماماً */
         .card {
             border-bottom: none;
         }
         
-        /* الكارد الأخير له حد سفلي */
         .column-content .card:last-child {
             border-bottom: 1px solid #000;
         }
         
-        /* تداخل الحدود لإلغاء المضاعفة - الكروت ملتصقة */
         .card + .card {
             margin-top: -1px;
             border-top: 1px solid #000;
         }
         
-        /* إزالة أي padding أو margin داخلية */
         .card-header, .card-body {
             margin: 0;
             padding: 0;
@@ -261,7 +257,6 @@
             padding: 0;
         }
 
-        /* جدول بدون أي مسافات داخلية */
         .production-table {
             width: 100%;
             border-collapse: collapse;
@@ -319,7 +314,7 @@
             line-height: 1;
         }
 
-        /* ===== أنماط الطباعة - بدون أي فراغات ===== */
+        /* ===== أنماط الطباعة - توزيع على صفحتين ===== */
         @media print {
             .no-print {
                 display: none !important;
@@ -332,7 +327,6 @@
                 direction: ltr;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-                color-adjust: exact !important;
             }
             
             .main-content {
@@ -348,11 +342,10 @@
             
             .split-view {
                 display: flex;
-                gap: 2mm;
+                gap: 3mm;
                 page-break-after: avoid;
                 margin: 0;
                 padding: 0;
-                height: auto;
             }
             
             .column {
@@ -375,8 +368,6 @@
                 page-break-after: avoid;
                 background-color: #2E5E3A !important;
                 color: white !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
                 font-weight: 700;
             }
             
@@ -385,10 +376,9 @@
                 margin: 0;
                 padding: 0;
                 border-radius: 0;
-                page-break-inside: avoid !important;
+                page-break-inside: avoid;
                 border-top-width: 0.5px;
                 border-bottom-width: 0;
-                break-inside: avoid !important;
             }
             
             .card + .card {
@@ -408,8 +398,6 @@
                 color: black !important;
                 font-weight: 600;
                 margin: 0;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
             }
             
             .production-table {
@@ -433,8 +421,6 @@
                 font-weight: 600 !important;
                 color: black !important;
                 padding: 1px 1px !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
             }
             
             .product-name {
@@ -450,8 +436,6 @@
             .total-cell {
                 background-color: #d0d0d0 !important;
                 font-weight: 600 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
             }
             
             .print-page {
@@ -460,27 +444,23 @@
                 padding: 0;
             }
             
-            /* منع أي تقسيم للجداول */
+            /* منع التقسيم داخل الصفحة الواحدة */
             .column-content, .card, .card-body, .table-container, 
             .production-table, tbody, tr, td, th {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
-                margin: 0 !important;
-                padding: 0 !important;
             }
             
-            /* إزالة أي مسافات */
             * {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-                color-adjust: exact;
                 margin: 0;
                 padding: 0;
             }
             
             @page {
                 size: A4 landscape;
-                margin: 2mm;
+                margin: 3mm;
             }
         }
 
@@ -508,37 +488,10 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Empty State */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 250px;
-            text-align: center;
-        }
-
-        .empty-icon {
-            font-size: 50px;
-            color: #8B9E7E;
-            margin-bottom: 10px;
-        }
-
-        .empty-state h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .empty-state p {
-            font-size: 14px;
-            color: #666;
-        }
-
         .hidden {
             display: none;
         }
 
-        /* Messages */
         .message {
             padding: 8px 12px;
             margin: 5px 0;
@@ -564,7 +517,6 @@
             border: 1px solid #ffd54f; 
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -583,14 +535,6 @@
             background: #2E5E3A;
         }
 
-        .column-content > *:first-child {
-            margin-top: 0;
-        }
-        
-        .column-content > *:last-child {
-            margin-bottom: 0;
-        }
-        
         .table-container {
             line-height: 0;
             font-size: 0;
@@ -603,7 +547,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header no-print">
         <div class="container">
             <div class="header-content">
@@ -614,7 +557,6 @@
         </div>
     </header>
 
-    <!-- Navigation Tabs -->
     <div class="nav-tabs no-print">
         <div class="nav-tab active" data-tab="production">
             <i class="fas fa-industry"></i> <span>الإنتاج</span>
@@ -624,22 +566,18 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <main class="container">
-        <!-- Production Tab -->
         <div id="production-tab" class="tab-content">
             <div class="main-content">
-                <!-- Print Controls -->
                 <div class="print-controls no-print">
                     <button id="print-all-production" class="print-btn">
-                        <i class="fas fa-print"></i> طباعة الكل
+                        <i class="fas fa-print"></i> طباعة الكل (صفحتين)
                     </button>
                     <button id="load-sample-production" class="print-btn" style="background:#8B9E7E;">
                         <i class="fas fa-database"></i> بيانات تجريبية
                     </button>
                 </div>
 
-                <!-- Filter -->
                 <div class="filter-section no-print">
                     <label class="filter-label">الفرع:</label>
                     <select id="branch-filter-production" class="branch-select">
@@ -647,45 +585,36 @@
                     </select>
                 </div>
 
-                <!-- Messages -->
                 <div id="message-container-production"></div>
 
-                <!-- Data Container -->
                 <div class="data-container" id="scroll-container-production">
-                    <!-- Loading -->
                     <div id="loading-state-production" class="loading-spinner">
                         <div class="spinner"></div>
                         <span>جاري تحميل بيانات الإنتاج...</span>
                     </div>
 
-                    <!-- Empty -->
                     <div id="empty-state-production" class="empty-state hidden">
                         <div class="empty-icon"><i class="fas fa-industry"></i></div>
                         <h3>لا توجد بيانات</h3>
-                        <p>لم يتم العثور على بيانات من API</p>
-                        <button id="try-sample-production" class="print-btn" style="margin-top:5px; background:#2E5E3A;">عرض بيانات تجريبية</button>
+                        <button id="try-sample-production" class="print-btn" style="margin-top:5px;">عرض بيانات تجريبية</button>
                     </div>
 
-                    <!-- Data -->
                     <div id="production-data" class="hidden"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Supply Tab -->
         <div id="supply-tab" class="tab-content hidden">
             <div class="main-content">
-                <!-- Print Controls -->
                 <div class="print-controls no-print">
                     <button id="print-all-supply" class="print-btn">
-                        <i class="fas fa-print"></i> طباعة الكل
+                        <i class="fas fa-print"></i> طباعة الكل (صفحتين)
                     </button>
                     <button id="load-sample-supply" class="print-btn" style="background:#8B9E7E;">
                         <i class="fas fa-database"></i> بيانات تجريبية
                     </button>
                 </div>
 
-                <!-- Filter -->
                 <div class="filter-section no-print">
                     <label class="filter-label">الفرع:</label>
                     <select id="branch-filter-supply" class="branch-select">
@@ -693,26 +622,20 @@
                     </select>
                 </div>
 
-                <!-- Messages -->
                 <div id="message-container-supply"></div>
 
-                <!-- Data Container -->
                 <div class="data-container" id="scroll-container-supply">
-                    <!-- Loading -->
                     <div id="loading-state-supply" class="loading-spinner">
                         <div class="spinner"></div>
                         <span>جاري تحميل بيانات التوريد...</span>
                     </div>
 
-                    <!-- Empty -->
                     <div id="empty-state-supply" class="empty-state hidden">
                         <div class="empty-icon"><i class="fas fa-truck-loading"></i></div>
                         <h3>لا توجد بيانات</h3>
-                        <p>لم يتم العثور على بيانات من API</p>
-                        <button id="try-sample-supply" class="print-btn" style="margin-top:5px; background:#2E5E3A;">عرض بيانات تجريبية</button>
+                        <button id="try-sample-supply" class="print-btn" style="margin-top:5px;">عرض بيانات تجريبية</button>
                     </div>
 
-                    <!-- Data -->
                     <div id="supply-data" class="hidden"></div>
                 </div>
             </div>
@@ -721,7 +644,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // حالة التطبيق
         let appState = {
             currentTab: 'production',
             production: {
@@ -730,8 +652,7 @@
                 allBranches: [],
                 selectedBranch: '',
                 apiUrl: 'https://ramadanv2026-production.up.railway.app/api/orderProduction/getOrderPof2Days',
-                isLoading: false,
-                useSampleData: false
+                isLoading: false
             },
             supply: {
                 items: [],
@@ -739,33 +660,25 @@
                 allBranches: [],
                 selectedBranch: '',
                 apiUrl: 'https://ramadanv2026-production.up.railway.app/api/orderSupply/getOrderPof2Days',
-                isLoading: false,
-                useSampleData: false
+                isLoading: false
             }
         };
 
-        // ترتيب الفروع المطلوب: M (شوران) أولاً، ثم S (سلطنة)، ثم A (عزيزية)
         const BRANCH_ORDER = ['M', 'S', 'A'];
-        
-        // أسماء الفروع المعروضة
         const BRANCH_NAMES = {
             'M': 'شوران M',
             'S': 'سلطنة S',
             'A': 'عزيزية A'
         };
 
-        // دالة لترتيب الفروع حسب الترتيب المحدد
         function sortBranches(branches) {
             return branches.sort((a, b) => {
                 let codeA = a.charAt(0);
                 let codeB = b.charAt(0);
-                
                 let indexA = BRANCH_ORDER.indexOf(codeA);
                 let indexB = BRANCH_ORDER.indexOf(codeB);
-                
                 if (indexA === -1) indexA = BRANCH_ORDER.length;
                 if (indexB === -1) indexB = BRANCH_ORDER.length;
-                
                 return indexA - indexB;
             });
         }
@@ -819,7 +732,6 @@
             if (appState.production.isLoading) return;
             
             appState.production.isLoading = true;
-            appState.production.useSampleData = false;
             $('#loading-state-production').removeClass('hidden');
             $('#production-data').addClass('hidden');
             $('#empty-state-production').addClass('hidden');
@@ -836,13 +748,11 @@
                         const data = await response.json();
                         if (data.status === 200 && data.data && data.data.length > 0) {
                             processProductionData(data);
-                            showMessage('production', '✅ تم تحميل بيانات الإنتاج بنجاح', 'success');
+                            showMessage('production', '✅ تم التحميل بنجاح', 'success');
                             return;
                         }
                     }
-                } catch (e) {
-                    console.log('فشل الاتصال المباشر:', e);
-                }
+                } catch (e) {}
 
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const response = await fetch(proxyUrl + appState.production.apiUrl, {
@@ -850,19 +760,16 @@
                     headers: { 'Content-Type': 'application/json' }
                 });
 
-                if (!response.ok) throw new Error(`خطأ: ${response.status}`);
+                if (!response.ok) throw new Error();
 
                 const data = await response.json();
                 if (data.status === 200 && data.data && data.data.length > 0) {
                     processProductionData(data);
-                    showMessage('production', '✅ تم تحميل بيانات الإنتاج بنجاح', 'success');
+                    showMessage('production', '✅ تم التحميل بنجاح', 'success');
                 } else {
-                    showMessage('production', '⚠️ لا توجد بيانات', 'warning');
                     $('#empty-state-production').removeClass('hidden');
                 }
             } catch (error) {
-                console.error('خطأ:', error);
-                showMessage('production', '❌ فشل الاتصال', 'error');
                 $('#empty-state-production').removeClass('hidden');
             } finally {
                 appState.production.isLoading = false;
@@ -875,7 +782,6 @@
             if (appState.supply.isLoading) return;
             
             appState.supply.isLoading = true;
-            appState.supply.useSampleData = false;
             $('#loading-state-supply').removeClass('hidden');
             $('#supply-data').addClass('hidden');
             $('#empty-state-supply').addClass('hidden');
@@ -892,13 +798,11 @@
                         const data = await response.json();
                         if (data.status === 200 && data.data && data.data.length > 0) {
                             processSupplyData(data);
-                            showMessage('supply', '✅ تم تحميل بيانات التوريد بنجاح', 'success');
+                            showMessage('supply', '✅ تم التحميل بنجاح', 'success');
                             return;
                         }
                     }
-                } catch (e) {
-                    console.log('فشل الاتصال المباشر:', e);
-                }
+                } catch (e) {}
 
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const response = await fetch(proxyUrl + appState.supply.apiUrl, {
@@ -906,19 +810,16 @@
                     headers: { 'Content-Type': 'application/json' }
                 });
 
-                if (!response.ok) throw new Error(`خطأ: ${response.status}`);
+                if (!response.ok) throw new Error();
 
                 const data = await response.json();
                 if (data.status === 200 && data.data && data.data.length > 0) {
                     processSupplyData(data);
-                    showMessage('supply', '✅ تم تحميل بيانات التوريد بنجاح', 'success');
+                    showMessage('supply', '✅ تم التحميل بنجاح', 'success');
                 } else {
-                    showMessage('supply', '⚠️ لا توجد بيانات', 'warning');
                     $('#empty-state-supply').removeClass('hidden');
                 }
             } catch (error) {
-                console.error('خطأ:', error);
-                showMessage('supply', '❌ فشل الاتصال', 'error');
                 $('#empty-state-supply').removeClass('hidden');
             } finally {
                 appState.supply.isLoading = false;
@@ -928,8 +829,6 @@
         }
 
         function loadSampleProductionData() {
-            appState.production.useSampleData = true;
-            
             let sampleData = {
                 data: [
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
@@ -940,17 +839,24 @@
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
-                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false }
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# المقبلات' }, product: { name: 'حمص' }, package: '500', packageUnit: { name: 'g' }, qty: 10, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# المقبلات' }, product: { name: 'بابا غنوج' }, package: '500', packageUnit: { name: 'g' }, qty: 8, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المقبلات' }, product: { name: 'متبل' }, package: '500', packageUnit: { name: 'g' }, qty: 5, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# السلطات' }, product: { name: 'تبولة' }, package: '300', packageUnit: { name: 'g' }, qty: 15, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# السلطات' }, product: { name: 'فتوش' }, package: '300', packageUnit: { name: 'g' }, qty: 12, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# السلطات' }, product: { name: 'سلطة يونانية' }, package: '300', packageUnit: { name: 'g' }, qty: 9, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# المشروبات' }, product: { name: 'عصير ليمون' }, package: '250', packageUnit: { name: 'ml' }, qty: 20, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# المشروبات' }, product: { name: 'عصير برتقال' }, package: '250', packageUnit: { name: 'ml' }, qty: 18, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المشروبات' }, product: { name: 'عصير مانجو' }, package: '250', packageUnit: { name: 'ml' }, qty: 15, isSend: false }
                 ]
             };
             
             processProductionData(sampleData);
-            showMessage('production', '✅ بيانات تجريبية', 'success');
+            showMessage('production', '✅ بيانات تجريبية - 6 فئات', 'success');
         }
 
         function loadSampleSupplyData() {
-            appState.supply.useSampleData = true;
-            
             let sampleData = {
                 data: [
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
@@ -958,7 +864,10 @@
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 20, isSend: false },
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
                     { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
-                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false },
+                    { branch: { name: 'M شوران' }, mainProductOP: { name: '# ألبان' }, product: { name: 'جبنة بيضاء' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 20, isSend: false },
+                    { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# ألبان' }, product: { name: 'لبنة' }, package: '500', packageUnit: { name: 'g' }, qty: 15, isSend: false },
+                    { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# ألبان' }, product: { name: 'زبادي' }, package: '1', packageUnit: { name: 'كيلو' }, qty: 12, isSend: false }
                 ]
             };
             
@@ -978,8 +887,7 @@
                         packageUnit: item.packageUnit?.name || '',
                         qty: parseFloat(item.qty) || 0,
                         category: item.mainProductOP?.name || 'غير مصنف',
-                        branch: item.branch?.name || 'فرع',
-                        branchCode: item.branch?.name || ''
+                        branch: item.branch?.name || 'فرع'
                     });
                     branches.add(item.branch?.name || 'فرع');
                 }
@@ -1004,8 +912,7 @@
                         packageUnit: item.packageUnit?.name || '',
                         qty: parseFloat(item.qty) || 0,
                         category: item.mainProductOP?.name || 'غير مصنف',
-                        branch: item.branch?.name || 'فرع',
-                        branchCode: item.branch?.name || ''
+                        branch: item.branch?.name || 'فرع'
                     });
                     branches.add(item.branch?.name || 'فرع');
                 }
@@ -1057,9 +964,18 @@
             });
             
             let categoryList = Object.keys(categories);
-            let midIndex = Math.ceil(categoryList.length / 2);
-            let firstHalf = categoryList.slice(0, midIndex);
-            let secondHalf = categoryList.slice(midIndex);
+            
+            // توزيع الفئات على عمودين بالتساوي
+            let firstHalf = [];
+            let secondHalf = [];
+            
+            categoryList.forEach((cat, index) => {
+                if (index % 2 === 0) {
+                    firstHalf.push(cat);
+                } else {
+                    secondHalf.push(cat);
+                }
+            });
             
             let html = `
                 <div class="split-view">
@@ -1072,7 +988,7 @@
                     <div class="column">
                         <div class="column-header">القسم (2)</div>
                         <div class="column-content">
-                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('') : ''}
+                            ${secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
                         </div>
                     </div>
                 </div>
@@ -1171,6 +1087,32 @@
             let title = type === 'production' ? 'تقرير الإنتاج' : 'تقرير التوريد';
             let date = new Date().toLocaleDateString('ar-EG');
             
+            // تقسيم الفئات إلى مجموعتين للصفحتين
+            let halfSize = Math.ceil(categoryList.length / 2);
+            let page1Categories = categoryList.slice(0, halfSize);
+            let page2Categories = categoryList.slice(halfSize);
+            
+            // توزيع كل صفحة على عمودين
+            let page1FirstHalf = [];
+            let page1SecondHalf = [];
+            page1Categories.forEach((cat, index) => {
+                if (index % 2 === 0) {
+                    page1FirstHalf.push(cat);
+                } else {
+                    page1SecondHalf.push(cat);
+                }
+            });
+            
+            let page2FirstHalf = [];
+            let page2SecondHalf = [];
+            page2Categories.forEach((cat, index) => {
+                if (index % 2 === 0) {
+                    page2FirstHalf.push(cat);
+                } else {
+                    page2SecondHalf.push(cat);
+                }
+            });
+            
             let printContent = `
                 <html dir="ltr">
                 <head>
@@ -1180,51 +1122,77 @@
                         * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
                         body { background:white; margin:0; padding:0; direction:ltr; }
                         .print-page { page-break-after:always; margin:0; padding:0; }
-                        .split-view { display:flex; gap:1mm; margin:0; padding:0; page-break-after:avoid; }
+                        .split-view { display:flex; gap:3mm; margin:0; padding:0; page-break-after:avoid; }
                         .column { flex:1; margin:0; padding:0; page-break-inside:avoid; }
                         .column-content { margin:0; padding:0; page-break-inside:avoid; }
-                        .column-header { background:#2E5E3A !important; color:white !important; padding:1px 2px; text-align:center; font-size:11px; margin:0; font-weight:600; }
-                        .card { border:0.5px solid black !important; margin:0; padding:0; page-break-inside:avoid !important; border-top-width:0.5px; border-bottom-width:0; }
+                        .column-header { background:#2E5E3A !important; color:white !important; padding:2px 4px; text-align:center; font-size:12px; margin:0; font-weight:600; page-break-after:avoid; }
+                        .card { border:0.5px solid black !important; margin:0; padding:0; page-break-inside:avoid; border-top-width:0.5px; border-bottom-width:0; }
                         .card + .card { margin-top:-0.5px; border-top:0.5px solid black !important; }
                         .column-content .card:last-child { border-bottom:0.5px solid black !important; }
-                        .card-header { background:#d0d8d0 !important; padding:1px 2px; text-align:center; font-weight:600; font-size:10px; border-bottom:0.5px solid black !important; margin:0; }
-                        .production-table { width:100%; border-collapse:collapse; font-size:9px !important; margin:0; }
-                        .production-table th, .production-table td { border:0.5px solid black !important; padding:1px 1px !important; text-align:center; font-size:9px !important; }
+                        .card-header { background:#d0d8d0 !important; padding:2px 4px; text-align:center; font-weight:600; font-size:11px; border-bottom:0.5px solid black !important; margin:0; }
+                        .production-table { width:100%; border-collapse:collapse; font-size:10px !important; margin:0; }
+                        .production-table th, .production-table td { border:0.5px solid black !important; padding:2px 2px !important; text-align:center; font-size:10px !important; }
                         .production-table th:first-child, .production-table td:first-child { text-align:left; width:35%; }
-                        .production-table th { background:#e0e0e0 !important; font-weight:600 !important; padding:1px !important; }
-                        .product-name { font-size:9px !important; font-weight:500; }
-                        .product-package { font-size:7px !important; color:#333; }
+                        .production-table th { background:#e0e0e0 !important; font-weight:600 !important; padding:2px !important; }
+                        .product-name { font-size:10px !important; font-weight:500; }
+                        .product-package { font-size:8px !important; color:#333; }
                         .total-cell { background:#d0d0d0 !important; font-weight:600 !important; }
                         .column-content, .card, .card-body, .table-container, 
                         .production-table, tbody, tr, td, th {
-                            page-break-inside:avoid !important;
-                            margin:0 !important;
-                            padding:0 !important;
+                            page-break-inside: avoid !important;
+                            break-inside: avoid !important;
                         }
-                        @page { size:A4 landscape; margin:1mm; }
+                        @page { size:A4 landscape; margin:3mm; }
                     </style>
                 </head>
                 <body>
+            `;
+            
+            // الصفحة الأولى
+            printContent += `
+                <div class="print-page">
+                    <div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:600;">${title} - ${date} (الصفحة 1/2)</div>
+                    <div class="split-view">
+                        <div class="column">
+                            <div class="column-header">القسم (1)</div>
+                            <div class="column-content">
+                                ${page1FirstHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="column-header">القسم (2)</div>
+                            <div class="column-content">
+                                ${page1SecondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // الصفحة الثانية إذا يوجد فئات
+            if (page2Categories.length > 0) {
+                printContent += `
                     <div class="print-page">
-                        <div style="text-align:center; margin-bottom:1mm; font-size:11px; font-weight:600;">${title} - ${date}</div>
+                        <div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:600;">${title} - ${date} (الصفحة 2/2)</div>
                         <div class="split-view">
                             <div class="column">
                                 <div class="column-header">القسم (1)</div>
                                 <div class="column-content">
-                                    ${categoryList.slice(0, Math.ceil(categoryList.length/2)).map(cat => buildCompactTable(cat, categories[cat])).join('')}
+                                    ${page2FirstHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
                                 </div>
                             </div>
                             <div class="column">
                                 <div class="column-header">القسم (2)</div>
                                 <div class="column-content">
-                                    ${categoryList.slice(Math.ceil(categoryList.length/2)).map(cat => buildCompactTable(cat, categories[cat])).join('')}
+                                    ${page2SecondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('')}
                                 </div>
                             </div>
                         </div>
                     </div>
-                </body>
-                </html>
-            `;
+                `;
+            }
+            
+            printContent += `</body></html>`;
             
             let printWindow = window.open('', '_blank');
             printWindow.document.write(printContent);
