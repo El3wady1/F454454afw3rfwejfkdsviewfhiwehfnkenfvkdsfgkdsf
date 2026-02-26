@@ -192,12 +192,12 @@
         .column-header {
             background-color: #2E5E3A;
             color: white;
-            padding: 6px 10px;
+            padding: 4px 8px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
-            border-radius: 5px 5px 0 0;
-            margin-bottom: 5px;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 2px;
         }
 
         .column-content {
@@ -206,12 +206,13 @@
             flex: 1;
         }
 
-        /* ===== أنماط الجداول - مدمجة بالكامل بدون أي مسافات ===== */
+        /* ===== أنماط الجداول - بدون أي padding أو margin ===== */
         .card {
             background-color: white;
             border: 1px solid #000;
             border-radius: 0;
             margin: 0;
+            padding: 0;
             border-top-width: 1px;
             border-bottom-width: 0;
         }
@@ -232,7 +233,7 @@
             border-top: 1px solid #000;
         }
         
-        /* إزالة أي مسافات داخلية قد تسبب فراغات */
+        /* إزالة أي padding أو margin داخلية */
         .card-header, .card-body {
             margin: 0;
             padding: 0;
@@ -240,9 +241,9 @@
 
         .card-header {
             background-color: #d0d8d0;
-            padding: 4px 8px;
+            padding: 2px 4px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 12px;
             color: #000;
             text-align: center;
             border-bottom: 1px solid #000;
@@ -260,13 +261,13 @@
             padding: 0;
         }
 
-        /* جدول بنفس تنسيق الصورة */
+        /* جدول بدون أي مسافات داخلية */
         .production-table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: auto;
-            font-size: 13px;
-            line-height: 1.2;
+            table-layout: fixed;
+            font-size: 11px;
+            line-height: 1.1;
             margin: 0;
             padding: 0;
         }
@@ -274,50 +275,51 @@
         .production-table th,
         .production-table td {
             border: 1px solid #000;
-            padding: 4px 6px;
+            padding: 1px 2px;
             margin: 0;
             text-align: center;
             vertical-align: middle;
-            font-size: 13px;
+            font-size: 11px;
+            font-weight: 400;
         }
 
         .production-table th:first-child,
         .production-table td:first-child {
             text-align: left;
-            padding: 4px 8px;
-            min-width: 150px;
-            max-width: 200px;
+            padding: 1px 2px;
+            width: 35%;
             white-space: normal;
             word-wrap: break-word;
         }
 
         .production-table th {
             background-color: #e0e0e0;
-            font-weight: 700;
+            font-weight: 600;
             color: #000;
             white-space: nowrap;
+            padding: 2px 2px;
         }
 
         .total-cell {
             background-color: #d0d0d0;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .product-name {
-            font-weight: 600;
-            line-height: 1.3;
+            font-weight: 500;
+            line-height: 1.1;
             white-space: normal;
             word-wrap: break-word;
-            font-size: 13px;
+            font-size: 11px;
         }
 
         .product-package {
-            font-size: 11px;
+            font-size: 9px;
             color: #555;
-            line-height: 1.2;
+            line-height: 1;
         }
 
-        /* ===== أنماط الطباعة - بدون أي فراغات وخطوط واضحة ===== */
+        /* ===== أنماط الطباعة - بدون أي فراغات ===== */
         @media print {
             .no-print {
                 display: none !important;
@@ -351,7 +353,6 @@
                 margin: 0;
                 padding: 0;
                 height: auto;
-                min-height: 0;
             }
             
             .column {
@@ -362,15 +363,15 @@
             }
             
             .column-content {
-                page-break-inside: auto;
+                page-break-inside: avoid;
                 margin: 0;
                 padding: 0;
             }
             
             .column-header {
-                font-size: 14px;
-                padding: 4px;
-                margin-bottom: 0;
+                font-size: 12px;
+                padding: 2px 4px;
+                margin: 0;
                 page-break-after: avoid;
                 background-color: #2E5E3A !important;
                 color: white !important;
@@ -380,71 +381,75 @@
             }
             
             .card {
-                border: 1px solid black !important;
+                border: 0.5px solid black !important;
                 margin: 0;
+                padding: 0;
                 border-radius: 0;
-                page-break-inside: avoid;
-                border-top-width: 1px;
+                page-break-inside: avoid !important;
+                border-top-width: 0.5px;
                 border-bottom-width: 0;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                break-inside: avoid !important;
             }
             
             .card + .card {
-                margin-top: -1px;
-                border-top: 1px solid black !important;
+                margin-top: -0.5px;
+                border-top: 0.5px solid black !important;
             }
             
             .column-content .card:last-child {
-                border-bottom: 1px solid black !important;
+                border-bottom: 0.5px solid black !important;
             }
             
             .card-header {
-                padding: 4px 6px;
-                font-size: 14px;
-                border-bottom: 1px solid black !important;
+                padding: 1px 2px;
+                font-size: 11px;
+                border-bottom: 0.5px solid black !important;
                 background-color: #d0d8d0 !important;
                 color: black !important;
-                font-weight: 700;
+                font-weight: 600;
+                margin: 0;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
             
             .production-table {
-                font-size: 13px !important;
+                font-size: 10px !important;
                 border-collapse: collapse;
+                margin: 0;
+                padding: 0;
             }
             
             .production-table th,
             .production-table td {
-                border: 1px solid black !important;
-                padding: 4px 6px;
-                font-size: 13px !important;
-                font-weight: 500;
+                border: 0.5px solid black !important;
+                padding: 1px 1px !important;
+                font-size: 10px !important;
+                font-weight: 400;
+                margin: 0;
             }
             
             .production-table th {
                 background-color: #e0e0e0 !important;
-                font-weight: 700 !important;
+                font-weight: 600 !important;
                 color: black !important;
+                padding: 1px 1px !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
             
             .product-name {
-                font-size: 13px !important;
-                font-weight: 600 !important;
+                font-size: 10px !important;
+                font-weight: 500 !important;
             }
             
             .product-package {
-                font-size: 11px !important;
+                font-size: 8px !important;
                 color: #333 !important;
-                font-weight: 400;
             }
             
             .total-cell {
                 background-color: #d0d0d0 !important;
-                font-weight: 700 !important;
+                font-weight: 600 !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -455,22 +460,27 @@
                 padding: 0;
             }
             
-            /* إجبار الجداول على عدم التقسيم بين الصفحات */
-            .column-content, .card, .card-body, .table-container, .production-table, tbody, tr, td, th {
+            /* منع أي تقسيم للجداول */
+            .column-content, .card, .card-body, .table-container, 
+            .production-table, tbody, tr, td, th {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             
-            /* منع أي فراغات أو فواصل */
+            /* إزالة أي مسافات */
             * {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
                 color-adjust: exact;
+                margin: 0;
+                padding: 0;
             }
             
             @page {
                 size: A4 landscape;
-                margin: 3mm;
+                margin: 2mm;
             }
         }
 
@@ -556,8 +566,8 @@
 
         /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
         
         ::-webkit-scrollbar-track {
@@ -566,7 +576,7 @@
         
         ::-webkit-scrollbar-thumb {
             background: #8B9E7E;
-            border-radius: 4px;
+            border-radius: 3px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
@@ -588,7 +598,7 @@
         
         .table-container table {
             line-height: normal;
-            font-size: 13px;
+            font-size: 11px;
         }
     </style>
 </head>
@@ -747,14 +757,12 @@
         // دالة لترتيب الفروع حسب الترتيب المحدد
         function sortBranches(branches) {
             return branches.sort((a, b) => {
-                // استخراج الحرف الأول من اسم الفرع (M, S, A)
                 let codeA = a.charAt(0);
                 let codeB = b.charAt(0);
                 
                 let indexA = BRANCH_ORDER.indexOf(codeA);
                 let indexB = BRANCH_ORDER.indexOf(codeB);
                 
-                // إذا كان الفرع غير موجود في الترتيب المحدد، يظهر في النهاية
                 if (indexA === -1) indexA = BRANCH_ORDER.length;
                 if (indexB === -1) indexB = BRANCH_ORDER.length;
                 
@@ -768,7 +776,6 @@
         });
 
         function setupEventListeners() {
-            // تبديل التبويبات
             $('.nav-tab').click(function() {
                 let tab = $(this).data('tab');
                 $('.nav-tab').removeClass('active');
@@ -778,19 +785,16 @@
                 appState.currentTab = tab;
             });
 
-            // فلتر الفروع للإنتاج
             $('#branch-filter-production').change(function() {
                 appState.production.selectedBranch = $(this).val() || '';
                 filterItems('production');
             });
 
-            // فلتر الفروع للتوريد
             $('#branch-filter-supply').change(function() {
                 appState.supply.selectedBranch = $(this).val() || '';
                 filterItems('supply');
             });
 
-            // زر التحديث
             $('#refresh-btn').click(function() {
                 if (appState.currentTab === 'production') {
                     loadProductionData();
@@ -799,7 +803,6 @@
                 }
             });
 
-            // أزرار البيانات التجريبية
             $('#load-sample-production, #try-sample-production').click(function() {
                 loadSampleProductionData();
             });
@@ -808,12 +811,10 @@
                 loadSampleSupplyData();
             });
 
-            // أزرار الطباعة
             $('#print-all-production').click(() => printAllTables('production'));
             $('#print-all-supply').click(() => printAllTables('supply'));
         }
 
-        // تحميل بيانات الإنتاج من API
         async function loadProductionData() {
             if (appState.production.isLoading) return;
             
@@ -825,21 +826,14 @@
             $('#refresh-btn').prop('disabled', true);
 
             try {
-                console.log('جاري تحميل بيانات الإنتاج من:', appState.production.apiUrl);
-                
-                // محاولة الاتصال المباشر أولاً
                 try {
                     const response = await fetch(appState.production.apiUrl, {
                         method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
+                        headers: { 'Content-Type': 'application/json' }
                     });
 
                     if (response.ok) {
                         const data = await response.json();
-                        console.log('بيانات الإنتاج المستلمة (مباشر):', data);
-                        
                         if (data.status === 200 && data.data && data.data.length > 0) {
                             processProductionData(data);
                             showMessage('production', '✅ تم تحميل بيانات الإنتاج بنجاح', 'success');
@@ -847,35 +841,28 @@
                         }
                     }
                 } catch (e) {
-                    console.log('فشل الاتصال المباشر، جرب proxy:', e);
+                    console.log('فشل الاتصال المباشر:', e);
                 }
 
-                // استخدام proxy
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const response = await fetch(proxyUrl + appState.production.apiUrl, {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
 
-                if (!response.ok) {
-                    throw new Error(`خطأ في الشبكة: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`خطأ: ${response.status}`);
 
                 const data = await response.json();
-                console.log('بيانات الإنتاج المستلمة (proxy):', data);
-
                 if (data.status === 200 && data.data && data.data.length > 0) {
                     processProductionData(data);
                     showMessage('production', '✅ تم تحميل بيانات الإنتاج بنجاح', 'success');
                 } else {
-                    showMessage('production', '⚠️ لا توجد بيانات في API، استخدم البيانات التجريبية', 'warning');
+                    showMessage('production', '⚠️ لا توجد بيانات', 'warning');
                     $('#empty-state-production').removeClass('hidden');
                 }
             } catch (error) {
-                console.error('خطأ في تحميل بيانات الإنتاج:', error);
-                showMessage('production', '❌ فشل الاتصال بالخادم: ' + error.message, 'error');
+                console.error('خطأ:', error);
+                showMessage('production', '❌ فشل الاتصال', 'error');
                 $('#empty-state-production').removeClass('hidden');
             } finally {
                 appState.production.isLoading = false;
@@ -884,7 +871,6 @@
             }
         }
 
-        // تحميل بيانات التوريد من API
         async function loadSupplyData() {
             if (appState.supply.isLoading) return;
             
@@ -896,21 +882,14 @@
             $('#refresh-btn').prop('disabled', true);
 
             try {
-                console.log('جاري تحميل بيانات التوريد من:', appState.supply.apiUrl);
-                
-                // محاولة الاتصال المباشر أولاً
                 try {
                     const response = await fetch(appState.supply.apiUrl, {
                         method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
+                        headers: { 'Content-Type': 'application/json' }
                     });
 
                     if (response.ok) {
                         const data = await response.json();
-                        console.log('بيانات التوريد المستلمة (مباشر):', data);
-                        
                         if (data.status === 200 && data.data && data.data.length > 0) {
                             processSupplyData(data);
                             showMessage('supply', '✅ تم تحميل بيانات التوريد بنجاح', 'success');
@@ -918,35 +897,28 @@
                         }
                     }
                 } catch (e) {
-                    console.log('فشل الاتصال المباشر، جرب proxy:', e);
+                    console.log('فشل الاتصال المباشر:', e);
                 }
 
-                // استخدام proxy
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const response = await fetch(proxyUrl + appState.supply.apiUrl, {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
 
-                if (!response.ok) {
-                    throw new Error(`خطأ في الشبكة: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`خطأ: ${response.status}`);
 
                 const data = await response.json();
-                console.log('بيانات التوريد المستلمة (proxy):', data);
-
                 if (data.status === 200 && data.data && data.data.length > 0) {
                     processSupplyData(data);
                     showMessage('supply', '✅ تم تحميل بيانات التوريد بنجاح', 'success');
                 } else {
-                    showMessage('supply', '⚠️ لا توجد بيانات في API، استخدم البيانات التجريبية', 'warning');
+                    showMessage('supply', '⚠️ لا توجد بيانات', 'warning');
                     $('#empty-state-supply').removeClass('hidden');
                 }
             } catch (error) {
-                console.error('خطأ في تحميل بيانات التوريد:', error);
-                showMessage('supply', '❌ فشل الاتصال بالخادم: ' + error.message, 'error');
+                console.error('خطأ:', error);
+                showMessage('supply', '❌ فشل الاتصال', 'error');
                 $('#empty-state-supply').removeClass('hidden');
             } finally {
                 appState.supply.isLoading = false;
@@ -955,22 +927,17 @@
             }
         }
 
-        // تحميل بيانات تجريبية للإنتاج مع أسماء الفروع: شوران، سلطنة، عزيزية
         function loadSampleProductionData() {
             appState.production.useSampleData = true;
             
             let sampleData = {
                 data: [
-                    // المقرمشات سنوي
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 3, isSend: false },
                     { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 2, isSend: false },
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'نوسف غانم' }, package: '1500', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
                     { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 2, isSend: false },
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# المقرمشات سنوي' }, product: { name: 'صابر غانم' }, package: '3000', packageUnit: { name: 'g' }, qty: 1, isSend: false },
-                    
-                    // الصوصات شامية
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'إيطالي سلف' }, package: '700', packageUnit: { name: 'g' }, qty: 7, isSend: false },
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'ديس رمان' }, package: '800', packageUnit: { name: 'g' }, qty: 14, isSend: false },
                     { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# الصوصات شامية' }, product: { name: 'راش قزعة' }, package: '650', packageUnit: { name: 'g' }, qty: 7, isSend: false }
@@ -978,10 +945,9 @@
             };
             
             processProductionData(sampleData);
-            showMessage('production', '✅ تم تحميل بيانات تجريبية بترتيب الفروع: شوران، سلطنة، عزيزية', 'success');
+            showMessage('production', '✅ بيانات تجريبية', 'success');
         }
 
-        // تحميل بيانات تجريبية للتوريد مع أسماء الفروع: شوران، سلطنة، عزيزية
         function loadSampleSupplyData() {
             appState.supply.useSampleData = true;
             
@@ -990,7 +956,6 @@
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 50, isSend: false },
                     { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# خضروات' }, product: { name: 'طماطم' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 20, isSend: false },
-                    
                     { branch: { name: 'M شوران' }, mainProductOP: { name: '# خضروات' }, product: { name: 'خيار' }, package: '10', packageUnit: { name: 'كيلو' }, qty: 40, isSend: false },
                     { branch: { name: 'S سلطانة' }, mainProductOP: { name: '# فواكه' }, product: { name: 'تفاح' }, package: '5', packageUnit: { name: 'كيلو' }, qty: 30, isSend: false },
                     { branch: { name: 'A عزيزية' }, mainProductOP: { name: '# فواكه' }, product: { name: 'موز' }, package: '3', packageUnit: { name: 'كيلو' }, qty: 25, isSend: false }
@@ -998,99 +963,70 @@
             };
             
             processSupplyData(sampleData);
-            showMessage('supply', '✅ تم تحميل بيانات تجريبية بترتيب الفروع: شوران، سلطنة، عزيزية', 'success');
+            showMessage('supply', '✅ بيانات تجريبية', 'success');
         }
 
-        // معالجة بيانات الإنتاج
         function processProductionData(data) {
             let items = [];
             let branches = new Set();
             
             (data.data || []).forEach(item => {
                 if (!item.isSend) {
-                    let productName = item.product?.name || 'منتج بدون اسم';
-                    let packageInfo = item.package || '';
-                    let packageUnit = item.packageUnit?.name || '';
-                    let categoryName = item.mainProductOP?.name || 'غير مصنف';
-                    let branchName = item.branch?.name || 'فرع غير معروف';
-                    let quantity = parseFloat(item.qty) || 0;
-                    
                     items.push({
-                        name: productName,
-                        package: packageInfo,
-                        packageUnit: packageUnit,
-                        qty: quantity,
-                        category: categoryName,
-                        branch: branchName,
+                        name: item.product?.name || 'منتج',
+                        package: item.package || '',
+                        packageUnit: item.packageUnit?.name || '',
+                        qty: parseFloat(item.qty) || 0,
+                        category: item.mainProductOP?.name || 'غير مصنف',
+                        branch: item.branch?.name || 'فرع',
                         branchCode: item.branch?.name || ''
                     });
-                    
-                    branches.add(branchName);
+                    branches.add(item.branch?.name || 'فرع');
                 }
             });
             
             appState.production.items = items;
-            
-            // ترتيب الفروع حسب الترتيب المطلوب M, S, A
             appState.production.allBranches = sortBranches(Array.from(branches));
-            
             updateBranchFilter('production');
             filterItems('production');
-            
             $('#empty-state-production').addClass('hidden');
         }
 
-        // معالجة بيانات التوريد
         function processSupplyData(data) {
             let items = [];
             let branches = new Set();
             
             (data.data || []).forEach(item => {
                 if (!item.isSend) {
-                    let productName = item.product?.name || 'منتج بدون اسم';
-                    let packageInfo = item.package || '';
-                    let packageUnit = item.packageUnit?.name || '';
-                    let categoryName = item.mainProductOP?.name || 'غير مصنف';
-                    let branchName = item.branch?.name || 'فرع غير معروف';
-                    let quantity = parseFloat(item.qty) || 0;
-                    
                     items.push({
-                        name: productName,
-                        package: packageInfo,
-                        packageUnit: packageUnit,
-                        qty: quantity,
-                        category: categoryName,
-                        branch: branchName,
+                        name: item.product?.name || 'منتج',
+                        package: item.package || '',
+                        packageUnit: item.packageUnit?.name || '',
+                        qty: parseFloat(item.qty) || 0,
+                        category: item.mainProductOP?.name || 'غير مصنف',
+                        branch: item.branch?.name || 'فرع',
                         branchCode: item.branch?.name || ''
                     });
-                    
-                    branches.add(branchName);
+                    branches.add(item.branch?.name || 'فرع');
                 }
             });
             
             appState.supply.items = items;
-            
-            // ترتيب الفروع حسب الترتيب المطلوب M, S, A
             appState.supply.allBranches = sortBranches(Array.from(branches));
-            
             updateBranchFilter('supply');
             filterItems('supply');
-            
             $('#empty-state-supply').addClass('hidden');
         }
 
-        // تحديث فلتر الفروع
         function updateBranchFilter(type) {
             let select = $(`#branch-filter-${type}`);
             select.empty().append('<option value="">كل الفروع</option>');
             appState[type].allBranches.forEach(b => {
-                // عرض الاسم العربي إذا كان متوفراً
                 let displayName = BRANCH_NAMES[b.charAt(0)] || b;
                 select.append(`<option value="${b}">${displayName}</option>`);
             });
         }
 
-        // تصفية العناصر
         function filterItems(type) {
             let state = appState[type];
             if (state.selectedBranch) {
@@ -1101,7 +1037,6 @@
             renderData(type);
         }
 
-        // عرض البيانات في عمودين - مع جداول ملتصقة تماماً وترتيب الفروع M, S, A
         function renderData(type) {
             let container = type === 'production' ? $('#production-data') : $('#supply-data');
             let state = appState[type];
@@ -1115,7 +1050,6 @@
             $(`#empty-state-${type}`).addClass('hidden');
             container.removeClass('hidden');
             
-            // تنظيم حسب الفئة
             let categories = {};
             state.filteredItems.forEach(item => {
                 if (!categories[item.category]) categories[item.category] = [];
@@ -1123,13 +1057,10 @@
             });
             
             let categoryList = Object.keys(categories);
-            
-            // تقسيم الفئات إلى نصفين (عمودين)
             let midIndex = Math.ceil(categoryList.length / 2);
             let firstHalf = categoryList.slice(0, midIndex);
             let secondHalf = categoryList.slice(midIndex);
             
-            // بناء هيكل الصفحة المقسمة
             let html = `
                 <div class="split-view">
                     <div class="column">
@@ -1141,7 +1072,7 @@
                     <div class="column">
                         <div class="column-header">القسم (2)</div>
                         <div class="column-content">
-                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('') : '<div style="text-align:center; color:#888; padding:20px;">لا توجد أقسام إضافية</div>'}
+                            ${secondHalf.length ? secondHalf.map(cat => buildCompactTable(cat, categories[cat])).join('') : ''}
                         </div>
                     </div>
                 </div>
@@ -1150,15 +1081,10 @@
             container.html(html);
         }
 
-        // بناء جدول مدمج مع عرض الفروع بترتيب M, S, A (شوران، سلطنة، عزيزية)
         function buildCompactTable(category, items) {
-            // الحصول على جميع الفروع الموجودة في العناصر
             let branchesSet = new Set(items.map(item => item.branch));
-            
-            // ترتيب الفروع حسب الترتيب المحدد M, S, A
             let allBranchesInItems = sortBranches(Array.from(branchesSet));
             
-            // تجميع المنتجات
             let products = {};
             items.forEach(item => {
                 let key = item.name + '-' + item.package + '-' + item.packageUnit;
@@ -1169,8 +1095,6 @@
                         packageUnit: item.packageUnit,
                         branches: {}
                     };
-                    
-                    // تهيئة جميع الفروع بالقيمة 0
                     allBranchesInItems.forEach(branch => {
                         products[key].branches[branch] = 0;
                     });
@@ -1180,20 +1104,18 @@
             
             let productList = Object.values(products).sort((a, b) => a.name.localeCompare(b.name));
             
-            // بناء رؤوس الأعمدة للفروع (مرتبة حسب M, S, A) مع عرض الأسماء العربية
             let branchHeaders = '';
             allBranchesInItems.forEach(branch => {
                 let displayName = BRANCH_NAMES[branch.charAt(0)] || branch;
                 branchHeaders += `<th>${displayName}</th>`;
             });
             
-            // بناء الجدول
-            let table = `
+            return `
                 <div class="card">
                     <div class="card-header">${category}</div>
                     <div class="card-body">
                         <div class="table-container">
-                            <table class="production-table" cellspacing="0" cellpadding="0">
+                            <table class="production-table">
                                 <thead>
                                     <tr>
                                         <th>المنتج</th>
@@ -1203,7 +1125,6 @@
                                 </thead>
                                 <tbody>
                                     ${productList.map(p => {
-                                        // حساب الإجمالي
                                         let total = 0;
                                         let branchCells = '';
                                         
@@ -1230,11 +1151,8 @@
                     </div>
                 </div>
             `;
-            
-            return table;
         }
 
-        // طباعة جميع الجداول - بدون فراغات وخطوط واضحة
         function printAllTables(type) {
             let state = appState[type];
             
@@ -1243,7 +1161,6 @@
                 return;
             }
             
-            // تنظيم حسب الفئة
             let categories = {};
             state.filteredItems.forEach(item => {
                 if (!categories[item.category]) categories[item.category] = [];
@@ -1251,7 +1168,6 @@
             });
             
             let categoryList = Object.keys(categories);
-            
             let title = type === 'production' ? 'تقرير الإنتاج' : 'تقرير التوريد';
             let date = new Date().toLocaleDateString('ar-EG');
             
@@ -1261,198 +1177,68 @@
                     <meta charset="UTF-8">
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
                     <style>
-                        * { 
-                            margin:0; 
-                            padding:0; 
-                            box-sizing:border-box; 
-                            font-family:Cairo; 
-                            -webkit-print-color-adjust: exact;
-                            print-color-adjust: exact;
-                            color-adjust: exact;
-                        }
-                        body { 
-                            background:white; 
-                            margin:0; 
-                            padding:0; 
-                            direction:ltr; 
-                        }
-                        .print-page { 
-                            page-break-after: always; 
-                            margin:0; 
-                            padding:0; 
-                        }
-                        .split-view { 
-                            display:flex; 
-                            gap:2mm; 
-                            margin:0; 
-                            padding:0;
-                            page-break-after: avoid;
-                            height: auto;
-                        }
-                        .column { 
-                            flex:1; 
-                            margin:0; 
-                            padding:0;
-                            page-break-inside: avoid;
-                        }
-                        .column-content { 
-                            margin:0; 
-                            padding:0;
-                            page-break-inside: avoid;
-                        }
-                        .column-header { 
-                            background:#2E5E3A !important; 
-                            color:white !important; 
-                            padding:4px; 
-                            text-align:center; 
-                            font-size:14px; 
-                            margin:0; 
-                            border-radius:0; 
-                            page-break-after:avoid; 
-                            font-weight:700;
-                            -webkit-print-color-adjust: exact; 
-                            print-color-adjust: exact; 
-                        }
-                        .card { 
-                            border:1px solid black !important; 
-                            margin:0; 
-                            border-radius:0; 
-                            page-break-inside: avoid !important;
-                            border-top-width:1px; 
-                            border-bottom-width:0;
-                            break-inside: avoid !important;
-                        }
-                        .card + .card { 
-                            margin-top:-1px; 
-                            border-top:1px solid black !important; 
-                        }
-                        .column-content .card:last-child { 
-                            border-bottom:1px solid black !important; 
-                        }
-                        .card-header { 
-                            background:#d0d8d0 !important; 
-                            padding:4px 6px; 
-                            text-align:center; 
-                            font-weight:700; 
-                            font-size:14px; 
-                            border-bottom:1px solid black !important; 
-                            margin:0; 
-                            -webkit-print-color-adjust: exact; 
-                            print-color-adjust: exact; 
-                        }
-                        .production-table { 
-                            width:100%; 
-                            border-collapse:collapse; 
-                            font-size:13px !important; 
-                            margin:0; 
-                        }
-                        .production-table th, 
-                        .production-table td { 
-                            border:1px solid black !important; 
-                            padding:4px 6px; 
-                            text-align:center; 
-                            margin:0; 
-                            font-size:13px !important; 
-                        }
-                        .production-table th:first-child, 
-                        .production-table td:first-child { 
-                            text-align:left; 
-                            min-width:100px; 
-                        }
-                        .production-table th { 
-                            background:#e0e0e0 !important; 
-                            font-weight:700 !important; 
-                            color:black !important; 
-                            -webkit-print-color-adjust: exact; 
-                            print-color-adjust: exact; 
-                        }
-                        .product-name { 
-                            font-weight:600; 
-                            font-size:13px !important; 
-                        }
-                        .product-package { 
-                            font-size:11px !important; 
-                            color:#333 !important; 
-                        }
-                        .total-cell { 
-                            background:#d0d0d0 !important; 
-                            font-weight:700 !important; 
-                            -webkit-print-color-adjust: exact; 
-                            print-color-adjust: exact; 
-                        }
-                        /* منع أي تقسيم للجداول بين الصفحات */
+                        * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+                        body { background:white; margin:0; padding:0; direction:ltr; }
+                        .print-page { page-break-after:always; margin:0; padding:0; }
+                        .split-view { display:flex; gap:1mm; margin:0; padding:0; page-break-after:avoid; }
+                        .column { flex:1; margin:0; padding:0; page-break-inside:avoid; }
+                        .column-content { margin:0; padding:0; page-break-inside:avoid; }
+                        .column-header { background:#2E5E3A !important; color:white !important; padding:1px 2px; text-align:center; font-size:11px; margin:0; font-weight:600; }
+                        .card { border:0.5px solid black !important; margin:0; padding:0; page-break-inside:avoid !important; border-top-width:0.5px; border-bottom-width:0; }
+                        .card + .card { margin-top:-0.5px; border-top:0.5px solid black !important; }
+                        .column-content .card:last-child { border-bottom:0.5px solid black !important; }
+                        .card-header { background:#d0d8d0 !important; padding:1px 2px; text-align:center; font-weight:600; font-size:10px; border-bottom:0.5px solid black !important; margin:0; }
+                        .production-table { width:100%; border-collapse:collapse; font-size:9px !important; margin:0; }
+                        .production-table th, .production-table td { border:0.5px solid black !important; padding:1px 1px !important; text-align:center; font-size:9px !important; }
+                        .production-table th:first-child, .production-table td:first-child { text-align:left; width:35%; }
+                        .production-table th { background:#e0e0e0 !important; font-weight:600 !important; padding:1px !important; }
+                        .product-name { font-size:9px !important; font-weight:500; }
+                        .product-package { font-size:7px !important; color:#333; }
+                        .total-cell { background:#d0d0d0 !important; font-weight:600 !important; }
                         .column-content, .card, .card-body, .table-container, 
                         .production-table, tbody, tr, td, th {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
+                            page-break-inside:avoid !important;
+                            margin:0 !important;
+                            padding:0 !important;
                         }
-                        @page { 
-                            size:A4 landscape; 
-                            margin:3mm; 
-                        }
+                        @page { size:A4 landscape; margin:1mm; }
                     </style>
                 </head>
                 <body>
+                    <div class="print-page">
+                        <div style="text-align:center; margin-bottom:1mm; font-size:11px; font-weight:600;">${title} - ${date}</div>
+                        <div class="split-view">
+                            <div class="column">
+                                <div class="column-header">القسم (1)</div>
+                                <div class="column-content">
+                                    ${categoryList.slice(0, Math.ceil(categoryList.length/2)).map(cat => buildCompactTable(cat, categories[cat])).join('')}
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="column-header">القسم (2)</div>
+                                <div class="column-content">
+                                    ${categoryList.slice(Math.ceil(categoryList.length/2)).map(cat => buildCompactTable(cat, categories[cat])).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>
             `;
-            
-            // عرض كل الفئات في صفحة واحدة
-            printContent += '<div class="print-page">';
-            printContent += `<div style="text-align:center; margin-bottom:2mm; font-size:14px; font-weight:700;">${title} - ${date}</div>`;
-            
-            // تقسيم الفئات إلى مجموعتين للعرض في عمودين
-            let midIndex = Math.ceil(categoryList.length / 2);
-            let firstHalf = categoryList.slice(0, midIndex);
-            let secondHalf = categoryList.slice(midIndex);
-            
-            printContent += '<div class="split-view">';
-            
-            // العمود الأول
-            printContent += '<div class="column">';
-            printContent += '<div class="column-header">القسم (1)</div>';
-            printContent += '<div class="column-content">';
-            firstHalf.forEach(cat => {
-                printContent += buildCompactTable(cat, categories[cat]);
-            });
-            printContent += '</div></div>';
-            
-            // العمود الثاني
-            printContent += '<div class="column">';
-            printContent += '<div class="column-header">القسم (2)</div>';
-            printContent += '<div class="column-content">';
-            if (secondHalf.length) {
-                secondHalf.forEach(cat => {
-                    printContent += buildCompactTable(cat, categories[cat]);
-                });
-            }
-            printContent += '</div></div>';
-            
-            printContent += '</div>'; // split-view
-            printContent += '</div>'; // print-page
-            
-            printContent += '</body></html>';
             
             let printWindow = window.open('', '_blank');
             printWindow.document.write(printContent);
             printWindow.document.close();
             printWindow.focus();
-            
-            // تأخير بسيط للتأكد من تحميل الخطوط
-            setTimeout(() => {
-                printWindow.print();
-            }, 250);
+            setTimeout(() => printWindow.print(), 200);
         }
 
-        // عرض الرسائل
-        function showMessage(type, message, messageType = 'info') {
+        function showMessage(type, message, messageType) {
             let container = $(`#message-container-${type}`);
             let className = messageType === 'success' ? 'success-message' : 
                            messageType === 'error' ? 'error-message' : 'warning-message';
-            
             container.html(`<div class="message ${className}">${message}</div>`);
-            
-            setTimeout(() => {
-                container.empty();
-            }, 4000);
+            setTimeout(() => container.empty(), 3000);
         }
     </script>
 </body>
