@@ -317,7 +317,7 @@
             line-height: 1.2;
         }
 
-        /* ===== أنماط الطباعة - بدون أي مسافات بين الجداول ===== */
+        /* ===== أنماط الطباعة - محسنة للوضوح على الهاتف ===== */
         @media print {
             .no-print {
                 display: none !important;
@@ -328,6 +328,9 @@
                 margin: 0;
                 padding: 0;
                 direction: ltr;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
             }
             
             .main-content {
@@ -356,53 +359,81 @@
             }
             
             .column-header {
-                font-size: 11px;
-                padding: 2px;
+                font-size: 12px;
+                padding: 3px;
                 margin-bottom: 0;
                 page-break-after: avoid;
+                background-color: #2E5E3A !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             
             .card {
-                border: 0.5px solid black;
+                border: 1px solid black !important;
                 margin: 0;
                 border-radius: 0;
                 page-break-inside: avoid;
-                border-top-width: 0.5px;
+                border-top-width: 1px;
                 border-bottom-width: 0;
             }
             
             .card + .card {
-                margin-top: -0.5px;
-                border-top: 0.5px solid black;
+                margin-top: -1px;
+                border-top: 1px solid black !important;
             }
             
             .column-content .card:last-child {
-                border-bottom: 0.5px solid black;
+                border-bottom: 1px solid black !important;
             }
             
             .card-header {
-                padding: 2px 4px;
-                font-size: 11px;
-                border-bottom: 0.5px solid black;
+                padding: 3px 4px;
+                font-size: 12px;
+                border-bottom: 1px solid black !important;
+                background-color: #d0d8d0 !important;
+                color: black !important;
+                font-weight: bold;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             
             .production-table {
-                font-size: 9px;
+                font-size: 11px !important;
+                border-collapse: collapse;
             }
             
             .production-table th,
             .production-table td {
-                border: 0.3px solid black;
-                padding: 1px 2px;
-                font-size: 9px;
+                border: 1px solid black !important;
+                padding: 3px 4px;
+                font-size: 11px !important;
+                font-weight: normal;
+            }
+            
+            .production-table th {
+                background-color: #e0e0e0 !important;
+                font-weight: bold !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             
             .product-name {
-                font-size: 9px;
+                font-size: 11px !important;
+                font-weight: 600 !important;
             }
             
             .product-package {
-                font-size: 7px;
+                font-size: 9px !important;
+                color: #333 !important;
+            }
+            
+            .total-cell {
+                background-color: #d0d0d0 !important;
+                font-weight: bold !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             
             .print-page {
@@ -416,9 +447,16 @@
                 margin: 0 !important;
             }
             
+            /* تحسين وضوح الخطوط للطباعة */
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
             @page {
                 size: A4 landscape;
-                margin: 3mm;
+                margin: 5mm;
             }
         }
 
@@ -1210,23 +1248,24 @@
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
                     <style>
                         * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; }
-                        body { background:white; margin:0; padding:0; direction:ltr; }
+                        body { background:white; margin:0; padding:0; direction:ltr; -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact; }
                         .print-page { page-break-after: always; margin:0; padding:0; }
                         .split-view { display:flex; gap:3mm; margin:0; padding:0; }
                         .column { flex:1; margin:0; padding:0; }
-                        .column-header { background:#2E5E3A; color:white; padding:2px; text-align:center; font-size:11px; margin:0; border-radius:2px; page-break-after:avoid; }
+                        .column-header { background:#2E5E3A !important; color:white !important; padding:3px; text-align:center; font-size:12px; margin:0; border-radius:2px; page-break-after:avoid; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
                         .column-content { margin:0; padding:0; }
-                        .card { border:0.5px solid black; margin:0; border-radius:0; page-break-inside:avoid; border-top-width:0.5px; border-bottom-width:0; }
-                        .card + .card { margin-top:-0.5px; border-top:0.5px solid black; }
-                        .column-content .card:last-child { border-bottom:0.5px solid black; }
-                        .card-header { background:#d0d8d0; padding:2px 4px; text-align:center; font-weight:bold; font-size:11px; border-bottom:0.5px solid black; margin:0; }
-                        .production-table { width:100%; border-collapse:collapse; font-size:9px; margin:0; }
-                        .production-table th, .production-table td { border:0.3px solid black; padding:1px 2px; text-align:center; margin:0; }
-                        .production-table th:first-child, .production-table td:first-child { text-align:left; min-width:80px; }
-                        .product-name { font-weight:bold; font-size:9px; }
-                        .product-package { font-size:7px; color:#555; }
-                        .total-cell { background:#d0d0d0; font-weight:bold; }
-                        @page { size:A4 landscape; margin:3mm; }
+                        .card { border:1px solid black !important; margin:0; border-radius:0; page-break-inside:avoid; border-top-width:1px; border-bottom-width:0; }
+                        .card + .card { margin-top:-1px; border-top:1px solid black !important; }
+                        .column-content .card:last-child { border-bottom:1px solid black !important; }
+                        .card-header { background:#d0d8d0 !important; padding:3px 4px; text-align:center; font-weight:bold; font-size:12px; border-bottom:1px solid black !important; margin:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+                        .production-table { width:100%; border-collapse:collapse; font-size:11px !important; margin:0; }
+                        .production-table th, .production-table td { border:1px solid black !important; padding:3px 4px; text-align:center; margin:0; font-size:11px !important; }
+                        .production-table th:first-child, .production-table td:first-child { text-align:left; min-width:100px; }
+                        .production-table th { background:#e0e0e0 !important; font-weight:bold !important; color:black !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+                        .product-name { font-weight:bold; font-size:11px !important; }
+                        .product-package { font-size:9px !important; color:#333 !important; }
+                        .total-cell { background:#d0d0d0 !important; font-weight:bold !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+                        @page { size:A4 landscape; margin:5mm; }
                     </style>
                 </head>
                 <body>
@@ -1234,7 +1273,7 @@
             
             // عرض كل الفئات في صفحة واحدة
             printContent += '<div class="print-page">';
-            printContent += `<div style="text-align:center; margin-bottom:1mm; font-size:12px; font-weight:bold;">${title} - ${date}</div>`;
+            printContent += `<div style="text-align:center; margin-bottom:2mm; font-size:14px; font-weight:bold;">${title} - ${date}</div>`;
             
             // تقسيم الفئات إلى مجموعتين للعرض في عمودين
             let midIndex = Math.ceil(categoryList.length / 2);
@@ -1272,7 +1311,11 @@
             printWindow.document.write(printContent);
             printWindow.document.close();
             printWindow.focus();
-            printWindow.print();
+            
+            // تأخير بسيط للتأكد من تحميل الخطوط
+            setTimeout(() => {
+                printWindow.print();
+            }, 250);
         }
 
         // عرض الرسائل
