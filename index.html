@@ -317,7 +317,7 @@
             line-height: 1.2;
         }
 
-        /* ===== أنماط الطباعة - محسنة للوضوح على الهاتف ===== */
+        /* ===== أنماط الطباعة - بدون أي فراغات وخطوط واضحة ===== */
         @media print {
             .no-print {
                 display: none !important;
@@ -341,32 +341,42 @@
             .data-container {
                 overflow: visible;
                 padding: 0;
+                margin: 0;
             }
             
             .split-view {
                 display: flex;
-                gap: 3mm;
+                gap: 2mm;
                 page-break-after: avoid;
+                margin: 0;
+                padding: 0;
+                height: auto;
+                min-height: 0;
             }
             
             .column {
                 flex: 1;
-                page-break-inside: auto;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
             }
             
             .column-content {
                 page-break-inside: auto;
+                margin: 0;
+                padding: 0;
             }
             
             .column-header {
-                font-size: 12px;
-                padding: 3px;
+                font-size: 14px;
+                padding: 4px;
                 margin-bottom: 0;
                 page-break-after: avoid;
                 background-color: #2E5E3A !important;
                 color: white !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                font-weight: 700;
             }
             
             .card {
@@ -376,6 +386,8 @@
                 page-break-inside: avoid;
                 border-top-width: 1px;
                 border-bottom-width: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             
             .card + .card {
@@ -388,50 +400,51 @@
             }
             
             .card-header {
-                padding: 3px 4px;
-                font-size: 12px;
+                padding: 4px 6px;
+                font-size: 14px;
                 border-bottom: 1px solid black !important;
                 background-color: #d0d8d0 !important;
                 color: black !important;
-                font-weight: bold;
+                font-weight: 700;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
             
             .production-table {
-                font-size: 11px !important;
+                font-size: 13px !important;
                 border-collapse: collapse;
             }
             
             .production-table th,
             .production-table td {
                 border: 1px solid black !important;
-                padding: 3px 4px;
-                font-size: 11px !important;
-                font-weight: normal;
+                padding: 4px 6px;
+                font-size: 13px !important;
+                font-weight: 500;
             }
             
             .production-table th {
                 background-color: #e0e0e0 !important;
-                font-weight: bold !important;
+                font-weight: 700 !important;
                 color: black !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
             
             .product-name {
-                font-size: 11px !important;
+                font-size: 13px !important;
                 font-weight: 600 !important;
             }
             
             .product-package {
-                font-size: 9px !important;
+                font-size: 11px !important;
                 color: #333 !important;
+                font-weight: 400;
             }
             
             .total-cell {
                 background-color: #d0d0d0 !important;
-                font-weight: bold !important;
+                font-weight: 700 !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -442,12 +455,13 @@
                 padding: 0;
             }
             
-            .column-content, .card, .card-body, .table-container {
-                padding: 0 !important;
-                margin: 0 !important;
+            /* إجبار الجداول على عدم التقسيم بين الصفحات */
+            .column-content, .card, .card-body, .table-container, .production-table, tbody, tr, td, th {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }
             
-            /* تحسين وضوح الخطوط للطباعة */
+            /* منع أي فراغات أو فواصل */
             * {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
@@ -456,7 +470,7 @@
             
             @page {
                 size: A4 landscape;
-                margin: 5mm;
+                margin: 3mm;
             }
         }
 
@@ -1220,7 +1234,7 @@
             return table;
         }
 
-        // طباعة جميع الجداول - مع الحفاظ على التصاق الجداول وترتيب الفروع M, S, A
+        // طباعة جميع الجداول - بدون فراغات وخطوط واضحة
         function printAllTables(type) {
             let state = appState[type];
             
@@ -1247,25 +1261,135 @@
                     <meta charset="UTF-8">
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
                     <style>
-                        * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; }
-                        body { background:white; margin:0; padding:0; direction:ltr; -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact; }
-                        .print-page { page-break-after: always; margin:0; padding:0; }
-                        .split-view { display:flex; gap:3mm; margin:0; padding:0; }
-                        .column { flex:1; margin:0; padding:0; }
-                        .column-header { background:#2E5E3A !important; color:white !important; padding:3px; text-align:center; font-size:12px; margin:0; border-radius:2px; page-break-after:avoid; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-                        .column-content { margin:0; padding:0; }
-                        .card { border:1px solid black !important; margin:0; border-radius:0; page-break-inside:avoid; border-top-width:1px; border-bottom-width:0; }
-                        .card + .card { margin-top:-1px; border-top:1px solid black !important; }
-                        .column-content .card:last-child { border-bottom:1px solid black !important; }
-                        .card-header { background:#d0d8d0 !important; padding:3px 4px; text-align:center; font-weight:bold; font-size:12px; border-bottom:1px solid black !important; margin:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-                        .production-table { width:100%; border-collapse:collapse; font-size:11px !important; margin:0; }
-                        .production-table th, .production-table td { border:1px solid black !important; padding:3px 4px; text-align:center; margin:0; font-size:11px !important; }
-                        .production-table th:first-child, .production-table td:first-child { text-align:left; min-width:100px; }
-                        .production-table th { background:#e0e0e0 !important; font-weight:bold !important; color:black !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-                        .product-name { font-weight:bold; font-size:11px !important; }
-                        .product-package { font-size:9px !important; color:#333 !important; }
-                        .total-cell { background:#d0d0d0 !important; font-weight:bold !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-                        @page { size:A4 landscape; margin:5mm; }
+                        * { 
+                            margin:0; 
+                            padding:0; 
+                            box-sizing:border-box; 
+                            font-family:Cairo; 
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                            color-adjust: exact;
+                        }
+                        body { 
+                            background:white; 
+                            margin:0; 
+                            padding:0; 
+                            direction:ltr; 
+                        }
+                        .print-page { 
+                            page-break-after: always; 
+                            margin:0; 
+                            padding:0; 
+                        }
+                        .split-view { 
+                            display:flex; 
+                            gap:2mm; 
+                            margin:0; 
+                            padding:0;
+                            page-break-after: avoid;
+                            height: auto;
+                        }
+                        .column { 
+                            flex:1; 
+                            margin:0; 
+                            padding:0;
+                            page-break-inside: avoid;
+                        }
+                        .column-content { 
+                            margin:0; 
+                            padding:0;
+                            page-break-inside: avoid;
+                        }
+                        .column-header { 
+                            background:#2E5E3A !important; 
+                            color:white !important; 
+                            padding:4px; 
+                            text-align:center; 
+                            font-size:14px; 
+                            margin:0; 
+                            border-radius:0; 
+                            page-break-after:avoid; 
+                            font-weight:700;
+                            -webkit-print-color-adjust: exact; 
+                            print-color-adjust: exact; 
+                        }
+                        .card { 
+                            border:1px solid black !important; 
+                            margin:0; 
+                            border-radius:0; 
+                            page-break-inside: avoid !important;
+                            border-top-width:1px; 
+                            border-bottom-width:0;
+                            break-inside: avoid !important;
+                        }
+                        .card + .card { 
+                            margin-top:-1px; 
+                            border-top:1px solid black !important; 
+                        }
+                        .column-content .card:last-child { 
+                            border-bottom:1px solid black !important; 
+                        }
+                        .card-header { 
+                            background:#d0d8d0 !important; 
+                            padding:4px 6px; 
+                            text-align:center; 
+                            font-weight:700; 
+                            font-size:14px; 
+                            border-bottom:1px solid black !important; 
+                            margin:0; 
+                            -webkit-print-color-adjust: exact; 
+                            print-color-adjust: exact; 
+                        }
+                        .production-table { 
+                            width:100%; 
+                            border-collapse:collapse; 
+                            font-size:13px !important; 
+                            margin:0; 
+                        }
+                        .production-table th, 
+                        .production-table td { 
+                            border:1px solid black !important; 
+                            padding:4px 6px; 
+                            text-align:center; 
+                            margin:0; 
+                            font-size:13px !important; 
+                        }
+                        .production-table th:first-child, 
+                        .production-table td:first-child { 
+                            text-align:left; 
+                            min-width:100px; 
+                        }
+                        .production-table th { 
+                            background:#e0e0e0 !important; 
+                            font-weight:700 !important; 
+                            color:black !important; 
+                            -webkit-print-color-adjust: exact; 
+                            print-color-adjust: exact; 
+                        }
+                        .product-name { 
+                            font-weight:600; 
+                            font-size:13px !important; 
+                        }
+                        .product-package { 
+                            font-size:11px !important; 
+                            color:#333 !important; 
+                        }
+                        .total-cell { 
+                            background:#d0d0d0 !important; 
+                            font-weight:700 !important; 
+                            -webkit-print-color-adjust: exact; 
+                            print-color-adjust: exact; 
+                        }
+                        /* منع أي تقسيم للجداول بين الصفحات */
+                        .column-content, .card, .card-body, .table-container, 
+                        .production-table, tbody, tr, td, th {
+                            page-break-inside: avoid !important;
+                            break-inside: avoid !important;
+                        }
+                        @page { 
+                            size:A4 landscape; 
+                            margin:3mm; 
+                        }
                     </style>
                 </head>
                 <body>
@@ -1273,7 +1397,7 @@
             
             // عرض كل الفئات في صفحة واحدة
             printContent += '<div class="print-page">';
-            printContent += `<div style="text-align:center; margin-bottom:2mm; font-size:14px; font-weight:bold;">${title} - ${date}</div>`;
+            printContent += `<div style="text-align:center; margin-bottom:2mm; font-size:14px; font-weight:700;">${title} - ${date}</div>`;
             
             // تقسيم الفئات إلى مجموعتين للعرض في عمودين
             let midIndex = Math.ceil(categoryList.length / 2);
