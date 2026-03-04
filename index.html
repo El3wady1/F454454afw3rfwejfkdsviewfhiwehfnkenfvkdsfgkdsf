@@ -317,7 +317,7 @@
             line-height: 1.2;
         }
 
-        /* ===== أنماط الطباعة - محسنة للوضوح على الهاتف ===== */
+        /* ===== أنماط الطباعة - محسنة للوضوح على الهاتف مع تصغير 60% ===== */
         @media print {
             .no-print {
                 display: none !important;
@@ -331,6 +331,9 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
+                transform: scale(0.6);
+                transform-origin: top left;
+                width: 166.67%; /* لتعويض التصغير (100/0.6 ≈ 166.67%) */
             }
             
             .main-content {
@@ -456,7 +459,7 @@
             
             @page {
                 size: A4 landscape;
-                margin: 5mm;
+                margin: 2mm;
             }
         }
 
@@ -1248,7 +1251,18 @@
                     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
                     <style>
                         * { margin:0; padding:0; box-sizing:border-box; font-family:Cairo; }
-                        body { background:white; margin:0; padding:0; direction:ltr; -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact; }
+                        body { 
+                            background:white; 
+                            margin:0; 
+                            padding:0; 
+                            direction:ltr; 
+                            -webkit-print-color-adjust:exact; 
+                            print-color-adjust:exact; 
+                            color-adjust:exact;
+                            transform: scale(0.6);
+                            transform-origin: top left;
+                            width: 166.67%;
+                        }
                         .print-page { page-break-after: always; margin:0; padding:0; }
                         .split-view { display:flex; gap:3mm; margin:0; padding:0; }
                         .column { flex:1; margin:0; padding:0; }
@@ -1265,7 +1279,7 @@
                         .product-name { font-weight:bold; font-size:11px !important; }
                         .product-package { font-size:9px !important; color:#333 !important; }
                         .total-cell { background:#d0d0d0 !important; font-weight:bold !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-                        @page { size:A4 landscape; margin:5mm; }
+                        @page { size:A4 landscape; margin:2mm; }
                     </style>
                 </head>
                 <body>
